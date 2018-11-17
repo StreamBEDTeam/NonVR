@@ -8,7 +8,7 @@ namespace StreamBED.Backend.Models.ProtocolModels
 {
     public class BankStabilityModel : ProtocolModel
     {
-        enum Keywords
+        public enum Keywords
         {
             [Keyword("Steep Bank")] SteepBank,
             [Keyword("Gently Sloping Bank")] GentlySlopingBank,

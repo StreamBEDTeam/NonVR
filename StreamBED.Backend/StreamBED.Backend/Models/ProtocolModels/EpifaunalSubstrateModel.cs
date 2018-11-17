@@ -8,13 +8,17 @@ namespace StreamBED.Backend.Models.ProtocolModels
 {
     public class EpifaunalSubstrateModel : ProtocolModel
     {
-        enum Keywords
+        public enum Keywords
         {
             [Keyword("Snags")]Snags,
             [Keyword("Submerged Logs")]SubmergedLogs,
             [Keyword("Undercut Banks")]UndercutBanks,
             [Keyword("Cobble")]Cobble
         }
+
+        public Keyword[] getKeywords() {
+            return (Keyword[])Enum.GetValues(typeof(Enumnum));
+        }                           
 
         public override Category GetCategory()
         {
