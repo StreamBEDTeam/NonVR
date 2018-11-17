@@ -8,7 +8,8 @@ namespace StreamBED.Backend.Models.ProtocolModels
 {
     public class EpifaunalSubstrateModel : ProtocolModel
     {
-        enum Keywords {
+        enum Keywords
+        {
             [Keyword("Snags")]Snags,
             [Keyword("Submerged Logs")]SubmergedLogs,
             [Keyword("Undercut Banks")]UndercutBanks,
@@ -17,9 +18,25 @@ namespace StreamBED.Backend.Models.ProtocolModels
 
         public override Category GetCategory()
         {
-            /* TO-DO: Implement this */
-
-            throw new NotImplementedException();
+            if (Score >= 0 && Score <= 5)
+            {
+                return Category.Poor;
+            }
+            else if (Score >= 6 && Score <= 10) {
+                return Category.Marginal;
+            }
+            else if (Score >= 11 && Score <= 15)
+            {
+                return Category.Suboptimal;
+            }
+            else if (Score >= 16 && Score <= 20)
+            {
+                return Category.Optimal;
+            }
+            else
+            {
+                return Category.None;
+            }
         }
 
         public override void InitializeDictionary()
