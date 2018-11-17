@@ -10,7 +10,7 @@ namespace StreamBED.Backend.Helper
     {
         public static int score;
 
-        public EpifaunalSubstrateScore()
+        public BankStabilityScore()
         {
             score = 0;
         }
