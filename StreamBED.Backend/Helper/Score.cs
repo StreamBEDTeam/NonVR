@@ -9,5 +9,7 @@ namespace StreamBED.Backend.Helper
     internal abstract class Score
     {
         /* Base class for scores of both protocols for easier handling. */
+        public void changeScore(int s);
+        public int getScore();
     }
 }

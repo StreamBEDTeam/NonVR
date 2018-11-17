@@ -8,16 +8,22 @@ namespace StreamBED.Backend.Helper
 {
     public class Keyword : Attribute
     {
-        private readonly string Content;
+        private readonly string content;
 
-        internal Keyword(string Content)
+        public Keyword(string content)
         {
-            this.Content = Content;
+            this.content = content;
         }
 
         public string GetContent()
         {
-            return Content;
+            return content;
         }
+        
+        public bool equals(Keyword k)
+        {
+            return this.GetContent().Equals(k.GetContent());
+        }
+      
     }
 }

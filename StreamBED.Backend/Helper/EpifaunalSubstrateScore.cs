@@ -6,8 +6,26 @@ using System.Threading.Tasks;
 
 namespace StreamBED.Backend.Helper
 {
-    internal class EpifaunalSubstrateScore : Score
+    public class EpifaunalSubstrateScore : Score
     {
-        public static double Score = 0;
+        public static int score;
+
+        public EpifaunalSubstrateScore()
+        {
+            score = 0;
+        }
+
+        public void changeScore(int s)
+        {
+            if (s > 20 || s < 0)
+                Debug.Log("Score is invalid, must be between 0-20");
+            else
+                score = s;
+        }
+
+        public int getScore()
+        {
+            return score;
+        }
     }
 }
