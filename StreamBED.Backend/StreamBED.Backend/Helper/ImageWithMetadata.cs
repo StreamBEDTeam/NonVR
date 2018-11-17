@@ -10,7 +10,7 @@ namespace StreamBED.Backend.Helper
         public readonly byte[] Data;
 
         public List<Keyword> Keywords;
-        private string Location;
+        public string Location;
 
         public ImageWithMetadata(byte[] Data)
         {
