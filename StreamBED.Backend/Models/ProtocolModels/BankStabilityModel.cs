@@ -3,11 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace StreamBED.Backend.Models.ProtocolModels
 {
-    public sealed class BankStabilityModel : ProtocolModel
+    public class BankStabilityModel : ProtocolModel
     {
         enum Keywords
         {

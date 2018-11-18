@@ -1,14 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace StreamBED.Backend.Helper
 {
     internal class BankStabilityScore : Score
     {
-        public static double LeftBank = 0;
-        public static double RightBank = 0;
+        private static int Score;
+
+        public BankStabilityScore()
+        {
+            Score = 0;
+        }
+
+        public void ChangeScore(int s)
+        {
+            if (s > 10 || s < 0)
+                Debug.Write("Score is invalid, must be between 0-10");
+            else
+                Score = s;
+        }
+
+        public int GetScore()
+        {
+            return Score;
+        }
     }
 }
