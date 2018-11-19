@@ -15,7 +15,7 @@ namespace StreamBED.Backend.Helper
             Score = 0;
         }
 
-        public void ChangeScore(int s)
+        public override void ChangeScore(int s)
         {
             if (s > 20 || s < 0)
                 Debug.Write("Score is invalid, must be between 0-10");
@@ -23,7 +23,7 @@ namespace StreamBED.Backend.Helper
                 Score = s;
         }
 
-        public int GetScore()
+        public override int GetScore()
         {
             return Score;
         }

@@ -16,6 +16,16 @@ namespace StreamBED.Backend.Models.ProtocolModels
             [Keyword("Cobble")]Cobble
         }
 
+        public static Keyword[] getKeywords() {
+            Keyword[] k = { 
+                            new Keyword("Snags"),
+                            new Keyword("Submerged Logs"),
+                            new Keyword("Undercut Banks"),
+                            new Keyword("Cobble")
+                          };
+            return k;
+        }
+
         public override Category GetCategory()
         {
             if (Score >= 0 && Score <= 5)

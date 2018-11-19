@@ -5,11 +5,10 @@ using System.Text;
 
 namespace StreamBED.Backend.Helper
 {
-    internal abstract class Score
+    public abstract class Score
     {
         /* Base class for scores of both protocols for easier handling. */
         public abstract void ChangeScore(int s);
-
         public abstract int GetScore();
     }
 }
