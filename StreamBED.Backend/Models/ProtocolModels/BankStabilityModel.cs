@@ -19,6 +19,19 @@ namespace StreamBED.Backend.Models.ProtocolModels
             [Keyword("Exposed Tree Root")] ExposedTreeRoot
         }
 
+        public static Keyword[] getKeywords() {
+            Keyword[] k = {
+                            new Keyword("Steep Bank"),
+                            new Keyword("Gently Sloping Bank"), 
+                            new Keyword("Bank Failure"),
+                            new Keyword("Crumbling Bank"),
+                            new Keyword("Erosional Scars"),
+                            new Keyword("Exposed Soil"),
+                            new Keyword("Exposed Tree Root") 
+                        };
+            return k;
+        }
+
         public override Category GetCategory()
         {
             /* TO-DO: Implement this */
