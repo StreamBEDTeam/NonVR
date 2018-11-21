@@ -1,10 +1,13 @@
 ﻿#layoutRoot {
-    height: 100%;
-    background-color: #fefefe;
+    width: auto;
+    height: auto;
+    background-color: #efefef;
+    overflow: auto;
+    display: inline-block;
 }
 
 .button {
-    background-color: #ececec;
+    background-color: #ededed;
     border: none;
     color: black;
     padding: 15px 60px;

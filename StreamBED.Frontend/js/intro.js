@@ -19,15 +19,16 @@ function nextButtonOnClick() {
         var element = document.getElementById("pageContent");
 
         element.classList.remove("fadeInTransition");
+
         void element.offsetWidth;
 
         element.innerHTML = landingPageText[i];
-
         element.classList.add("fadeInTransition");
+
         i++;
     }
     else {
-        //window.location.href = "ms-appx-web:///index.html";
+        window.location.href = "ms-appx-web:///views/areas.html";
     }
 }
 

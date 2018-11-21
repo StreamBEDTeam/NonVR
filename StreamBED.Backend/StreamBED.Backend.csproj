@@ -47,6 +47,7 @@
     <Compile Include="Helper\ImageWithMetadata.cs" />
     <Compile Include="Helper\Keyword.cs" />
     <Compile Include="Helper\Score.cs" />
+    <Compile Include="Models\AreaModelBase.cs" />
     <Compile Include="Models\ProtocolModel.cs" />
     <Compile Include="Models\ProtocolModels\BankStabilityModel.cs" />
     <Compile Include="Models\ProtocolModels\EpifaunalSubstrateModel.cs" />
