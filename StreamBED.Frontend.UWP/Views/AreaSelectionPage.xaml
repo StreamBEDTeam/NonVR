@@ -29,7 +29,8 @@
                                        HorizontalAlignment="Center"
                                        Text="{x:Bind Area.Name}"/>
                         </Grid>
-                     
+
+                        <GridView x:Name="imageGridView"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

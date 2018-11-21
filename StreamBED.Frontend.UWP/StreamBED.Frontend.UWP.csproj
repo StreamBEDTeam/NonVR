@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Models\AreaDataModel.cs" />
     <Compile Include="Models\ColorScheme.cs" />
+    <Compile Include="Models\ImageDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\AreaSelectionPage.xaml.cs">
       <DependentUpon>AreaSelectionPage.xaml</DependentUpon>

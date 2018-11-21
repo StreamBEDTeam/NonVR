@@ -21,9 +21,9 @@ namespace StreamBED.Frontend.UWP.Models
             get { return new SolidColorBrush(ItemColor); }
         }
 
-        public AreaDataModel(string Name, List<ImageWithMetadata> ImageList, Color ItemColor)
+        public AreaDataModel(AreaModelBase Area, Color ItemColor)
         {
-            this.Area = new AreaModelBase(Name, ImageList);
+            this.Area = Area;
             this.ItemColor = ItemColor;
         }
     }

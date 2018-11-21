@@ -48,6 +48,11 @@ namespace StreamBED.Backend.Helper
             return Data;
         }
 
+        public int GetPhotoSize()
+        {
+            return Data.Length;
+        }
+
         public List<Keyword> GetKeywords()
         {
             return Keywords;
