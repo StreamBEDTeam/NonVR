@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StreamBED.Backend.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace StreamBED.Backend.Helper
 
         private List<Keyword> Keywords;
 
-        private string Location;
+        private AreaModelBase Location;
 
         private EpifaunalSubstrateScore eScore;
         private BankStabilityScore bScore;
@@ -33,14 +34,14 @@ namespace StreamBED.Backend.Helper
             bScore.ChangeScore(i);
         }
 
-        public string GetLocation()
+        public AreaModelBase GetLocation()
         {
             return Location;
         }
 
-        public void SetLocation(string s)
+        public void SetLocation(string name)
         {
-            Location = s;
+            Location = new AreaModelBase(name);
         }
 
         public byte[] GetPhoto()

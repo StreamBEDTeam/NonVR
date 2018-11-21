@@ -12,10 +12,9 @@ namespace StreamBED.Backend.Models
 
         public List<ImageWithMetadata> ImageList;
 
-        public AreaModelBase(string Name, List<ImageWithMetadata> ImageList)
+        public AreaModelBase(string Name)
         {
             this.Name = Name;
-            this.ImageList = ImageList;
         }
     }
 }
