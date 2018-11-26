@@ -8,6 +8,9 @@ namespace StreamBED.Backend.Models
 {
     public abstract class ProtocolModel
     {
+        /// <summary>
+        /// Lists all possible categories associated with a protocol.
+        /// </summary>
         public enum Category
         {
             Optimal,
@@ -17,15 +20,7 @@ namespace StreamBED.Backend.Models
             None
         }
 
-        internal Dictionary<int, string> Descriptions = new Dictionary<int, string>();
         public double Score = 0;
-
-        public string GetCategoryDescription(int key)
-        {
-            return Descriptions.Values.ElementAt<string>(key);
-        }
-
-        public abstract void InitializeDictionary();
 
         public abstract Category GetCategory();
 

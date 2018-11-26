@@ -7,6 +7,10 @@ using System.Text;
 
 namespace StreamBED.Backend.Helper
 {
+    /// <summary>
+    /// Defines an image with meta data like <see cref="keywords"/>,
+    /// <see cref="Location"/>, etc.
+    /// </summary>
     public class ImageWithMetadata
     {
         private EpifaunalSubstrateScore epifaunalScore;
@@ -19,7 +23,7 @@ namespace StreamBED.Backend.Helper
 
         public IList<Keyword> Keywords { get { return keywords.AsReadOnly(); } }
 
-        public AreaModelBase Location { get; set; }
+        public string Location { get; set; }
 
         public int EpifaunalSubstarteScore { get { return epifaunalScore.GetScore(); } }
 
@@ -28,12 +32,18 @@ namespace StreamBED.Backend.Helper
         public ImageWithMetadata(byte[] Data)
         {
             this.Data = Data;
-            keywords = new List<Keyword>();
+            this.keywords = new List<Keyword>();
+
+            this.epifaunalScore = new EpifaunalSubstrateScore();
+            this.bankScore = new BankStabilityScore();
         }
 
         public void ChangeEpifaunalSubstrateScore(int i)
         {
             epifaunalScore.ChangeScore(i);
+
+            ImageSerialization a = new ImageSerialization();
+            
         }
 
         public void ChangeBankStabilityScore(int i)
@@ -49,9 +59,9 @@ namespace StreamBED.Backend.Helper
         public void AddKeyword(Keyword keyword)
         {
             if (!keywords.Contains(keyword))
+            {
                 keywords.Add(keyword);
-            else
-                Debug.Write("Already contains the keyword " + keyword);
+            }
         }
     }
 }

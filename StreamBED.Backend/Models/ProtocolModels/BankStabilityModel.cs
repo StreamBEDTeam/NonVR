@@ -25,16 +25,26 @@ namespace StreamBED.Backend.Models.ProtocolModels
 
         public override Category GetCategory()
         {
-            /* TO-DO: Implement this */
-
-            throw new NotImplementedException();
-        }
-
-        public override void InitializeDictionary()
-        {
-            /* TO-DO: Implement this */
-
-            throw new NotImplementedException();
+            if (Score >= 0 && Score <= 2)
+            {
+                return Category.Poor;
+            }
+            else if (Score >= 3 && Score <= 5)
+            {
+                return Category.Marginal;
+            }
+            else if (Score >= 6 && Score <= 8)
+            {
+                return Category.Suboptimal;
+            }
+            else if (Score >= 9 && Score <= 10)
+            {
+                return Category.Optimal;
+            }
+            else
+            {
+                return Category.None;
+            }
         }
     }
 }

@@ -15,12 +15,16 @@ namespace StreamBED.Backend.Helper
             Score = 0;
         }
 
-        public override void ChangeScore(int s)
+        public override void ChangeScore(int score)
         {
-            if (s > 10 || s < 0)
-                Debug.Write("Score is invalid, must be between 0-10");
+            if (score > 10 || score < 0)
+            {
+                Debug.Write("Score is invalid, must be between 0 - 10");
+            }
             else
-                Score = s;
+            {
+                Score = score;
+            }
         }
 
         public override int GetScore()

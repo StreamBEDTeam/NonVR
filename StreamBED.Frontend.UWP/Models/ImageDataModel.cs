@@ -14,9 +14,9 @@ namespace StreamBED.Frontend.UWP.Models
 {
     public class ImageDataModel
     {
-        private readonly ImageWithMetadata Image;
+        public ImageWithMetadata Image { get; }
 
-        public ImageSource ImageSource;
+        public ImageSource ImageSource { get; }
 
         public ImageDataModel(ImageWithMetadata Image)
         {
@@ -29,7 +29,6 @@ namespace StreamBED.Frontend.UWP.Models
         {
             this.ImageSource = source;
         }
-
 
         public async Task<BitmapImage> GetImageSource()
         {

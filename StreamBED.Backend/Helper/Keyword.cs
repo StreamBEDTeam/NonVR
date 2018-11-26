@@ -7,16 +7,11 @@ namespace StreamBED.Backend.Helper
 {
     public class Keyword : Attribute
     {
-        private readonly string Content;
+        public string Content { get; }
 
         internal Keyword(string Content)
         {
             this.Content = Content;
-        }
-
-        public string GetContent()
-        {
-            return Content;
         }
     }
 }

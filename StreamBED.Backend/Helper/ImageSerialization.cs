@@ -8,20 +8,50 @@ using System.Text;
 
 namespace StreamBED.Backend.Helper
 {
+    /// <summary>
+    /// Defines methods to serialize and deserialize a list of <see cref="ImageWithMetadata"/>.
+    /// </summary>
     public class ImageSerialization
     {
-        private List<ImageWithMetadata> ImageList;
+        // Stores all the images that are going to be serialized or deserialized.
+        private List<ImageWithMetadata> imageList;
 
+        /// <summary>
+        /// Returns the <see cref="ImageSerialization.imageList"/> as a 
+        /// <see cref="System.Collections.ObjectModel.ReadOnlyCollection{ImageWithMetadata}"/>
+        /// </summary>
+        public IList<ImageWithMetadata> ImageList { get { return imageList.AsReadOnly(); } }
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public ImageSerialization()
+        {
+            imageList = new List<ImageWithMetadata>();
+        }
+
+        /// <summary>
+        /// Adds an <see cref="ImageWithMetadata"/> into 
+        /// ImageList to be serialized or deserialized.
+        /// </summary>
+        /// <param name="Image"><see cref="ImageWithMetadata"/> to be added.</param>
         public void AddImage(ImageWithMetadata Image)
         {
-            ImageList.Add(Image);
+            imageList.Add(Image);
         }
 
+        /// <summary>
+        /// Removes an <see cref="ImageWithMetadata"/> from <paramref name="ImageList"/>.
+        /// </summary>
+        /// <param name="Image"><see cref="ImageWithMetadata"/> to be removed.</param>
         public void RemoveImage(ImageWithMetadata Image)
         {
-            ImageList.Remove(Image);
+            imageList.Remove(Image);
         }
 
+        /// <summary>
+        /// Serializes ImageList and is saved to ImageData.dat.
+        /// </summary>
         public void SerializeImage()
         {
             Stream stream = File.Open("ImageData.dat", FileMode.Create);
@@ -32,12 +62,15 @@ namespace StreamBED.Backend.Helper
             stream.Close();
         }
 
+        /// <summary>
+        /// Deserializes ImageList from ImageData.dat.
+        /// </summary>
         public void DeserializeImage()
         {
             Stream stream = File.Open("ImageData.dat", FileMode.Open);
             BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-            ImageList = (List<ImageWithMetadata>)binaryFormatter.Deserialize(stream);
+            imageList = (List<ImageWithMetadata>)binaryFormatter.Deserialize(stream);
 
             stream.Close();
         }

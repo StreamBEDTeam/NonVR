@@ -74,7 +74,7 @@
                                   Background="{x:Bind ItemColorBrush}">
                                 <Button Style="{StaticResource RoundedButton}" 
                                         x:Name="nextButton" 
-                                        Background="White"
+                                        Background="#EDEDED"
                                         Foreground="Black"
                                         FontSize="24"
                                         VerticalAlignment="Center" 

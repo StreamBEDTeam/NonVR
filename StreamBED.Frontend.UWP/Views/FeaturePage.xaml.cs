@@ -1,4 +1,6 @@
 ﻿using StreamBED.Frontend.UWP.Models;
+using StreamBED.Backend.Models.ProtocolModels;
+using StreamBED.Backend.Helper;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,11 +32,16 @@ namespace StreamBED.Frontend.UWP.Views
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             Area = e.Parameter as AreaDataModel;
+
+            foreach (Keyword keyword in EpifaunalSubstrateModel.GetKeywords())
+            {
+                listViewRoot.Items.Add(await FeatureDataModel.GetFeatureDataModel(keyword, Area.ImageList));
+            }
         }
     }
 }
