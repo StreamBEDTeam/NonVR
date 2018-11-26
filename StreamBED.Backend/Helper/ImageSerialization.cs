@@ -22,9 +22,7 @@ namespace StreamBED.Backend.Helper
         /// </summary>
         public IList<ImageWithMetadata> ImageList { get { return imageList.AsReadOnly(); } }
 
-        /// <summary>
-        /// Default constructor.
-        /// </summary>
+        // Constructor
         public ImageSerialization()
         {
             imageList = new List<ImageWithMetadata>();

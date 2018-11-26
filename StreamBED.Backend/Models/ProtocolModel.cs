@@ -6,6 +6,9 @@ using System.Text;
 
 namespace StreamBED.Backend.Models
 {
+    /// <summary>
+    /// Defines an abstract class to represent a protocol.
+    /// </summary>
     public abstract class ProtocolModel
     {
         /// <summary>
@@ -20,13 +23,14 @@ namespace StreamBED.Backend.Models
             None
         }
 
-        public double Score = 0;
+        /// <summary>
+        /// Score associated with the protocol.
+        /// </summary>
+        public double Score { get; set; }
 
+        /// <summary>
+        /// Returns <see cref="ProtocolModel.Category"/> based on <see cref="ProtocolModel.Score"/>
+        /// </summary>
         public abstract Category GetCategory();
-
-        public double GetScore()
-        {
-            return Score;
-        }
     }
 }

@@ -6,8 +6,14 @@ using System.Text;
 
 namespace StreamBED.Backend.Models.ProtocolModels
 {
+    /// <summary>
+    /// Defines the Epifaunal Substrate Model.
+    /// </summary>
     public class EpifaunalSubstrateModel : ProtocolModel
     {
+        /// <summary>
+        /// Lists all possible keywords associated with <see cref="EpifaunalSubstrateModel"/> protocol.
+        /// </summary>
         public enum Keywords
         {
             [Keyword("Snags")]Snags,
@@ -16,10 +22,16 @@ namespace StreamBED.Backend.Models.ProtocolModels
             [Keyword("Cobble")]Cobble
         }
 
+        /// <summary>
+        /// Returns <see cref="Keywords"/> associated with <see cref="EpifaunalSubstrateModel"/> as an array.
+        /// </summary>
         public static Keyword[] GetKeywords() {
-            return(Keyword[])Enum.GetValues(typeof(Keywords));
+            return (Keyword[])Enum.GetValues(typeof(Keywords));
         }
 
+        /// <summary>
+        /// Returns <see cref="ProtocolModel.Category"/> based on <see cref="ProtocolModel.Score"/>
+        /// </summary>
         public override Category GetCategory()
         {
             if (Score >= 0 && Score <= 5)
@@ -41,11 +53,6 @@ namespace StreamBED.Backend.Models.ProtocolModels
             {
                 return Category.None;
             }
-        }
-
-        public override void InitializeDictionary()
-        {
-            /* TO-DO: Implement this. */
         }
     }
 }
