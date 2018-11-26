@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StreamBED.Frontend.UWP.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,7 +13,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using StreamBED.Backend.Helper;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -21,32 +21,20 @@ namespace StreamBED.Frontend.UWP.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class LandingPage : Page
+    public sealed partial class FeaturePage : Page
     {
-        public LandingPage()
+        private AreaDataModel Area;
+
+        public FeaturePage()
         {
             this.InitializeComponent();
         }
 
-        private void PivotRoot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (((Pivot)sender).SelectedIndex == 1)
-            {
-                nextButton.Content = "Next";
-                nextButton.Width = 200;
-            }
-        }
+            base.OnNavigatedTo(e);
 
-        private void NextButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (pivotRoot.SelectedIndex < 3)
-            {
-                pivotRoot.SelectedIndex = ++pivotRoot.SelectedIndex;
-            }
-            else
-            {
-                this.Frame.Navigate(typeof(AreaPage));
-            }
+            Area = e.Parameter as AreaDataModel;
         }
     }
 }

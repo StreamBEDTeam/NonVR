@@ -9,60 +9,47 @@ namespace StreamBED.Backend.Helper
 {
     public class ImageWithMetadata
     {
-        private readonly byte[] Data;
+        private EpifaunalSubstrateScore epifaunalScore;
 
-        private List<Keyword> Keywords;
+        private BankStabilityScore bankScore;
 
-        private AreaModelBase Location;
+        private List<Keyword> keywords;
 
-        private EpifaunalSubstrateScore eScore;
-        private BankStabilityScore bScore;
+        public byte[] Data { get; }
+
+        public IList<Keyword> Keywords { get { return keywords.AsReadOnly(); } }
+
+        public AreaModelBase Location { get; set; }
+
+        public int EpifaunalSubstarteScore { get { return epifaunalScore.GetScore(); } }
+
+        public int BankStabilityScore { get { return bankScore.GetScore(); } }
 
         public ImageWithMetadata(byte[] Data)
         {
             this.Data = Data;
-            Keywords = new List<Keyword>();
+            keywords = new List<Keyword>();
         }
 
-        public void ChangeEScore(int i)
+        public void ChangeEpifaunalSubstrateScore(int i)
         {
-            eScore.ChangeScore(i);
+            epifaunalScore.ChangeScore(i);
         }
 
-        public void ChangeBScore(int i)
+        public void ChangeBankStabilityScore(int i)
         {
-            bScore.ChangeScore(i);
+            bankScore.ChangeScore(i);
         }
 
-        public AreaModelBase GetLocation()
-        {
-            return Location;
-        }
-
-        public void SetLocation(string name)
-        {
-            Location = new AreaModelBase(name);
-        }
-
-        public byte[] GetPhoto()
-        {
-            return Data;
-        }
-
-        public int GetPhotoSize()
+        public int GetImageSize()
         {
             return Data.Length;
         }
 
-        public List<Keyword> GetKeywords()
-        {
-            return Keywords;
-        }
-
         public void AddKeyword(Keyword keyword)
         {
-            if (!Keywords.Contains(keyword))
-                Keywords.Add(keyword);
+            if (!keywords.Contains(keyword))
+                keywords.Add(keyword);
             else
                 Debug.Write("Already contains the keyword " + keyword);
         }

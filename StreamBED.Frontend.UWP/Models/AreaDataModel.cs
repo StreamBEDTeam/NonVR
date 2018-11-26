@@ -15,9 +15,9 @@ namespace StreamBED.Frontend.UWP.Models
     {
         public string Name { get; }
 
-        public ObservableCollection<ImageDataModel> ImageList;
+        public ObservableCollection<ImageDataModel> ImageList { get; }
 
-        public Color ItemColor { get; set; }
+        public Color ItemColor { get; }
 
         public SolidColorBrush ItemColorBrush
         {

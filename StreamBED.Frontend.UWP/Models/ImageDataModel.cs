@@ -37,7 +37,7 @@ namespace StreamBED.Frontend.UWP.Models
 
             using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
             {
-                await stream.WriteAsync(Image.GetPhoto().AsBuffer());
+                await stream.WriteAsync(Image.Data.AsBuffer());
                 stream.Seek(0);
                 bitmapImage.SetSource(stream);
             }
