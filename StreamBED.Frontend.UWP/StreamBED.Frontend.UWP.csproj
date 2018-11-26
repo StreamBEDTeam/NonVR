@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\UpperCaseConverter.cs" />
     <Compile Include="Models\AreaDataModel.cs" />
     <Compile Include="Models\ColorScheme.cs" />
     <Compile Include="Models\ImageDataModel.cs" />
@@ -137,6 +138,7 @@
     <None Include="StreamBED.Frontend.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Logo\image.png" />
     <Content Include="Assets\Logo\StreamBEDLogo.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

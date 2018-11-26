@@ -7,12 +7,15 @@ using Windows.UI;
 using Windows.UI.Xaml.Media;
 using StreamBED.Backend.Helper;
 using StreamBED.Backend.Models;
+using System.Collections.ObjectModel;
 
 namespace StreamBED.Frontend.UWP.Models
 {
     public class AreaDataModel
     {
-        public AreaModelBase Area { get; }
+        public string Name { get; }
+
+        public ObservableCollection<ImageDataModel> ImageList;
 
         public Color ItemColor { get; set; }
 
@@ -21,10 +24,12 @@ namespace StreamBED.Frontend.UWP.Models
             get { return new SolidColorBrush(ItemColor); }
         }
 
-        public AreaDataModel(AreaModelBase Area, Color ItemColor)
+        public AreaDataModel(string Name, Color ItemColor)
         {
-            this.Area = Area;
+            this.Name = Name;
             this.ItemColor = ItemColor;
+
+            ImageList = new ObservableCollection<ImageDataModel>();
         }
     }
 }

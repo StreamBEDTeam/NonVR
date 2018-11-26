@@ -14,28 +14,32 @@ namespace StreamBED.Frontend.UWP.Models
 {
     public class ImageDataModel
     {
-        private readonly ImageWithMetadata LoadedImage;
+        private readonly ImageWithMetadata Image;
 
-        public Image ConvertedImage;
+        public ImageSource ImageSource;
 
-        public ImageDataModel(ImageWithMetadata LoadedImage)
+        public ImageDataModel(ImageWithMetadata Image)
         {
-            this.LoadedImage = LoadedImage;
+            this.Image = Image;
 
-            ConvertedImage.Source = ProcessLoadedImage().Result;
-            ConvertedImage.Height = 250;
-            ConvertedImage.Width = 250;
+            this.ImageSource = GetImageSource().Result;
         }
 
-        private async Task<BitmapImage> ProcessLoadedImage()
+        public ImageDataModel(ImageSource source)
+        {
+            this.ImageSource = source;
+        }
+
+
+        public async Task<BitmapImage> GetImageSource()
         {
             BitmapImage bitmapImage = new BitmapImage();
 
             using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
             {
-                await stream.WriteAsync(LoadedImage.GetPhoto().AsBuffer());
+                await stream.WriteAsync(Image.GetPhoto().AsBuffer());
                 stream.Seek(0);
-                await bitmapImage.SetSourceAsync(stream);
+                bitmapImage.SetSource(stream);
             }
 
             return bitmapImage;

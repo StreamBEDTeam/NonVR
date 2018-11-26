@@ -4,34 +4,86 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:StreamBED.Frontend.UWP.Views"
     xmlns:model="using:StreamBED.Frontend.UWP.Models"
+    xmlns:backend="using:StreamBED.Backend.Helper"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="#d9d9d9">
+    Background="#d9d9d9"
+    Loaded="Page_Loaded">
 
     <Grid x:Name="layoutRoot">
         <ListView x:Name="listViewRoot"
-                  SelectionMode="None"
-                  Margin="30, 0">
+                  SelectionMode="None"                  
+                  HorizontalAlignment="Center">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:AreaDataModel">
-                    <StackPanel x:Name="templateRoot"
-                          Background="White"
-                          Margin="150, 0">
-                        <Grid x:Name="titleGrid"
-                              Background="{x:Bind ItemColorBrush}">
-                            <TextBlock x:Name="titleBlock"
-                                       Foreground="White"
-                                       FontSize="36"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Text="{x:Bind Area.Name}"/>
-                        </Grid>
+                    <Border Width="1500" 
+                            BorderBrush="#d9d9d9" 
+                            CornerRadius="8,8,8,8" 
+                            BorderThickness="8,8,8,8"
+                            Margin="150, 25, 150, 25">
+                        <StackPanel x:Name="templateRoot"
+                                    Background="White">
+                            <Grid x:Name="titleGrid"
+                                  Height="75"
+                                  Background="{x:Bind ItemColorBrush}">
+                                <TextBlock x:Name="titleBlock"
+                                           Foreground="White"
+                                           FontSize="30"
+                                           FontWeight="Bold"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Text="{x:Bind Name, Converter={StaticResource UpperCaseConverter}}"/>
+                            </Grid>
 
-                        <GridView x:Name="imageGridView"/>
-                    </StackPanel>
+                            <GridView x:Name="imageGridView"
+                                      ItemsSource="{x:Bind ImageList}"
+                                      Margin="5, 0"
+                                      SelectionMode="None"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                                      ScrollViewer.HorizontalScrollMode="Enabled"
+                                      ScrollViewer.VerticalScrollMode="Disabled">
+                                <GridView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <ItemsWrapGrid MaximumRowsOrColumns="2" 
+                                                       Orientation="Vertical"/>
+                                    </ItemsPanelTemplate>
+                                </GridView.ItemsPanel>
+
+                                <GridView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:ImageDataModel">
+                                        <Button x:Name="imageRoot"
+                                                Height="300"
+                                                Width="300"
+                                                Margin="5, 10"
+                                                Style="{StaticResource ImageButton}">
+                                            <Image x:Name="image" 
+                                                   Source="{x:Bind ImageSource}"/>
+                                        </Button>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+
+                            <Grid x:Name="buttonGrid"
+                                  Height="100"
+                                  Background="{x:Bind ItemColorBrush}">
+                                <Button Style="{StaticResource RoundedButton}" 
+                                        x:Name="nextButton" 
+                                        Background="White"
+                                        Foreground="Black"
+                                        FontSize="24"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center"
+                                        Height="64"
+                                        Width="200">
+                                    Enter
+                                </Button>
+                            </Grid>
+                            
+                        </StackPanel>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

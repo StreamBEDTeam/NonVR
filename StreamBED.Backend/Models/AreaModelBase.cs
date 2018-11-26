@@ -14,6 +14,7 @@ namespace StreamBED.Backend.Models
 
         public AreaModelBase(string Name)
         {
+            ImageList = new List<ImageWithMetadata>();
             this.Name = Name;
         }
     }

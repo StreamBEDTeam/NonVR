@@ -25,7 +25,14 @@ namespace StreamBED.Frontend.UWP.Models
         {
             if (Index < ColorSchemeList.Count())
             {
-                return (Color)(new System.Drawing.ColorConverter()).ConvertFromString(ColorSchemeList[++Index]);
+                System.Drawing.Color c = (System.Drawing.Color)(new System.Drawing.ColorConverter()).ConvertFromString(ColorSchemeList[Index++]);
+                Color l = new Color();
+                l.A = c.A;
+                l.R = c.R;
+                l.G = c.G;
+                l.B = c.B;
+
+                return l;
             }
             else
             {
