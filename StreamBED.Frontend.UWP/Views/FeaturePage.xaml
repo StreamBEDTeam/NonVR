@@ -34,7 +34,7 @@
                                            TextAlignment="Center"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center"
-                                           Text="{x:Bind Name, Converter={StaticResource UpperCaseConverter}}"/>
+                                           Text="Hello"/>
                             </Grid>
 
                             <GridView x:Name="imageGridView"
