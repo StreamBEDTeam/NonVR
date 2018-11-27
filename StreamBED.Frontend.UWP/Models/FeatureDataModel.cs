@@ -19,7 +19,7 @@ namespace StreamBED.Frontend.UWP.Models
             this.Keyword = keyword;
         }
 
-        public static async Task<FeatureDataModel> GetFeatureDataModel(Keyword keyword, ICollection<ImageDataModel> imageList)
+        public static FeatureDataModel GetFeatureDataModel(Keyword keyword, ICollection<ImageDataModel> imageList)
         {
             FeatureDataModel feature = new FeatureDataModel(keyword);
 

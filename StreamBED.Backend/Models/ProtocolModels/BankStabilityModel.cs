@@ -14,22 +14,23 @@ namespace StreamBED.Backend.Models.ProtocolModels
         /// <summary>
         /// Lists all possible keywords associated with <see cref="BankStabilityModel"/> protocol.
         /// </summary>
-        public enum Keywords
+        public static class Keywords
         {
-            [Keyword("Steep Bank")] SteepBank,
-            [Keyword("Gently Sloping Bank")] GentlySlopingBank,
-            [Keyword("Bank Failure")] BankFailure,
-            [Keyword("Crumbling Bank")] CrumblingBank,
-            [Keyword("Erosional Scars")] ErosionalScars,
-            [Keyword("Exposed Soil")] ExposedSoil,
-            [Keyword("Exposed Tree Root")] ExposedTreeRoot
+            public static readonly Keyword SteepBank = new Keyword("Snags");
+            public static readonly Keyword GentlySlopingBank = new Keyword("Gently Sloping Bank");
+            public static readonly Keyword BankFailure = new Keyword("Bank Failure");
+            public static readonly Keyword CrumblingBank = new Keyword("Crumbling Bank");
+            public static readonly Keyword ErosionalScars = new Keyword("Erosional Scars");
+            public static readonly Keyword ExposedSoil = new Keyword("Exposed Soil");
+            public static readonly Keyword ExposedTreeRoot = new Keyword("Exposed Tree Root");
         }
 
         /// <summary>
         /// Returns <see cref="Keywords"/> associated with <see cref="BankStabilityModel"/> as an array.
         /// </summary>
-        public static Keyword[] GetKeywords() {
-            return (Keyword[])Enum.GetValues(typeof(Keywords));
+        public static object[] GetKeywords()
+        {
+            return typeof(Keywords).GetFields().Select(field => field.GetValue(typeof(Keywords))).ToArray();
         }
 
         /// <summary>

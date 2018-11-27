@@ -15,8 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using static StreamBED.Backend.Models.ProtocolModels.EpifaunalSubstrateModel;
 
 namespace StreamBED.Frontend.UWP.Views
 {
@@ -32,15 +31,34 @@ namespace StreamBED.Frontend.UWP.Views
             this.InitializeComponent();
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             Area = e.Parameter as AreaDataModel;
 
-            foreach (Keyword keyword in EpifaunalSubstrateModel.GetKeywords())
+            foreach (object keyword in EpifaunalSubstrateModel.GetKeywords())
             {
-                listViewRoot.Items.Add(await FeatureDataModel.GetFeatureDataModel(keyword, Area.ImageList));
+                try
+                {
+                    listViewRoot.Items.Add(FeatureDataModel.GetFeatureDataModel((Keyword)keyword, Area.ImageList));
+                }
+                catch (Exception f)
+                {
+
+                }
+            }
+
+            foreach (Keyword keyword in BankStabilityModel.GetKeywords())
+            {
+                try
+                {
+                    listViewRoot.Items.Add(FeatureDataModel.GetFeatureDataModel((Keyword)keyword, Area.ImageList));
+                }
+                catch (Exception f)
+                {
+
+                }
             }
         }
     }

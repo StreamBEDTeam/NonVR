@@ -14,19 +14,19 @@ namespace StreamBED.Backend.Models.ProtocolModels
         /// <summary>
         /// Lists all possible keywords associated with <see cref="EpifaunalSubstrateModel"/> protocol.
         /// </summary>
-        public enum Keywords
+        public static class Keywords
         {
-            [Keyword("Snags")]Snags,
-            [Keyword("Submerged Logs")]SubmergedLogs,
-            [Keyword("Undercut Banks")]UndercutBanks,
-            [Keyword("Cobble")]Cobble
+            public static readonly Keyword Snags = new Keyword("Snags");
+            public static readonly Keyword SubmergedLogs = new Keyword("Snags");
+            public static readonly Keyword UndercutBanks = new Keyword("Snags");
+            public static readonly Keyword Cobble = new Keyword("Snags");
         }
 
         /// <summary>
         /// Returns <see cref="Keywords"/> associated with <see cref="EpifaunalSubstrateModel"/> as an array.
         /// </summary>
-        public static Keyword[] GetKeywords() {
-            return (Keyword[])Enum.GetValues(typeof(Keywords));
+        public static object[] GetKeywords() {
+            return typeof(Keywords).GetFields().Select(field => field.GetValue(typeof(Keywords))).ToArray();
         }
 
         /// <summary>
