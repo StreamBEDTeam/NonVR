@@ -15,7 +15,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using static StreamBED.Backend.Models.ProtocolModels.EpifaunalSubstrateModel;
 
 namespace StreamBED.Frontend.UWP.Views
 {
@@ -37,28 +36,14 @@ namespace StreamBED.Frontend.UWP.Views
 
             Area = e.Parameter as AreaDataModel;
 
-            foreach (object keyword in EpifaunalSubstrateModel.GetKeywords())
+            foreach (Keyword keyword in EpifaunalSubstrateModel.GetKeywords())
             {
-                try
-                {
-                    listViewRoot.Items.Add(FeatureDataModel.GetFeatureDataModel((Keyword)keyword, Area.ImageList));
-                }
-                catch (Exception f)
-                {
-
-                }
+                listViewRoot.Items.Add(FeatureDataModel.GetFeatureDataModel(keyword, Area.ImageList));
             }
 
             foreach (Keyword keyword in BankStabilityModel.GetKeywords())
             {
-                try
-                {
-                    listViewRoot.Items.Add(FeatureDataModel.GetFeatureDataModel((Keyword)keyword, Area.ImageList));
-                }
-                catch (Exception f)
-                {
-
-                }
+                listViewRoot.Items.Add(FeatureDataModel.GetFeatureDataModel(keyword, Area.ImageList));
             }
         }
     }

@@ -25,8 +25,19 @@ namespace StreamBED.Backend.Models.ProtocolModels
         /// <summary>
         /// Returns <see cref="Keywords"/> associated with <see cref="EpifaunalSubstrateModel"/> as an array.
         /// </summary>
-        public static object[] GetKeywords() {
-            return typeof(Keywords).GetFields().Select(field => field.GetValue(typeof(Keywords))).ToArray();
+        public static Keyword[] GetKeywords() {
+            var original = typeof(Keywords).GetFields().Select(field => field.GetValue(typeof(Keywords)));
+            var output = new List<Keyword>();
+
+            foreach (object item in original)
+            {
+                if (item is Keyword)
+                {
+                    output.Add(item as Keyword);
+                }
+            }
+
+            return output.ToArray();
         }
 
         /// <summary>

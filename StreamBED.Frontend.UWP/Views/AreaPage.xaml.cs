@@ -1,4 +1,6 @@
-﻿using StreamBED.Frontend.UWP.Models;
+﻿using StreamBED.Backend.Helper;
+using StreamBED.Backend.Models.ProtocolModels;
+using StreamBED.Frontend.UWP.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,10 +51,23 @@ namespace StreamBED.Frontend.UWP.Views
                         )
                     ));*/
 
-                    area.ImageList.Add(new ImageDataModel(
-                        new BitmapImage(
-                            new Uri("ms-appx:///Assets/Logo/image.png")
-                    )));
+                    var imageDataModel = new ImageDataModel(
+                                            new BitmapImage(
+                                                new Uri("ms-appx:///Assets/Logo/image.png")
+                                         ));
+
+                    foreach (Keyword keyword in EpifaunalSubstrateModel.GetKeywords())
+                    {
+                        var l = imageDataModel.Image;
+                        l.AddKeyword(keyword);
+                    }
+
+                    foreach (Keyword keyword in BankStabilityModel.GetKeywords())
+                    {
+                        imageDataModel.Image.AddKeyword(keyword);
+                    }
+
+                    area.ImageList.Add(imageDataModel);
                 }
 
                 listViewRoot.Items.Add(area);

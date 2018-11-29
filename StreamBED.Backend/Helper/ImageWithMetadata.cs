@@ -40,7 +40,6 @@ namespace StreamBED.Backend.Helper
         /// </summary>
         public string Location { get; set; }
 
-
         /// <summary>
         /// Returns <see cref="EpifaunalSubstrateScore.Score"/> as an <see cref="int"/>
         /// </summary>
@@ -51,11 +50,16 @@ namespace StreamBED.Backend.Helper
         /// </summary>
         public int BankStabilityScore { get { return bankScore.Score; } }
 
-        // Constructor
-        public ImageWithMetadata(byte[] Data)
+        // Default Constructor
+        private ImageWithMetadata()
+        {
+            this.keywords = new List<Keyword>();
+        }
+
+        // Constructor that takes in data as byte array
+        public ImageWithMetadata(byte[] Data) : this()
         {
             this.Data = Data;
-            this.keywords = new List<Keyword>();
         }
 
         /// <summary>

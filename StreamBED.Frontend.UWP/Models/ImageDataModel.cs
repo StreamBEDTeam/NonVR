@@ -21,7 +21,6 @@ namespace StreamBED.Frontend.UWP.Models
         public ImageDataModel(ImageWithMetadata Image)
         {
             this.Image = Image;
-
             this.ImageSource = GetImageSource().Result;
         }
 
