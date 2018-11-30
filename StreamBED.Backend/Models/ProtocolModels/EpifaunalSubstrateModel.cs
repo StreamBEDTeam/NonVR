@@ -17,8 +17,8 @@ namespace StreamBED.Backend.Models.ProtocolModels
         public static class Keywords
         {
             public static readonly Keyword Snags = new Keyword("Snags");
-            public static readonly Keyword SubmergedLogs = new Keyword("SubmergedLogs");
-            public static readonly Keyword UndercutBanks = new Keyword("UndercutBanks");
+            public static readonly Keyword SubmergedLogs = new Keyword("Submerged Logs");
+            public static readonly Keyword UndercutBanks = new Keyword("Undercut Banks");
             public static readonly Keyword Cobble = new Keyword("Cobble");
         }
 

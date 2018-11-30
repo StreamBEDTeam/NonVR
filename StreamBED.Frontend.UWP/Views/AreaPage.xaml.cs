@@ -73,6 +73,8 @@ namespace StreamBED.Frontend.UWP.Views
 
                 listViewRoot.Items.Add(area);
             }
+
+            progressRing.IsActive = false;
         }
 
         private async Task<byte[]> Convert(BitmapImage image)

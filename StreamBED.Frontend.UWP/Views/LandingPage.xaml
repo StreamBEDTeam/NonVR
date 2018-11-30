@@ -9,8 +9,24 @@
     Background="White">
 
     <Grid x:Name="layoutRoot">
+        <Grid x:Name="titleBar"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Top"
+              Height="32">
+            <Grid.Background>
+                <SolidColorBrush Color="Black" Opacity="0.2"/>
+            </Grid.Background>
+
+            <TextBlock Text="StreamBED"
+                       Foreground="Black"
+                       FontSize="14"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="15,0,0,1"/>
+        </Grid>
+
         <Pivot x:Name="pivotRoot"
-               Margin="0, 0, 0, 112"
+               Margin="0, 32, 0, 112"
                IsHitTestVisible="False"
                SelectionChanged="PivotRoot_SelectionChanged">
             <PivotItem>
@@ -57,7 +73,7 @@
                 </TextBlock>
             </PivotItem>
         </Pivot>
-        
+
         <Button Style="{StaticResource RoundedButton}" 
                 x:Name="nextButton" 
                 Background="#EDEDED"

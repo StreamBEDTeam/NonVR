@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using StreamBED.Backend.Helper;
+using StreamBED.Frontend.UWP.Helper;
 
 namespace StreamBED.Frontend.UWP.Views
 {

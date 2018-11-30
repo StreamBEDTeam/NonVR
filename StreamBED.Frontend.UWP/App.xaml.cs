@@ -1,4 +1,5 @@
-﻿using StreamBED.Frontend.UWP.Views;
+﻿using StreamBED.Frontend.UWP.Helper;
+using StreamBED.Frontend.UWP.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,8 +7,10 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -41,6 +44,8 @@ namespace StreamBED.Frontend.UWP
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
+
+            TitleBarExtension.ModifyTitleBar();
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active

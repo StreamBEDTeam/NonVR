@@ -120,6 +120,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\UpperCaseConverter.cs" />
+    <Compile Include="Helper\TitleBarExtension.cs" />
     <Compile Include="Models\AreaDataModel.cs" />
     <Compile Include="Models\ColorScheme.cs" />
     <Compile Include="Models\FeatureDataModel.cs" />

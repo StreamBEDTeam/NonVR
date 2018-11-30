@@ -16,7 +16,7 @@ namespace StreamBED.Backend.Models.ProtocolModels
         /// </summary>
         public static class Keywords
         {
-            public static readonly Keyword SteepBank = new Keyword("Snags");
+            public static readonly Keyword SteepBank = new Keyword("Steep Bank");
             public static readonly Keyword GentlySlopingBank = new Keyword("Gently Sloping Bank");
             public static readonly Keyword BankFailure = new Keyword("Bank Failure");
             public static readonly Keyword CrumblingBank = new Keyword("Crumbling Bank");

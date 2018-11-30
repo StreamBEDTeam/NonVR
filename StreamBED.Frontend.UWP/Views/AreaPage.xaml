@@ -12,13 +12,42 @@
     Loaded="Page_Loaded">
 
     <Grid x:Name="layoutRoot">
+        <Grid x:Name="titleBar"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Top"
+              Height="32">
+            <Grid.Background>
+                <SolidColorBrush Color="Black" Opacity="0.2"/>
+            </Grid.Background>
+
+            <TextBlock Text="StreamBED"
+                       Foreground="Black"
+                       FontSize="14"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="15,0,0,1"/>
+        </Grid>
+
+        <ProgressRing x:Name="progressRing"
+                      Foreground="DodgerBlue"
+                      Height="50"
+                      Width=" 50"
+                      IsActive="True"
+                      Margin="0, 32, 0, 0"/>
+
         <ListView x:Name="listViewRoot"
                   SelectionMode="None"                  
-                  HorizontalAlignment="Center">
+                  HorizontalAlignment="Center"
+                  Margin="0, 32, 0, 0">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:AreaDataModel">
-                    <Border Width="1250" 
-                            BorderBrush="#d9d9d9" 
+                    <Border BorderBrush="#d9d9d9" 
                             CornerRadius="8,8,8,8" 
                             BorderThickness="8,8,8,8"
                             Margin="150, 12.5, 150, 12.5">
