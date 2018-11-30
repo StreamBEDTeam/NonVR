@@ -17,6 +17,7 @@ namespace StreamBED.Frontend.UWP.Models
         public FeatureDataModel(Keyword keyword)
         {
             this.Keyword = keyword;
+            ImageList = new ObservableCollection<ImageDataModel>();
         }
 
         public static FeatureDataModel GetFeatureDataModel(Keyword keyword, ICollection<ImageDataModel> imageList)

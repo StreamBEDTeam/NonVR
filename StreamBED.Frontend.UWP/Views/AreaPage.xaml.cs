@@ -33,8 +33,12 @@ namespace StreamBED.Frontend.UWP.Views
             this.InitializeComponent();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            var buffer = await Convert(new BitmapImage(
+                                    new Uri("ms-appx:///Assets/Logo/image.png")
+                                ));
+
             for (int i = 1; i <= 7; i++)
             {
                 var area = new AreaDataModel("Area " + i, ColorScheme.GetColor());
@@ -51,10 +55,7 @@ namespace StreamBED.Frontend.UWP.Views
                         )
                     ));*/
 
-                    var imageDataModel = new ImageDataModel(
-                                            new BitmapImage(
-                                                new Uri("ms-appx:///Assets/Logo/image.png")
-                                         ));
+                    var imageDataModel = new ImageDataModel(new ImageWithMetadata(buffer));
 
                     foreach (Keyword keyword in EpifaunalSubstrateModel.GetKeywords())
                     {

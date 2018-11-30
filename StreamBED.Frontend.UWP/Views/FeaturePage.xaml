@@ -27,7 +27,7 @@
                                   Height="75"
                                   Background="White">
                                 <TextBlock x:Name="titleBlock"
-                                           Foreground="White"
+                                           Foreground="Black"
                                            FontSize="30"
                                            FontWeight="Bold"
                                            TextWrapping="Wrap"

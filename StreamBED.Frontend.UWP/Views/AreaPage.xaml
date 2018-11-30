@@ -72,7 +72,7 @@
                             <Grid x:Name="buttonGrid"
                                   Height="100"
                                   Background="{x:Bind ItemColorBrush}">
-                                <Button Style="{StaticResource RoundedButton}" 
+                                <Button Style="{StaticResource KindaRoundedButton}" 
                                         x:Name="nextButton" 
                                         Background="#EDEDED"
                                         Foreground="Black"
