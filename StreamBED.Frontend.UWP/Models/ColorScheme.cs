@@ -9,9 +9,9 @@ namespace StreamBED.Frontend.UWP.Models
 {
     public class ColorScheme
     {
-        private static int Index = 0;
+        private int Index = 0;
 
-        private static readonly string[] ColorSchemeList = {
+        private readonly string[] ColorSchemeList = {
             "#A6CEE3",
             "#1F78B4",
             "#B2DF8A",
@@ -21,24 +21,29 @@ namespace StreamBED.Frontend.UWP.Models
             "#FF7F00"
         };
 
-        public static Color GetColor()
+        public Color GetColor()
         {
             if (Index < ColorSchemeList.Count())
             {
-                System.Drawing.Color colorReference = (System.Drawing.Color)(new System.Drawing.ColorConverter()).ConvertFromString(ColorSchemeList[Index++]);
-
-                Color color = new Color();
-                color.A = colorReference.A;
-                color.R = colorReference.R;
-                color.G = colorReference.G;
-                color.B = colorReference.B;
-
-                return color;
+                return ColorFromHex(ColorSchemeList[Index++]);
             }
             else
             {
                 return new Color();
             }
+        }
+
+        public static Color ColorFromHex(string hex)
+        {
+            System.Drawing.Color colorReference = (System.Drawing.Color)(new System.Drawing.ColorConverter()).ConvertFromString(hex);
+
+            Color color = new Color();
+            color.A = colorReference.A;
+            color.R = colorReference.R;
+            color.G = colorReference.G;
+            color.B = colorReference.B;
+
+            return color;
         }
 
     }

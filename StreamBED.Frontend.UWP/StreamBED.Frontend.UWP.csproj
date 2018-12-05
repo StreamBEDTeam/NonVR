@@ -129,6 +129,9 @@
     <Compile Include="Views\AreaPage.xaml.cs">
       <DependentUpon>AreaPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AssessmentPage.xaml.cs">
+      <DependentUpon>AssessmentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FeaturePage.xaml.cs">
       <DependentUpon>FeaturePage.xaml</DependentUpon>
     </Compile>
@@ -167,6 +170,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AreaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AssessmentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

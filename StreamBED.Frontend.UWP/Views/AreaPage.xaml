@@ -12,22 +12,6 @@
     Loaded="Page_Loaded">
 
     <Grid x:Name="layoutRoot">
-        <Grid x:Name="titleBar"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Top"
-              Height="32">
-            <Grid.Background>
-                <SolidColorBrush Color="Black" Opacity="0.2"/>
-            </Grid.Background>
-
-            <TextBlock Text="StreamBED"
-                       Foreground="Black"
-                       FontSize="14"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Margin="15,0,0,1"/>
-        </Grid>
-
         <ProgressRing x:Name="progressRing"
                       Foreground="DodgerBlue"
                       Height="50"
@@ -38,7 +22,9 @@
         <ListView x:Name="listViewRoot"
                   SelectionMode="None"                  
                   HorizontalAlignment="Center"
-                  Margin="0, 32, 0, 0">
+                  Margin="0, 32, 0, 0"
+                  MinWidth="1272"
+                  MaxWidth="1890">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -47,7 +33,8 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:AreaDataModel">
-                    <Border BorderBrush="#d9d9d9" 
+                    <Border x:Name="itemRoot"
+                            BorderBrush="#d9d9d9" 
                             CornerRadius="8,8,8,8" 
                             BorderThickness="8,8,8,8"
                             Margin="150, 12.5, 150, 12.5">
@@ -71,9 +58,12 @@
                                       ItemsSource="{x:Bind ImageList}"
                                       Margin="2.5, 0"
                                       SelectionMode="None"
+                                      Height="638"
                                       ScrollViewer.HorizontalScrollBarVisibility="Visible"
                                       ScrollViewer.HorizontalScrollMode="Enabled"
-                                      ScrollViewer.VerticalScrollMode="Disabled">
+                                      ScrollViewer.VerticalScrollMode="Disabled"
+                                      ItemContainerStyle="{StaticResource ImageGridViewItemContainer}" 
+                                      Style="{StaticResource ImageGridView}">
                                 <GridView.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <ItemsWrapGrid MaximumRowsOrColumns="2" 
@@ -88,10 +78,9 @@
                                                 Width="300"
                                                 Margin="5, 10"
                                                 Style="{StaticResource ImageButton}">-->
-                                            <Image x:Name="image" 
+                                        <Image x:Name="image" 
                                                    Height="300"
                                                    Width="300"
-                                                   Margin="2.5, 5"
                                                    Source="{x:Bind ImageSource}"/>
                                         <!--</Button>-->
                                     </DataTemplate>
@@ -114,11 +103,28 @@
                                     Enter
                                 </Button>
                             </Grid>
-                            
+
                         </StackPanel>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Grid x:Name="titleBar"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Top"
+              Height="32">
+            <Grid.Background>
+                <SolidColorBrush Color="Black" 
+                                 Opacity="0.2"/>
+            </Grid.Background>
+
+            <TextBlock Text="StreamBED"
+                       Foreground="Black"
+                       FontSize="14"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="15,0,0,1"/>
+        </Grid>
     </Grid>
 </Page>

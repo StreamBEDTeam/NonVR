@@ -39,9 +39,11 @@ namespace StreamBED.Frontend.UWP.Views
                                     new Uri("ms-appx:///Assets/Logo/image.png")
                                 ));
 
+            ColorScheme scheme = new ColorScheme();
+
             for (int i = 1; i <= 7; i++)
             {
-                var area = new AreaDataModel("Area " + i, ColorScheme.GetColor());
+                var area = new AreaDataModel("Area " + i, scheme.GetColor());
 
                 for (int j = 0; j < 10; j++)
                 {
@@ -72,6 +74,7 @@ namespace StreamBED.Frontend.UWP.Views
                 }
 
                 listViewRoot.Items.Add(area);
+                
             }
 
             progressRing.IsActive = false;
