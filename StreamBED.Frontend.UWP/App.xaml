@@ -65,25 +65,10 @@
                         <ListViewItemPresenter x:Name="Root" 
                                                DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" 
                                                DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" 
-                                               DragBackground="{ThemeResource GridViewItemDragBackground}" 
-                                               DragForeground="{ThemeResource GridViewItemDragForeground}" 
-                                               FocusBorderBrush="{ThemeResource GridViewItemFocusBorderBrush}" 
                                                FocusVisualMargin="{TemplateBinding FocusVisualMargin}" 
-                                               FocusSecondaryBorderBrush="{ThemeResource GridViewItemFocusSecondaryBorderBrush}" 
                                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                               PressedBackground="{ThemeResource GridViewItemBackgroundPressed}" 
-                                               PlaceholderBackground="{ThemeResource GridViewItemPlaceholderBackground}" 
-                                               PointerOverForeground="{ThemeResource GridViewItemForegroundPointerOver}" 
-                                               PointerOverBackground="{ThemeResource GridViewItemBackgroundPointerOver}" 
-                                               RevealBorderThickness="{ThemeResource GridViewItemRevealBorderThemeThickness}" 
                                                ReorderHintOffset="{ThemeResource GridViewItemReorderHintThemeOffset}" 
-                                               RevealBorderBrush="{ThemeResource GridViewItemRevealBorderBrush}" 
-                                               RevealBackground="{ThemeResource GridViewItemRevealBackground}" 
-                                               SelectedForeground="{ThemeResource GridViewItemForegroundSelected}" 
-                                               SelectionCheckMarkVisualEnabled="{ThemeResource GridViewItemSelectionCheckMarkVisualEnabled}" 
-                                               SelectedBackground="{ThemeResource GridViewItemBackgroundSelected}" 
-                                               SelectedPressedBackground="{ThemeResource GridViewItemBackgroundSelectedPressed}" 
-                                               SelectedPointerOverBackground="{ThemeResource GridViewItemBackgroundSelectedPointerOver}" 
+                                               SelectionCheckMarkVisualEnabled="{ThemeResource GridViewItemSelectionCheckMarkVisualEnabled}"  
                                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
@@ -99,16 +84,19 @@
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="PointerOverSelected">
-
+                                        <VisualState.Setters>
+                                            <Setter Target="Root.(image.Opacity)" Value="0.25"/>
+                                        </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="PointerOverPressed">
-
+                                        <VisualState.Setters>
+                                            <Setter Target="Root.(image.Opacity)" Value="0.75"/>
+                                        </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="Pressed">
-
-                                    </VisualState>
-                                    <VisualState x:Name="PressedSelected">
-
+                                        <VisualState.Setters>
+                                            <Setter Target="Root.(image.Opacity)" Value="0.5"/>
+                                        </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
                                 <VisualStateGroup x:Name="DisabledStates">
