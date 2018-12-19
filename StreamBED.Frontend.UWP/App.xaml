@@ -8,7 +8,7 @@
 
     <Application.Resources>
         <convert:UpperCaseConverter x:Key="UpperCaseConverter"/>
-        
+
         <Style x:Key="ImageGridView" TargetType="GridView">
             <Setter Property="Padding" Value="0"/>
             <Setter Property="IsTabStop" Value="False"/>

@@ -15,8 +15,6 @@ namespace StreamBED.Backend.Helper
         /// </summary>
         public string Content { get; }
 
-        public int i = 10;
-
         // Internal constructor
         internal Keyword(string Content)
         {

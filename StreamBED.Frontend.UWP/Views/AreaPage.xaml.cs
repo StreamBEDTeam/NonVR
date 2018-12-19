@@ -28,6 +28,8 @@ namespace StreamBED.Frontend.UWP.Views
     /// </summary>
     public sealed partial class AreaPage : Page
     {
+        public static List<AreaDataModel> AreaList = new List<AreaDataModel>();
+
         public AreaPage()
         {
             this.InitializeComponent();
@@ -35,46 +37,57 @@ namespace StreamBED.Frontend.UWP.Views
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            var buffer = await Convert(new BitmapImage(
-                                    new Uri("ms-appx:///Assets/Logo/image.png")
-                                ));
-
-            ColorScheme scheme = new ColorScheme();
-
-            for (int i = 1; i <= 7; i++)
+            if (AreaList.Count == 0)
             {
-                var area = new AreaDataModel("Area " + i, scheme.GetColor());
+                var buffer = await Convert(new BitmapImage(
+                                        new Uri("ms-appx:///Assets/Logo/image.png")
+                                    ));
 
-                for (int j = 0; j < 10; j++)
+                ColorScheme scheme = new ColorScheme();
+
+                for (int i = 1; i <= 7; i++)
                 {
-                    /*area.ImageList.Add(new ImageDataModel(
-                        new Backend.Helper.ImageWithMetadata(
-                            await Convert(
-                                new BitmapImage(
-                                    new Uri("ms-appx:///Assets/Logo/image.png")
+                    var area = new AreaDataModel("Area " + i, scheme.GetColor());
+
+                    for (int j = 0; j < 10; j++)
+                    {
+                        /*area.ImageList.Add(new ImageDataModel(
+                            new Backend.Helper.ImageWithMetadata(
+                                await Convert(
+                                    new BitmapImage(
+                                        new Uri("ms-appx:///Assets/Logo/image.png")
+                                    )
                                 )
                             )
-                        )
-                    ));*/
+                        ));*/
 
-                    var imageDataModel = new ImageDataModel(new ImageWithMetadata(buffer));
+                        var imageDataModel = new ImageDataModel(new ImageWithMetadata(buffer));
 
-                    foreach (Keyword keyword in EpifaunalSubstrateModel.GetKeywords())
-                    {
-                        var l = imageDataModel.Image;
-                        l.AddKeyword(keyword);
+                        foreach (Keyword keyword in EpifaunalSubstrateModel.GetKeywords())
+                        {
+                            var l = imageDataModel.Image;
+                            l.AddKeyword(keyword);
+                        }
+
+                        foreach (Keyword keyword in BankStabilityModel.GetKeywords())
+                        {
+                            imageDataModel.Image.AddKeyword(keyword);
+                        }
+
+                        area.ImageList.Add(imageDataModel);
                     }
 
-                    foreach (Keyword keyword in BankStabilityModel.GetKeywords())
-                    {
-                        imageDataModel.Image.AddKeyword(keyword);
-                    }
+                    listViewRoot.Items.Add(area);
+                    AreaList.Add(area);
 
-                    area.ImageList.Add(imageDataModel);
                 }
-
-                listViewRoot.Items.Add(area);
-                
+            }
+            else
+            {
+                foreach (AreaDataModel area in AreaList)
+                {
+                    listViewRoot.Items.Add(area);
+                }
             }
 
             progressRing.IsActive = false;
@@ -95,7 +108,9 @@ namespace StreamBED.Frontend.UWP.Views
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(FeaturePage), (sender as Button).DataContext);
+            AreaDataModel model = (sender as Button).DataContext as AreaDataModel;
+
+            this.Frame.Navigate(typeof(FeaturePage), model);
         }
     }
 }

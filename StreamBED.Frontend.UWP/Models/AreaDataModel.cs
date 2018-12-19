@@ -19,9 +19,11 @@ namespace StreamBED.Frontend.UWP.Models
 
         public Color ItemColor { get; }
 
+        public bool IsCompleted = false;
+
         public SolidColorBrush ItemColorBrush
         {
-            get { return new SolidColorBrush(ItemColor); }
+            get { return (!IsCompleted) ? new SolidColorBrush(ItemColor) : new SolidColorBrush(Colors.LimeGreen); }
         }
 
         public AreaDataModel(string Name, Color ItemColor)

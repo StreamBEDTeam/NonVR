@@ -145,5 +145,44 @@
                        HorizontalAlignment="Left"
                        Margin="15,0,0,1"/>
         </Grid>
+
+        <Grid x:Name="messagePopup">
+            <Grid.Background>
+                <SolidColorBrush Color="Black"
+                                 Opacity="0.3"/>
+            </Grid.Background>
+
+            <Grid Height="350"
+                  Width="750"
+                  Background="#EBEBEB"
+                  CornerRadius="8, 8, 8, 8"
+                  Padding="50">
+                <TextBlock x:Name="titleBlock"
+                           Foreground="Black"
+                           FontSize="30"
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Margin="0, 0, 0, 50"
+                           Text="Select 1 image that best represents each feature"/>
+
+                <Button Style="{StaticResource KindaRoundedButton}" 
+                        x:Name="popupButton" 
+                        Background="{x:Bind Area.ItemColorBrush}"
+                        Foreground="White"
+                        FontSize="24"
+                        VerticalAlignment="Bottom" 
+                        HorizontalAlignment="Right"
+                        FontWeight="Bold"
+                        Height="64"
+                        Width="200"
+                        Click="PopupButton_Click">
+                    Got it
+                </Button>
+            </Grid>
+
+        </Grid>
     </Grid>
 </Page>

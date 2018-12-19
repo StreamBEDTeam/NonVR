@@ -112,7 +112,7 @@ namespace StreamBED.Frontend.UWP.Views
             DataContext = null;
             listViewRoot.DataContext = null;
 
-            this.Frame.GoBack();
+            this.Frame.Navigate(typeof(AreaPage));
         }
 
         private void ImageGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -131,17 +131,57 @@ namespace StreamBED.Frontend.UWP.Views
             {
                 CompletionGrid.Background = new SolidColorBrush(Colors.LimeGreen);
                 nextButton.Visibility = Visibility.Visible;
+
+                Area.IsCompleted = true;
             }
             else
             {
                 CompletionGrid.Background = Area.ItemColorBrush;
                 nextButton.Visibility = Visibility.Collapsed;
+
+                Area.IsCompleted = false;
             }
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AssessmentPage), SelectedItems);
+            var list = AreaPage.AreaList;
+            int currIndex = list.IndexOf(Area);
+
+            if (currIndex < list.Count - 1)
+            {
+                this.Frame.Navigate(typeof(FeaturePage), AreaPage.AreaList.ElementAt(AreaPage.AreaList.IndexOf(Area) + 1));
+            }
+            else
+            {
+                bool flag = false;
+
+                foreach (AreaDataModel model in list)
+                {
+                    if (model.IsCompleted)
+                    {
+                        flag = true;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                
+                if (flag)
+                {
+                    this.Frame.Navigate(typeof(FeatureSelectionPage));
+                }
+                else
+                {
+                    this.Frame.Navigate(typeof(AreaPage));
+                }
+            }
+        }
+
+        private void PopupButton_Click(object sender, RoutedEventArgs e)
+        {
+            messagePopup.Visibility = Visibility.Collapsed;
         }
     }
 }
