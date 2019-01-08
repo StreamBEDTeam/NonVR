@@ -30,6 +30,8 @@ namespace StreamBED.Frontend.UWP.Views
     {
         public static List<AreaDataModel> AreaList = new List<AreaDataModel>();
 
+        private bool AllAreasCompleted = false;
+
         public AreaPage()
         {
             this.InitializeComponent();
@@ -111,6 +113,24 @@ namespace StreamBED.Frontend.UWP.Views
                 }
             }
 
+            foreach (AreaDataModel area in AreaList)
+            {
+                if (area.IsCompleted)
+                {
+                    AllAreasCompleted = true;
+                }
+                else
+                {
+                    AllAreasCompleted = false;
+                    break;
+                }
+            }
+
+            if (AllAreasCompleted)
+            {
+                nextButton.Visibility = Visibility.Visible;
+            }
+
             progressRing.IsActive = false;
         }
 
@@ -132,6 +152,11 @@ namespace StreamBED.Frontend.UWP.Views
             AreaDataModel model = (sender as Button).DataContext as AreaDataModel;
 
             this.Frame.Navigate(typeof(FeaturePage), model);
+        }
+
+        private void NextButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FeatureSelectionPage));
         }
     }
 }

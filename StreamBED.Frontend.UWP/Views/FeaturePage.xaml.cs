@@ -47,6 +47,11 @@ namespace StreamBED.Frontend.UWP.Views
         {
             base.OnNavigatedTo(e);
 
+            if (SelectedItems.Count != 0)
+            {
+                messagePopup.Visibility = Visibility.Collapsed;
+            }
+
             Area = e.Parameter as AreaDataModel;
 
             foreach (Keyword keyword in EpifaunalSubstrateModel.GetKeywords())
@@ -135,6 +140,11 @@ namespace StreamBED.Frontend.UWP.Views
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
+            foreach (ImageDataModel image in imageDict.Values)
+            {
+                SelectedItems.Add(image);
+            }
+
             DataContext = null;
             listViewRoot.DataContext = null;
 

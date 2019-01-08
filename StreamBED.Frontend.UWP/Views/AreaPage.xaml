@@ -121,6 +121,22 @@
             </ListView.ItemTemplate>
         </ListView>
 
+        <Button Style="{StaticResource RoundedButton}" 
+                x:Name="nextButton"
+                FontFamily="Segoe MDL2 Assets"
+                Background="#EDEDED"
+                Foreground="Black"
+                FontSize="24"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Right"
+                Margin="15, 52"
+                Height="64"
+                Width="64"
+                Visibility="Collapsed"
+                Click="NextButton_Click_1">
+            &#xEBE7;
+        </Button>
+
         <Grid x:Name="titleBar"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Top"
