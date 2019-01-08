@@ -32,15 +32,15 @@ namespace StreamBED.Frontend.UWP.Views
 
         private int NumberOfKeywords = 0;
 
-        private Grid CompletionGrid;
+        private FontIcon CompletionIcon;
 
-        private List<ImageDataModel> SelectedItems;
+        private Dictionary<FeatureDataModel, ImageDataModel> imageDict = new Dictionary<FeatureDataModel, ImageDataModel>();
+
+        public static List<ImageDataModel> SelectedItems = new List<ImageDataModel>();
 
         public FeaturePage()
         {
             this.InitializeComponent();
-
-            SelectedItems = new List<ImageDataModel>();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -51,17 +51,27 @@ namespace StreamBED.Frontend.UWP.Views
 
             foreach (Keyword keyword in EpifaunalSubstrateModel.GetKeywords())
             {
-                listViewRoot.Items.Add(FeatureDataModel.GetFeatureDataModel(keyword, Area.ImageList));
+                var model = FeatureDataModel.GetFeatureDataModel(keyword, Area.ImageList);
 
-                NumberOfKeywords++;
+                if (model != null)
+                {
+                    listViewRoot.Items.Add(FeatureDataModel.GetFeatureDataModel(keyword, Area.ImageList));
+
+                    NumberOfKeywords++;
+                }
             }
 
-            /*foreach (Keyword keyword in BankStabilityModel.GetKeywords())
+            foreach (Keyword keyword in BankStabilityModel.GetKeywords())
             {
-                listViewRoot.Items.Add(FeatureDataModel.GetFeatureDataModel(keyword, Area.ImageList));
+                var model = FeatureDataModel.GetFeatureDataModel(keyword, Area.ImageList);
 
-                NumberOfKeywords++;
-            }*/
+                if (model != null)
+                {
+                    listViewRoot.Items.Add(FeatureDataModel.GetFeatureDataModel(keyword, Area.ImageList));
+
+                    NumberOfKeywords++;
+                }
+            }
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -75,7 +85,8 @@ namespace StreamBED.Frontend.UWP.Views
                     BorderBrush = new SolidColorBrush(ColorScheme.ColorFromHex("#D9D9D9")),
                     CornerRadius = new CornerRadius(8, 8, 8, 8),
                     BorderThickness = new Thickness(8, 8, 8, 8),
-                    Margin = new Thickness(150, 12.5, 150, 12.5)
+                    Margin = new Thickness(150, 12.5, 150, 12.5),
+                    Width = 1200
                 };
 
                 Grid titleGrid = new Grid()
@@ -96,14 +107,29 @@ namespace StreamBED.Frontend.UWP.Views
                     Text = Area.Name.ToUpper()
                 };
 
-                CompletionGrid = titleGrid;
+                FontIcon icon = new FontIcon()
+                {
+                    FontFamily = new FontFamily("Segoe MDL2 Assets"),
+                    Foreground = new SolidColorBrush(Colors.White),
+                    FontSize = 45,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    Margin = new Thickness(15),
+                    Height = 75,
+                    Width = 75,
+                    Visibility = Visibility.Collapsed,
+                    Glyph = "\uE73E"
+                };
+
+                CompletionIcon = icon;
 
                 titleGrid.Children.Add(title);
+                titleGrid.Children.Add(icon);
                 border.Child = titleGrid;
 
                 stack.Children.Insert(0, border);
 
-                Count++;
+                Count--;
             }
         }
 
@@ -117,29 +143,37 @@ namespace StreamBED.Frontend.UWP.Views
 
         private void ImageGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.RemovedItems.Count != 0)
-            {
-                SelectedItems.Remove(e.RemovedItems.First() as ImageDataModel);
-            }
+            var gridView = sender as GridView;
 
-            if (e.AddedItems.Count != 0)
+            if (gridView.DataContext != null)
             {
-                SelectedItems.Add(e.AddedItems.First() as ImageDataModel);
-            }
+                if (gridView.SelectedItem as ImageDataModel != null)
+                {
+                    if (!gridView.SelectedItem.Equals(imageDict.GetValueOrDefault(gridView.DataContext as FeatureDataModel) as ImageDataModel))
+                    {
+                        if (imageDict.ContainsKey(gridView.DataContext as FeatureDataModel))
+                        {
+                            imageDict.Remove(gridView.DataContext as FeatureDataModel);
+                        }
 
-            if (SelectedItems.Count == NumberOfKeywords)
-            {
-                CompletionGrid.Background = new SolidColorBrush(Colors.LimeGreen);
-                nextButton.Visibility = Visibility.Visible;
+                        imageDict.Add(gridView.DataContext as FeatureDataModel, gridView.SelectedItem as ImageDataModel);
+                    }
+                }
 
-                Area.IsCompleted = true;
-            }
-            else
-            {
-                CompletionGrid.Background = Area.ItemColorBrush;
-                nextButton.Visibility = Visibility.Collapsed;
+                if (imageDict.Count == NumberOfKeywords)
+                {
+                    CompletionIcon.Visibility = Visibility.Visible;
+                    nextButton.Visibility = Visibility.Visible;
 
-                Area.IsCompleted = false;
+                    Area.IsCompleted = true;
+                }
+                else
+                {
+                    CompletionIcon.Visibility = Visibility.Collapsed;
+                    nextButton.Visibility = Visibility.Collapsed;
+
+                    Area.IsCompleted = false;
+                }
             }
         }
 
@@ -150,6 +184,13 @@ namespace StreamBED.Frontend.UWP.Views
 
             if (currIndex < list.Count - 1)
             {
+                foreach (ImageDataModel image in imageDict.Values)
+                {
+                    SelectedItems.Add(image);
+                }
+
+                list[currIndex].IsCompleted = true;
+
                 this.Frame.Navigate(typeof(FeaturePage), AreaPage.AreaList.ElementAt(AreaPage.AreaList.IndexOf(Area) + 1));
             }
             else
@@ -170,6 +211,11 @@ namespace StreamBED.Frontend.UWP.Views
                 
                 if (flag)
                 {
+                    foreach (ImageDataModel image in imageDict.Values)
+                    {
+                        SelectedItems.Add(image);
+                    }
+
                     this.Frame.Navigate(typeof(FeatureSelectionPage));
                 }
                 else

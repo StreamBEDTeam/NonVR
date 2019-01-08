@@ -18,15 +18,13 @@ namespace StreamBED.Frontend.UWP.Models
 
         public ImageSource ImageSource { get; }
 
+        public bool isAssessmentComplete { get; set; }
+
         public ImageDataModel(ImageWithMetadata Image)
         {
             this.Image = Image;
             this.ImageSource = GetImageSource().Result;
-        }
-
-        public ImageDataModel(ImageSource source)
-        {
-            this.ImageSource = source;
+            this.isAssessmentComplete = false;
         }
 
         public async Task<BitmapImage> GetImageSource()

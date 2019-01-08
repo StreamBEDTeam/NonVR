@@ -44,42 +44,63 @@ namespace StreamBED.Frontend.UWP.Views
                                     ));
 
                 ColorScheme scheme = new ColorScheme();
+                Random r = new Random();
+
+                List<ImageWithMetadata> imageList = new List<ImageWithMetadata>();
+
+                for (int i = 0; i < 2; i++)
+                {
+                    var image = new ImageWithMetadata(buffer);
+
+                    for (int j = 0; j < r.Next(0, 3); j++)
+                    {
+                        var k = EpifaunalSubstrateModel.GetKeywords()[r.Next(0, 3)];
+
+                        if (!image.Keywords.Contains(k))
+                        {
+                            image.AddKeyword(k);
+                        }
+                    }
+
+                    for (int j = 0; j < r.Next(0, 6); j++)
+                    {
+                        var k = BankStabilityModel.GetKeywords()[r.Next(0, 6)];
+
+                        if (!image.Keywords.Contains(k))
+                        {
+                            image.AddKeyword(k);
+                        }
+                    }
+
+                    image.Location = "Area " + r.Next(1, 7);
+
+                    imageList.Add(image);
+                }
+
+                List<ImageDataModel> imageModelList = new List<ImageDataModel>();
+
+                foreach (ImageWithMetadata image in imageList)
+                {
+                    imageModelList.Add(new ImageDataModel(image));
+                }
 
                 for (int i = 1; i <= 7; i++)
                 {
                     var area = new AreaDataModel("Area " + i, scheme.GetColor());
 
-                    for (int j = 0; j < 10; j++)
+                    foreach (ImageDataModel image in imageModelList)
                     {
-                        /*area.ImageList.Add(new ImageDataModel(
-                            new Backend.Helper.ImageWithMetadata(
-                                await Convert(
-                                    new BitmapImage(
-                                        new Uri("ms-appx:///Assets/Logo/image.png")
-                                    )
-                                )
-                            )
-                        ));*/
-
-                        var imageDataModel = new ImageDataModel(new ImageWithMetadata(buffer));
-
-                        foreach (Keyword keyword in EpifaunalSubstrateModel.GetKeywords())
+                        if (image.Image.Location.Equals(area.Name))
                         {
-                            var l = imageDataModel.Image;
-                            l.AddKeyword(keyword);
+                            area.ImageList.Add(image);
                         }
-
-                        foreach (Keyword keyword in BankStabilityModel.GetKeywords())
-                        {
-                            imageDataModel.Image.AddKeyword(keyword);
-                        }
-
-                        area.ImageList.Add(imageDataModel);
                     }
 
-                    listViewRoot.Items.Add(area);
-                    AreaList.Add(area);
-
+                    if (area.ImageList.Count != 0)
+                    {
+                        listViewRoot.Items.Add(area);
+                        AreaList.Add(area);
+                    }
                 }
             }
             else

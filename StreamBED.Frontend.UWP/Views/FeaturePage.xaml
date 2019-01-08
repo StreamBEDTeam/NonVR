@@ -13,8 +13,8 @@
     <Grid x:Name="layoutRoot">
         <ListView x:Name="listViewRoot"
                   SelectionMode="None"                  
-                  HorizontalAlignment="Center"
-                  Margin="0, 32, 0, 0">
+                  Margin="0, 32, 0, 0"
+                  HorizontalAlignment="Stretch">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -27,7 +27,8 @@
                         <Border BorderBrush="#d9d9d9" 
                                 CornerRadius="8,8,8,8" 
                                 BorderThickness="8,8,8,8"
-                                Margin="150, 12.5, 150, 12.5">
+                                Margin="150, 12.5, 150, 12.5"
+                                Width="1200">
                             <StackPanel x:Name="templateRoot"
                                         Background="#EBEBEB">
                                 <Grid x:Name="titleGrid"
@@ -42,9 +43,10 @@
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
                                                Text="{x:Bind Keyword.Content, Converter={StaticResource                                     UpperCaseConverter}}"/>
+                                    
                                 </Grid>
 
-                                <GridView x:Name="imageGridView"
+                                <GridView Height="638"
                                           ItemsSource="{x:Bind ImageList}"
                                           Margin="2.5, 0"
                                           SelectionMode="Single"

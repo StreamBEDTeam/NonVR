@@ -32,7 +32,14 @@ namespace StreamBED.Frontend.UWP.Models
                 }
             }
 
-            return feature;
+            if (feature.ImageList.Count != 0)
+            {
+                return feature;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Media;
 using StreamBED.Backend.Helper;
 using StreamBED.Backend.Models;
 using System.Collections.ObjectModel;
+using Windows.UI.Xaml;
 
 namespace StreamBED.Frontend.UWP.Models
 {
@@ -21,9 +22,13 @@ namespace StreamBED.Frontend.UWP.Models
 
         public bool IsCompleted = false;
 
+        public bool IsEnabled { get { return !IsCompleted; } }
+
+        public Visibility Visibility { get { return (IsCompleted) ? Visibility.Visible : Visibility.Collapsed; } }
+
         public SolidColorBrush ItemColorBrush
         {
-            get { return (!IsCompleted) ? new SolidColorBrush(ItemColor) : new SolidColorBrush(Colors.LimeGreen); }
+            get { return new SolidColorBrush(ItemColor); }
         }
 
         public AreaDataModel(string Name, Color ItemColor)

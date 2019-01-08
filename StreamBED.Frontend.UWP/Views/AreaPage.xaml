@@ -21,10 +21,8 @@
 
         <ListView x:Name="listViewRoot"
                   SelectionMode="None"                  
-                  HorizontalAlignment="Center"
                   Margin="0, 32, 0, 0"
-                  MinWidth="1272"
-                  MaxWidth="1890">
+                  HorizontalAlignment="Stretch">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -37,7 +35,8 @@
                             BorderBrush="#d9d9d9" 
                             CornerRadius="8,8,8,8" 
                             BorderThickness="8,8,8,8"
-                            Margin="150, 12.5, 150, 12.5">
+                            Margin="150, 12.5, 150, 12.5"
+                            Width="1200">
                         <StackPanel x:Name="templateRoot"
                                     Background="White">
                             <Grid x:Name="titleGrid"
@@ -52,6 +51,17 @@
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center"
                                            Text="{x:Bind Name, Converter={StaticResource UpperCaseConverter}}"/>
+
+                                <FontIcon FontFamily="Segoe MDL2 Assets"
+                                          Foreground="White"
+                                          FontSize="45"
+                                          VerticalAlignment="Center" 
+                                          HorizontalAlignment="Right"
+                                          Margin="15"
+                                          Height="75"
+                                          Width="75"
+                                          Visibility="{x:Bind Visibility}"
+                                          Glyph="&#xE73E;"/>
                             </Grid>
 
                             <GridView x:Name="imageGridView"
@@ -99,7 +109,8 @@
                                         HorizontalAlignment="Center"
                                         Height="64"
                                         Width="200"
-                                        Click="NextButton_Click">
+                                        Click="NextButton_Click"
+                                        IsEnabled="{x:Bind IsEnabled}">
                                     Enter
                                 </Button>
                             </Grid>
