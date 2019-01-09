@@ -30,11 +30,13 @@ namespace StreamBED.Frontend.UWP.Views
 
         private int Index = 0;
 
+        private List<int> visit = new List<int>() { 20, 15, 20, 5, 0 };
+
         public EpifaunalAssessmentPage()
         {
             this.InitializeComponent();
 
-            CurrentImage = FeatureSelectionPage.SelectedFeature.ImageList[Index];
+            CurrentImage = FeatureSelectionPage.SelectedFeature.ImageList[Index++];
             progressBar.Maximum = FeatureSelectionPage.SelectedFeature.ImageList.Count;
         }
 
@@ -42,7 +44,7 @@ namespace StreamBED.Frontend.UWP.Views
         {
             if (Index < FeatureSelectionPage.SelectedFeature.ImageList.Count)
             {
-                CurrentImage = FeatureSelectionPage.SelectedFeature.ImageList[++Index];
+                CurrentImage = FeatureSelectionPage.SelectedFeature.ImageList[Index++];
 
                 return 0;
             }
@@ -99,6 +101,21 @@ namespace StreamBED.Frontend.UWP.Views
         private void RadioButton_Click(object sender, RoutedEventArgs e)
         {
             CurrentScore = Convert.ToInt32((sender as RadioButton).Content);
+
+            if (visit.Contains(CurrentScore))
+            {
+                visit.Remove(CurrentScore);
+            }
+
+            if (visit.Count == 0)
+            {
+                detailButton1.IsHitTestVisible = true;
+                detailButton2.IsHitTestVisible = true;
+                detailButton3.IsHitTestVisible = true;
+                detailButton4.IsHitTestVisible = true;
+
+                submitButton.IsEnabled = true;
+            }
         }
     }
 }

@@ -50,7 +50,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                 List<ImageWithMetadata> imageList = new List<ImageWithMetadata>();
 
-                for (int i = 0; i < 1; i++)
+                for (int i = 0; i < 2; i++)
                 {
                     var image = new ImageWithMetadata(buffer);
 

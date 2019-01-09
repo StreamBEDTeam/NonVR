@@ -16,9 +16,9 @@ namespace StreamBED.Backend.Helper
     {
         #region Private Variables
 
-        private EpifaunalSubstrateScore epifaunalScore;
+        private EpifaunalSubstrateScore epifaunalScore = new EpifaunalSubstrateScore();
 
-        private BankStabilityScore bankScore;
+        private BankStabilityScore bankScore = new BankStabilityScore();
 
         private List<Keyword> keywords;
 

@@ -218,7 +218,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                 if (page.NextImage() == -1)
                 {
-
+                    
                 }
             }
             else if (SelectedModel is BankStabilityModel)
