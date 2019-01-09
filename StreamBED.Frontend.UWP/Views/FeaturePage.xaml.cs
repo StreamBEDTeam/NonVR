@@ -36,7 +36,7 @@ namespace StreamBED.Frontend.UWP.Views
 
         private Dictionary<FeatureDataModel, ImageDataModel> imageDict = new Dictionary<FeatureDataModel, ImageDataModel>();
 
-        public static List<ImageDataModel> SelectedItems = new List<ImageDataModel>();
+        internal static List<ImageDataModel> SelectedItems = new List<ImageDataModel>();
 
         public FeaturePage()
         {

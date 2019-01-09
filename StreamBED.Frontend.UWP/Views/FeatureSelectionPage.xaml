@@ -5,6 +5,7 @@
     xmlns:local="using:StreamBED.Frontend.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:StreamBED.Frontend.UWP.Models"
     mc:Ignorable="d"
     Background="#d9d9d9">
 
@@ -61,32 +62,38 @@
 
             <PivotItem Margin="0, 59, 0, 0">
                 <ScrollViewer>
-                    <StackPanel 
-                    HorizontalAlignment="Stretch"
-                    Width="1200">
+                    <StackPanel HorizontalAlignment="Stretch"
+                                Width="1200">
 
                         <StackPanel Background="White"
-                  Margin="0, 25, 0, 0"
-                  CornerRadius="8"
+                                    Margin="0, 25, 0, 0"
+                                    CornerRadius="8"
                                     Tapped="StackPanel_Tapped_1">
                             <Grid Height="75">
                                 <TextBlock Foreground="Black"
-                           FontSize="26"
-                           FontWeight="Bold"
-                           TextWrapping="Wrap"
-                           TextAlignment="Center"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center"
-                           Text="Epifaunal Substrate"
-                           Margin="15"/>
+                                           FontSize="26"
+                                           FontWeight="Bold"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Text="Epifaunal Substrate"
+                                           Margin="15"/>
+
+                                <Image Source="/Assets/ProtocolAssets/rock.png"
+                                       Height="50"
+                                       Width="50"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="15"/>
                             </Grid>
 
                             <Image Source="/Assets/ProtocolAssets/Epifaunal.png"/>
                         </StackPanel>
 
                         <StackPanel Background="White"
-                  Margin="0, 25, 0, 25"
-                  CornerRadius="8"
+                                    Margin="0, 25, 0, 25"
+                                    CornerRadius="8"
                                     Tapped="StackPanel_Tapped">
                             <Grid Height="75">
                                 <TextBlock Foreground="Black"
@@ -98,6 +105,13 @@
                                            HorizontalAlignment="Center"
                                            Text="Bank Stability"
                                            Margin="15"/>
+
+                                <Image Source="/Assets/ProtocolAssets/tree.png"
+                                       Height="50"
+                                       Width="50"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="15"/>
                             </Grid>
 
                             <Image Source="/Assets/ProtocolAssets/Bank.png"/>
@@ -116,10 +130,56 @@
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                             </Style>
                         </ListView.ItemContainerStyle>
-                        
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="model:FeatureDataModel">
+                                <StackPanel>
+                                    <Border BorderBrush="#d9d9d9" 
+                                CornerRadius="8,8,8,8" 
+                                BorderThickness="8,8,8,8"
+                                Margin="150, 12.5, 150, 12.5"
+                                Width="1200">
+                                        <StackPanel x:Name="templateRoot"
+                                                    Background="#EBEBEB"
+                                                    Tapped="TemplateRoot_Tapped">
+                                            <Grid x:Name="titleGrid"
+                                                  Height="75"
+                                                  Background="White">
+                                                <TextBlock x:Name="titleBlock"
+                                                           Foreground="Black"
+                                                           FontSize="30"
+                                                           FontWeight="Bold"
+                                                           TextWrapping="Wrap"
+                                                           TextAlignment="Center"
+                                                           VerticalAlignment="Center"
+                                                           HorizontalAlignment="Center"
+                                                           Text="{x:Bind Keyword.Content, Converter={StaticResource                                     UpperCaseConverter}}"/>
+
+                                                <FontIcon FontFamily="Segoe MDL2 Assets"
+                                                          Foreground="Black"
+                                                          FontSize="45"
+                                                          VerticalAlignment="Center" 
+                                                          HorizontalAlignment="Right"
+                                                          Margin="15"
+                                                          Height="75"
+                                                          Width="75"
+                                                          Visibility="{x:Bind Visibility}"
+                                                          Glyph="&#xE73E;"/>
+                                            </Grid>
+                                            
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
                     </ListView>
          
                 </Grid>
+            </PivotItem>
+
+            <PivotItem Margin="0, 59, 0, 0">
+                <Frame x:Name="assessmentFrame"/>
             </PivotItem>
         </Pivot>
 
@@ -128,7 +188,7 @@
               Background="White"
               VerticalAlignment="Top"
               Margin="0, 32, 0, 0"
-              Visibility="Collapsed">
+              Visibility="Visible">
             <StackPanel Orientation="Horizontal"
                         Margin="15">
                 <Border BorderThickness="0, 0, 2.5, 0" 
@@ -160,7 +220,7 @@
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"
                                Margin="0, 0, 15, 0"
-                               Text="Epifaunal Substrate"
+                               Text="EPIFAUNAL SUBSTRATE"
                                Tapped="ProtocolTitle_Tapped"/>
                 </Border>
 
@@ -177,10 +237,23 @@
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"
                                Margin="0, 0, 15, 0"
-                               Text="Steep Bank"/>
+                               Text="STEEP BANK"/>
                 </Border>
             </StackPanel>
-            
+
+            <FontIcon x:Name="nextImageButton"
+                      FontFamily="Segoe MDL2 Assets"
+                      Foreground="Black"
+                      FontSize="30"
+                      VerticalAlignment="Center" 
+                      HorizontalAlignment="Right"
+                      Margin="15"
+                      Height="75"
+                      Width="75"
+                      Visibility="Collapsed"
+                      Glyph="&#xE72A;"
+                      Tapped="NextImageButton_Tapped"/>
+
         </Grid>
 
         <Grid x:Name="titleBar"

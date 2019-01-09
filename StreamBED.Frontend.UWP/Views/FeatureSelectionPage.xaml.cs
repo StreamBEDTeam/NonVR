@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -28,17 +29,17 @@ namespace StreamBED.Frontend.UWP.Views
     /// </summary>
     public sealed partial class FeatureSelectionPage : Page
     {
+        private static EpifaunalSubstrateModel EpifaunalSubstrateModel = new EpifaunalSubstrateModel();
+
+        private static BankStabilityModel BankStabilityModel = new BankStabilityModel();
+
+        internal static Dictionary<Keyword, FeatureDataModel> epifaunalSubstrateFeatures = new Dictionary<Keyword, FeatureDataModel>();
+
+        internal static Dictionary<Keyword, FeatureDataModel> bankStabilityFeatures = new Dictionary<Keyword, FeatureDataModel>();
+
+        internal static FeatureDataModel SelectedFeature;
+
         private ProtocolModel SelectedModel;
-
-        private static ProtocolModel epifaunalSubstrateModel = new EpifaunalSubstrateModel();
-
-        private static ProtocolModel bankStabilityModel = new BankStabilityModel();
-
-        private List<ImageDataModel> protocolImages = new List<ImageDataModel>();
-
-        private List<ImageDataModel> featureImages = new List<ImageDataModel>();
-
-        private List<Keyword> protocolFeatures = new List<Keyword>();
 
         public FeatureSelectionPage()
         {
@@ -63,90 +64,76 @@ namespace StreamBED.Frontend.UWP.Views
             else
             {
                 ++layoutPivot.SelectedIndex;
+
+                InitializeProtocol(BankStabilityModel.GetKeywords(), BankStabilityModel);
+                InitializeProtocol(EpifaunalSubstrateModel.GetKeywords(), EpifaunalSubstrateModel);
             }
         }
 
         private void StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            SelectedModel = new BankStabilityModel();
             protocolTitle.Text = "BANK STABILITY";
+            SelectedModel = BankStabilityModel;
 
-            InitProtocolPage(BankStabilityModel.GetKeywords());
+            listViewRoot.Items.Clear();
+
+            foreach (FeatureDataModel feature in bankStabilityFeatures.Values)
+            {
+                listViewRoot.Items.Add(feature);
+            }
+
+            ++layoutPivot.SelectedIndex;
         }
 
         private void StackPanel_Tapped_1(object sender, TappedRoutedEventArgs e)
         {
-            SelectedModel = new EpifaunalSubstrateModel();
             protocolTitle.Text = "EPIFAUNAL SUBSTRATE";
+            SelectedModel = EpifaunalSubstrateModel;
 
-            InitProtocolPage(EpifaunalSubstrateModel.GetKeywords());
-        }
-
-        private void InitProtocolPage(Keyword[] keywords) 
-        {
-            protocolImages.Clear();
-            protocolFeatures.Clear();
             listViewRoot.Items.Clear();
 
+            foreach (FeatureDataModel feature in epifaunalSubstrateFeatures.Values)
+            {
+                listViewRoot.Items.Add(feature);
+            }
+
+            ++layoutPivot.SelectedIndex;
+        }
+
+        private void InitializeProtocol(Keyword[] keywords, ProtocolModel model) 
+        {
             foreach (Keyword keyword in keywords)
             {
                 foreach (ImageDataModel image in FeaturePage.SelectedItems)
                 {
                     if (image.Image.Keywords.Contains(keyword))
                     {
-                        if (!protocolImages.Contains(image))
+                        if (model is EpifaunalSubstrateModel)
                         {
-                            protocolImages.Add(image);
-                        }
+                            if (!epifaunalSubstrateFeatures.ContainsKey(keyword))
+                            {
+                                epifaunalSubstrateFeatures.Add(keyword, new FeatureDataModel(keyword));
+                            }
 
-                        if (!protocolFeatures.Contains(keyword))
+                            if (!epifaunalSubstrateFeatures.GetValueOrDefault(keyword).ImageList.Contains(image))
+                            {
+                                epifaunalSubstrateFeatures.GetValueOrDefault(keyword).ImageList.Add(image);
+                            }
+                        }
+                        else if (model is BankStabilityModel)
                         {
-                            protocolFeatures.Add(keyword);
+                            if (!bankStabilityFeatures.ContainsKey(keyword))
+                            {
+                                bankStabilityFeatures.Add(keyword, new FeatureDataModel(keyword));
+                            }
+
+                            if (!bankStabilityFeatures.GetValueOrDefault(keyword).ImageList.Contains(image))
+                            {
+                                bankStabilityFeatures.GetValueOrDefault(keyword).ImageList.Add(image);
+                            }
                         }
                     }
                 }
-            }
-
-            GenerateProtocolPage();
-
-            ++layoutPivot.SelectedIndex;
-        }
-
-        private void GenerateProtocolPage()
-        {
-            foreach (Keyword feature in protocolFeatures)
-            {
-                Border border = new Border()
-                {
-                    BorderBrush = new SolidColorBrush(ColorScheme.ColorFromHex("#D9D9D9")),
-                    CornerRadius = new CornerRadius(8, 8, 8, 8),
-                    BorderThickness = new Thickness(8, 8, 8, 8),
-                    Margin = new Thickness(150, 12.5, 150, 12.5),
-                    Width = 1200
-                };
-
-                Grid titleGrid = new Grid()
-                {
-                    Height = 75,
-                    Background = new SolidColorBrush(Colors.White)
-                };
-
-                TextBlock title = new TextBlock()
-                {
-                    Foreground = new SolidColorBrush(Colors.Black),
-                    FontSize = 30,
-                    FontWeight = FontWeights.Bold,
-                    TextWrapping = TextWrapping.Wrap,
-                    TextAlignment = TextAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    Text = feature.Content.ToUpper()
-                };
-
-                titleGrid.Children.Add(title);
-                border.Child = titleGrid;
-
-                listViewRoot.Items.Add(border);
             }
         }
 
@@ -154,29 +141,33 @@ namespace StreamBED.Frontend.UWP.Views
         {
             int index = layoutPivot.SelectedIndex;
 
-            if (index < 1)
+            if (index == 0)
             {
                 navBar.Visibility = Visibility.Collapsed;
                 protocolBlock.Visibility = Visibility.Collapsed;
                 featureBlock.Visibility = Visibility.Collapsed;
+                nextImageButton.Visibility = Visibility.Collapsed;
             }
-            else if (index < 2)
+            else if (index == 1)
             {
                 navBar.Visibility = Visibility.Visible;
                 protocolBlock.Visibility = Visibility.Collapsed;
                 featureBlock.Visibility = Visibility.Collapsed;
+                nextImageButton.Visibility = Visibility.Collapsed;
             }
-            else if (index < 3)
+            else if (index == 2)
             {
                 navBar.Visibility = Visibility.Visible;
                 protocolBlock.Visibility = Visibility.Visible;
                 featureBlock.Visibility = Visibility.Collapsed;
+                nextImageButton.Visibility = Visibility.Collapsed;
             }
-            else if (index < 4)
+            else if (index == 3)
             {
                 navBar.Visibility = Visibility.Visible;
                 protocolBlock.Visibility = Visibility.Visible;
                 featureBlock.Visibility = Visibility.Visible;
+                nextImageButton.Visibility = Visibility.Visible;
             }
         }
 
@@ -199,6 +190,46 @@ namespace StreamBED.Frontend.UWP.Views
         private void GlanceCloseButton_Click(object sender, RoutedEventArgs e)
         {
             glanceProtocol.Visibility = Visibility.Collapsed;
+        }
+
+        private void TemplateRoot_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            SelectedFeature = (sender as StackPanel).DataContext as FeatureDataModel;
+
+            featureTitle.Text = SelectedFeature.Keyword.Content.ToUpper();
+
+            if (SelectedModel is EpifaunalSubstrateModel)
+            {
+                assessmentFrame.Navigate(typeof(EpifaunalAssessmentPage));
+            }
+            else if (SelectedModel is BankStabilityModel)
+            {
+                assessmentFrame.Navigate(typeof(BankAssessmentPage));
+            }
+
+            ++layoutPivot.SelectedIndex;
+        }
+
+        private void NextImageButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (SelectedModel is EpifaunalSubstrateModel)
+            {
+                var page = assessmentFrame.Content as EpifaunalAssessmentPage;
+
+                if (page.NextImage() == -1)
+                {
+
+                }
+            }
+            else if (SelectedModel is BankStabilityModel)
+            {
+                var page = assessmentFrame.Content as BankAssessmentPage;
+
+                if (page.NextImage() == -1)
+                {
+
+                }
+            }
         }
     }
 }

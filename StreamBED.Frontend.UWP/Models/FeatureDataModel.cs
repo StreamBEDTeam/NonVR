@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
 namespace StreamBED.Frontend.UWP.Models
 {
@@ -13,6 +14,49 @@ namespace StreamBED.Frontend.UWP.Models
         public Keyword Keyword { get; }
 
         public ObservableCollection<ImageDataModel> ImageList { get; }
+
+        public bool IsComplete
+        {
+            get
+            {
+                bool flag = false;
+
+                foreach (ImageDataModel image in ImageList)
+                {
+                    if (image.isComplete)
+                    {
+                        flag = true;
+                    }
+                    else
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+
+                return flag;
+            }
+        }
+
+        public int CountComplete
+        {
+            get
+            {
+                int count = 0;
+
+                foreach (ImageDataModel image in ImageList)
+                {
+                    if (image.isComplete)
+                    {
+                        count++;
+                    }
+                }
+
+                return count;
+            }
+        }
+
+        public Visibility Visibility { get { return (IsComplete) ? Visibility.Visible : Visibility.Collapsed; } }
 
         public FeatureDataModel(Keyword keyword)
         {
