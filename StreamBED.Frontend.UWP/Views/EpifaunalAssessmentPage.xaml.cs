@@ -118,7 +118,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                 if (FeatureEvalPage.EpifaunalSubstrateModel.IsCompleted && FeatureEvalPage.BankStabilityModel.IsCompleted)
                 {
-                    (this.Parent as Frame).Navigate(typeof(FinalAssessmentPage));
+                    (Window.Current.Content as Frame).Navigate(typeof(FinalAssessmentPage));
                 }
                 else
                 {

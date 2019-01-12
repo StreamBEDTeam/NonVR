@@ -50,7 +50,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                 List<ImageWithMetadata> imageList = new List<ImageWithMetadata>();
 
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i < 20; i++)
                 {
                     var image = new ImageWithMetadata(buffer);
 
@@ -72,11 +72,6 @@ namespace StreamBED.Frontend.UWP.Views
                         {
                             image.AddKeyword(k);
                         }
-                    }
-
-                    if (!image.Keywords.Contains(EpifaunalSubstrateModel.Keywords.Snags))
-                    {
-                        image.AddKeyword(EpifaunalSubstrateModel.Keywords.Snags);
                     }
 
                     image.Location = "Area " + r.Next(1, 7);

@@ -92,7 +92,7 @@
 									 HorizontalAlignment="Center"
 									 Content="5"
 									 Click="RadioButton_Click"
-									 Margin="90, 0"
+									 Margin="20, 0"
                                      Opacity="0"
 									 IsHitTestVisible="False"/>
 
@@ -137,11 +137,11 @@
 
                     <Grid x:Name="epifaunalDetail">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3.5*"/>
+                            <ColumnDefinition Width="4.5*"/>
+                            <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="3.5*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="4.5*"/>
                         </Grid.ColumnDefinitions>
 
                         <Button x:Name="detailButton1"

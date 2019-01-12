@@ -6,9 +6,187 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="#d9d9d9">
 
-    <Grid>
+    <Grid x:Name="layoutRoot">
+        <Pivot x:Name="layoutPivot"
+               SelectionChanged="LayoutPivot_SelectionChanged">
+            <PivotItem Margin="0, -16, 0, 0">
+                <Grid Background="White">
+                    <TextBlock Foreground="Black"
+                       FontSize="36"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Margin="270, 0">
+                        In the next and final section, you will rate the stream based on the ratings you gave to each feature. *NEED A SENTENCE HERE*
+                    </TextBlock>
 
+                    <Button Style="{StaticResource RoundedButton}" 
+                            x:Name="nextButton" 
+                            Background="#EDEDED"
+                            Foreground="Black"
+                            FontSize="24"
+                            VerticalAlignment="Bottom" 
+                            HorizontalAlignment="Center"
+                            Height="64"
+                            Width="200"
+                            Margin="0, 0, 0, 48"
+                            Click="NextButton_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </PivotItem>
+            
+            <PivotItem Margin="0, 59, 0, 0">
+                <ScrollViewer>
+                    <StackPanel HorizontalAlignment="Stretch"
+                                Width="1200">
+
+                        <StackPanel Background="White"
+                                    Margin="0, 25, 0, 0"
+                                    CornerRadius="8"
+                                    Tapped="EpifaunalSubstrate_Tapped">
+                            <Grid Height="75">
+                                <TextBlock Foreground="Black"
+                                           FontSize="26"
+                                           FontWeight="Bold"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Text="Epifaunal Substrate"
+                                           Margin="15"/>
+
+                                <Image Source="/Assets/ProtocolAssets/rock.png"
+                                       Height="50"
+                                       Width="50"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="15"/>
+                            </Grid>
+
+                            <Image Source="/Assets/ProtocolAssets/Epifaunal.png"/>
+                        </StackPanel>
+
+                        <StackPanel Background="White"
+                                    Margin="0, 25, 0, 25"
+                                    CornerRadius="8"
+                                    Tapped="BankStability_Tapped">
+                            <Grid Height="75">
+                                <TextBlock Foreground="Black"
+                                           FontSize="26"
+                                           FontWeight="Bold"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Text="Bank Stability"
+                                           Margin="15"/>
+
+                                <Image Source="/Assets/ProtocolAssets/tree.png"
+                                       Height="50"
+                                       Width="50"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="15"/>
+                            </Grid>
+
+                            <Image Source="/Assets/ProtocolAssets/Bank.png"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </PivotItem>
+
+            <PivotItem Margin="0, 59, 0, 0">
+                <Grid Background="White"
+                      Padding="15,0">
+                    <ProgressBar x:Name="progressBar"
+						         Foreground="LimeGreen"
+						         Background="Gray"
+						         Height="5"
+						         VerticalAlignment="Top"/>
+
+                    <Grid VerticalAlignment="Center">
+                        <Slider Style="{StaticResource AssessmentSlider}" Width="936" 
+                                IsDirectionReversed="True" TickPlacement="TopLeft" Minimum="0" Maximum="20" IsThumbToolTipEnabled="False" TickFrequency="1" SmallChange="1"/>
+                    </Grid>
+
+                    <Button Style="{StaticResource RoundedButton}" 
+                            x:Name="submitButton" 
+                            Background="#EDEDED"
+                            Foreground="Black"
+                            FontSize="24"
+                            VerticalAlignment="Bottom" 
+                            HorizontalAlignment="Center"
+                            Height="64"
+                            Width="250"
+                            Margin="0, 0, 0, 48"
+                            Click="SubmitButton_Click">
+                        Submit
+                    </Button>
+                </Grid>
+            </PivotItem>
+        </Pivot>
+
+        <Grid x:Name="navBar"
+              Height="75"
+              Background="White"
+              VerticalAlignment="Top"
+              Margin="0, 32, 0, 0"
+              Visibility="Visible">
+            <StackPanel Orientation="Horizontal"
+                        Margin="15">
+                <Border BorderThickness="0, 0, 2.5, 0" 
+                        BorderBrush="Gray"
+                        Margin="0, 0, 15, 0">
+                    <TextBlock x:Name="evalTitle"
+                               Foreground="Black"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Margin="0, 0, 15, 0"
+                               Text="PROTOCOL EVALUATION"
+                               Tapped="EvalTitle_Tapped"/>
+                </Border>
+
+                <Border x:Name="protocolBlock" 
+                        BorderThickness="0, 0, 2.5, 0" 
+                        BorderBrush="Gray"
+                        Margin="0, 0, 15, 0">
+                    <TextBlock x:Name="protocolTitle"
+                               Foreground="Black"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Margin="0, 0, 15, 0"
+                               Text="EPIFAUNAL SUBSTRATE"
+                               Tapped="ProtocolTitle_Tapped"/>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="titleBar"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Top"
+              Height="32">
+            <Grid.Background>
+                <SolidColorBrush Color="Black" Opacity="0.2"/>
+            </Grid.Background>
+
+            <TextBlock Text="StreamBED"
+                       Foreground="Black"
+                       FontSize="14"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="15,0,0,1"/>
+        </Grid>
     </Grid>
 </Page>
