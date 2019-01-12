@@ -1,4 +1,5 @@
-﻿using StreamBED.Frontend.UWP.Models;
+﻿using StreamBED.Backend.Helper;
+using StreamBED.Frontend.UWP.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -38,9 +39,20 @@ namespace StreamBED.Frontend.UWP.Views
             this.InitializeComponent();
 
             Index = FeatureEvalPage.SelectedFeature.CountComplete;
-            CurrentImage = FeatureEvalPage.SelectedFeature.ImageList[Index++];
-            progressBar.Maximum = FeatureEvalPage.SelectedFeature.ImageList.Count;
-            progressBar.Value = FeatureEvalPage.SelectedFeature.CountComplete;
+
+            if (Index < FeatureEvalPage.SelectedFeature.ImageList.Count)
+            {
+                CurrentImage = FeatureEvalPage.SelectedFeature.ImageList[Index++];
+                progressBar.Maximum = FeatureEvalPage.SelectedFeature.ImageList.Count;
+                progressBar.Value = FeatureEvalPage.SelectedFeature.CountComplete;
+            }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            selectedImage.Source = CurrentImage.ImageSource;
         }
 
         public int NextImage()
@@ -81,6 +93,44 @@ namespace StreamBED.Frontend.UWP.Views
             }
 
             FeatureEvalPage.SelectedFeature.IsComplete = true;
+
+            FeatureDataModel next = null;
+
+            foreach (Keyword keyword in FeatureEvalPage.epifaunalSubstrateFeatures.Keys)
+            {
+                if (!FeatureEvalPage.epifaunalSubstrateFeatures.GetValueOrDefault(keyword).IsComplete)
+                {
+                    next = FeatureEvalPage.epifaunalSubstrateFeatures.GetValueOrDefault(keyword);
+                    break;
+                }
+            }
+
+            if (next != null)
+            {
+                (completionGrid.Children[0] as TextBlock).Text = "Great job rating the " + FeatureEvalPage.SelectedFeature.Keyword.Content + " feature.\n\nNext you will rate the " + next.Keyword.Content + " feature.";
+                FeatureEvalPage.SelectedFeature = next;
+
+                completionGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                FeatureEvalPage.SelectedModel.IsCompleted = true;
+
+                if (FeatureEvalPage.EpifaunalSubstrateModel.IsCompleted && FeatureEvalPage.BankStabilityModel.IsCompleted)
+                {
+                    (this.Parent as Frame).Navigate(typeof(FinalAssessmentPage));
+                }
+                else
+                {
+                    (completionGrid.Children[0] as TextBlock).Text = "Great job rating the Epifunal Substrate protocol.\n\nNext you will rate the Bank Stability protocol.";
+                    FeatureEvalPage.SelectedFeature = null;
+
+                    FeatureEvalPage.Current.ChangeToEpifaunalSubstrate();
+                    completionGrid.Visibility = Visibility.Visible;
+
+                    (((this.Parent as Frame).Parent as PivotItem).Parent as Pivot).SelectedIndex = 2;
+                }
+            }
 
             return -1;
         }
@@ -236,6 +286,22 @@ namespace StreamBED.Frontend.UWP.Views
         private void GlanceOpenButton_Click(object sender, RoutedEventArgs e)
         {
             glanceProtocol.Visibility = Visibility.Visible;
+        }
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (FeatureEvalPage.SelectedFeature == null)
+            {
+                FeatureEvalPage.Current.ChangeToBankStability();
+
+                (((this.Parent as Frame).Parent as PivotItem).Parent as Pivot).SelectedIndex = 2;
+            }
+            else
+            {
+                FeatureEvalPage.Current.ChangeTitle(FeatureEvalPage.SelectedFeature.Keyword.Content.ToUpper());
+                
+                (this.Parent as Frame).Navigate(typeof(EpifaunalAssessmentPage));
+            }
         }
     }
 }

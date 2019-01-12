@@ -28,7 +28,6 @@
                       Width="936"
                       Height="702">
                     <Image x:Name="selectedImage"
-						   Source="/Assets/Logo/image.png"
                            Stretch="UniformToFill"/>
 				</Grid>
 
@@ -352,5 +351,33 @@
 				&#xE711;
 			</Button>
 		</Grid>
+
+        <Grid x:Name="completionGrid"
+              Background="White"
+              Visibility="Collapsed">
+            <TextBlock Foreground="Black"
+                       FontSize="36"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Margin="270, 0">
+                        
+            </TextBlock>
+
+            <Button Style="{StaticResource RoundedButton}" 
+                    x:Name="nextButton" 
+                    Background="#EDEDED"
+                    Foreground="Black"
+                    FontSize="24"
+                    VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Center"
+                    Height="64"
+                    Width="200"
+                    Margin="0, 0, 0, 48"
+                    Click="NextButton_Click">
+                Next
+            </Button>
+        </Grid>
 	</Grid>
 </Page>

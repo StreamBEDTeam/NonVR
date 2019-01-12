@@ -28,6 +28,8 @@ namespace StreamBED.Backend.Models
         /// </summary>
         public double Score { get; set; }
 
+        public bool IsCompleted = false;
+
         /// <summary>
         /// Returns <see cref="ProtocolModel.Category"/> based on <see cref="ProtocolModel.Score"/>
         /// </summary>

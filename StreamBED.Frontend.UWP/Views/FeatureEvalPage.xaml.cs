@@ -29,9 +29,9 @@ namespace StreamBED.Frontend.UWP.Views
     /// </summary>
     public sealed partial class FeatureEvalPage : Page
     {
-        private static EpifaunalSubstrateModel EpifaunalSubstrateModel = new EpifaunalSubstrateModel();
+        public static EpifaunalSubstrateModel EpifaunalSubstrateModel = new EpifaunalSubstrateModel();
 
-        private static BankStabilityModel BankStabilityModel = new BankStabilityModel();
+        public static BankStabilityModel BankStabilityModel = new BankStabilityModel();
 
         internal static Dictionary<Keyword, FeatureDataModel> epifaunalSubstrateFeatures = new Dictionary<Keyword, FeatureDataModel>();
 
@@ -39,11 +39,14 @@ namespace StreamBED.Frontend.UWP.Views
 
         internal static FeatureDataModel SelectedFeature;
 
-        private ProtocolModel SelectedModel;
+        internal static ProtocolModel SelectedModel;
+
+        internal static FeatureEvalPage Current = null;
 
         public FeatureEvalPage()
         {
             this.InitializeComponent();
+            Current = this;
         }
 
         private void PivotRoot_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -70,34 +73,76 @@ namespace StreamBED.Frontend.UWP.Views
             }
         }
 
-        private void StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        private void BankStability_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ChangeToBankStability();
+
+            ++layoutPivot.SelectedIndex;
+        }
+
+        public void ChangeToBankStability()
         {
             protocolTitle.Text = "BANK STABILITY";
             SelectedModel = BankStabilityModel;
 
             listViewRoot.Items.Clear();
 
+            bool? flag = null;
+
             foreach (FeatureDataModel feature in bankStabilityFeatures.Values)
             {
                 listViewRoot.Items.Add(feature);
+
+                if (flag == null || !feature.IsComplete)
+                {
+                    flag = feature.IsComplete;
+                }
             }
+
+            if (!flag.Value)
+            {
+                nextProtocolButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                nextProtocolButton.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void EpifaunalSubstrate_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ChangeToEpifaunalSubstrate();
 
             ++layoutPivot.SelectedIndex;
         }
 
-        private void StackPanel_Tapped_1(object sender, TappedRoutedEventArgs e)
+        public void ChangeToEpifaunalSubstrate()
         {
             protocolTitle.Text = "EPIFAUNAL SUBSTRATE";
             SelectedModel = EpifaunalSubstrateModel;
 
             listViewRoot.Items.Clear();
 
+            bool? flag = null;
+
             foreach (FeatureDataModel feature in epifaunalSubstrateFeatures.Values)
             {
                 listViewRoot.Items.Add(feature);
+
+                if (flag == null || !feature.IsComplete)
+                {
+                    flag = feature.IsComplete;
+                }
             }
 
-            ++layoutPivot.SelectedIndex;
+            if (!flag.Value)
+            {
+                nextProtocolButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                nextProtocolButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void InitializeProtocol(Keyword[] keywords, ProtocolModel model) 
@@ -225,6 +270,11 @@ namespace StreamBED.Frontend.UWP.Views
             }
         }
 
+        public void ChangeTitle(string text)
+        {
+            featureTitle.Text = text;
+        }
+
         private void NextImageButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             if (SelectedModel is EpifaunalSubstrateModel)
@@ -245,6 +295,11 @@ namespace StreamBED.Frontend.UWP.Views
 
                 }
             }
+        }
+
+        private void NextProtocolButton_Click(object sender, RoutedEventArgs e)
+        {
+            ++layoutPivot.SelectedIndex;
         }
     }
 }

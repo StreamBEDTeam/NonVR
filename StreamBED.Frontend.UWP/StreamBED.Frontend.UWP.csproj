@@ -141,6 +141,9 @@
     <Compile Include="Views\FeatureEvalPage.xaml.cs">
       <DependentUpon>FeatureEvalPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FinalAssessmentPage.xaml.cs">
+      <DependentUpon>FinalAssessmentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LandingPage.xaml.cs">
       <DependentUpon>LandingPage.xaml</DependentUpon>
     </Compile>
@@ -199,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FeatureEvalPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FinalAssessmentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

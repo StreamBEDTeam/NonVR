@@ -15,13 +15,10 @@ namespace StreamBED.Backend.Models
         /// </summary>
         internal int Score;
 
-        internal int Count;
-
         // Contructor
         public ScoreModel()
         {
-            Score = -1;
-            Count = 1;
+            Score = 0;
         }
 
         /// <summary>
@@ -29,10 +26,5 @@ namespace StreamBED.Backend.Models
         /// </summary>
         /// <param name="score"></param>
         public abstract void ChangeScore(int score);
-
-        public int GetScore()
-        {
-            return Score / Count;
-        }
     }
 }

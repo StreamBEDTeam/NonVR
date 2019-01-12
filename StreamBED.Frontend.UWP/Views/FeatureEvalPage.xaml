@@ -68,7 +68,7 @@
                         <StackPanel Background="White"
                                     Margin="0, 25, 0, 0"
                                     CornerRadius="8"
-                                    Tapped="StackPanel_Tapped_1">
+                                    Tapped="EpifaunalSubstrate_Tapped">
                             <Grid Height="75">
                                 <TextBlock Foreground="Black"
                                            FontSize="26"
@@ -94,7 +94,7 @@
                         <StackPanel Background="White"
                                     Margin="0, 25, 0, 25"
                                     CornerRadius="8"
-                                    Tapped="StackPanel_Tapped">
+                                    Tapped="BankStability_Tapped">
                             <Grid Height="75">
                                 <TextBlock Foreground="Black"
                                            FontSize="26"
@@ -166,15 +166,29 @@
                                                           Visibility="{x:Bind Visibility}"
                                                           Glyph="&#xE73E;"/>
                                             </Grid>
-                                            
+
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-
                     </ListView>
-         
+
+                    <Button Style="{StaticResource RoundedButton}" 
+                            x:Name="nextProtocolButton"
+                            FontFamily="Segoe MDL2 Assets"
+                            Background="#EDEDED"
+                            Foreground="Black"
+                            FontSize="24"
+                            VerticalAlignment="Top" 
+                            HorizontalAlignment="Right"
+                            Margin="15"
+                            Height="64"
+                            Width="64"
+                            Click="NextProtocolButton_Click">
+                        &#xE72A;
+                    </Button>
+                 
                 </Grid>
             </PivotItem>
 
