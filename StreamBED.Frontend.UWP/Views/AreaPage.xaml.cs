@@ -54,7 +54,7 @@ namespace StreamBED.Frontend.UWP.Views
                 {
                     var image = new ImageWithMetadata(buffer);
 
-                    for (int j = 0; j < r.Next(0, 3); j++)
+                    for (int j = 0; j < r.Next(0, 4); j++)
                     {
                         var k = EpifaunalSubstrateModel.GetKeywords()[r.Next(0, 3)];
 
@@ -64,7 +64,7 @@ namespace StreamBED.Frontend.UWP.Views
                         }
                     }
 
-                    for (int j = 0; j < r.Next(0, 6); j++)
+                    for (int j = 0; j < r.Next(0, 7); j++)
                     {
                         var k = BankStabilityModel.GetKeywords()[r.Next(0, 6)];
 
@@ -72,6 +72,11 @@ namespace StreamBED.Frontend.UWP.Views
                         {
                             image.AddKeyword(k);
                         }
+                    }
+
+                    if (!image.Keywords.Contains(EpifaunalSubstrateModel.Keywords.Snags))
+                    {
+                        image.AddKeyword(EpifaunalSubstrateModel.Keywords.Snags);
                     }
 
                     image.Location = "Area " + r.Next(1, 7);
@@ -156,7 +161,7 @@ namespace StreamBED.Frontend.UWP.Views
 
         private void NextButton_Click_1(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(FeatureSelectionPage));
+            this.Frame.Navigate(typeof(FeatureEvalPage));
         }
     }
 }

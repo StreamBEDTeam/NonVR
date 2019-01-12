@@ -13,12 +13,15 @@ namespace StreamBED.Backend.Models
         /// <summary>
         /// Represents score associated with a protocol.
         /// </summary>
-        public int Score { get; internal set; }
+        internal int Score;
+
+        internal int Count;
 
         // Contructor
         public ScoreModel()
         {
-            Score = 0;
+            Score = -1;
+            Count = 1;
         }
 
         /// <summary>
@@ -26,5 +29,10 @@ namespace StreamBED.Backend.Models
         /// </summary>
         /// <param name="score"></param>
         public abstract void ChangeScore(int score);
+
+        public int GetScore()
+        {
+            return Score / Count;
+        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="StreamBED.Frontend.UWP.Views.FeatureSelectionPage"
+    x:Class="StreamBED.Frontend.UWP.Views.FeatureEvalPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:StreamBED.Frontend.UWP.Views"
@@ -270,32 +270,6 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
                        Margin="15,0,0,1"/>
-        </Grid>
-
-        <Grid x:Name="glanceProtocol"
-              Visibility="Collapsed">
-            <Grid.Background>
-                <SolidColorBrush Color="Black" Opacity="0.3"/>
-            </Grid.Background>
-
-            <Image x:Name="image"
-                   Width="1200"
-                   Source="/Assets/ProtocolAssets/Bank.png"/>
-
-            <Button Style="{StaticResource RoundedButton}" 
-                    x:Name="glanceCloseButton"
-                    FontFamily="Segoe MDL2 Assets"
-                    Background="#EDEDED"
-                    Foreground="Black"
-                    FontSize="24"
-                    VerticalAlignment="Bottom" 
-                    HorizontalAlignment="Center"
-                    Margin="15, 15"
-                    Height="64"
-                    Width="64"
-                    Click="GlanceCloseButton_Click">
-                &#xE711;
-            </Button>
         </Grid>
     </Grid>
 </Page>

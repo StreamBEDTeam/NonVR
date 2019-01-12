@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,54 +10,22 @@ using Windows.UI.Xaml;
 
 namespace StreamBED.Frontend.UWP.Models
 {
-    public class FeatureDataModel
+    public class FeatureDataModel : INotifyPropertyChanged
     {
         public Keyword Keyword { get; }
 
         public ObservableCollection<ImageDataModel> ImageList { get; }
 
-        public bool IsComplete
-        {
-            get
-            {
-                bool flag = false;
+        public bool IsComplete = false;
 
-                foreach (ImageDataModel image in ImageList)
-                {
-                    if (image.isComplete)
-                    {
-                        flag = true;
-                    }
-                    else
-                    {
-                        flag = false;
-                        break;
-                    }
-                }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-                return flag;
-            }
-        }
+        internal void NotifyPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        public int CountComplete
-        {
-            get
-            {
-                int count = 0;
+        public int CountComplete = 0;
 
-                foreach (ImageDataModel image in ImageList)
-                {
-                    if (image.isComplete)
-                    {
-                        count++;
-                    }
-                }
-
-                return count;
-            }
-        }
-
-        public Visibility Visibility { get { return (IsComplete) ? Visibility.Visible : Visibility.Collapsed; } }
+        public Visibility Visibility { get { NotifyPropertyChanged(nameof(IsComplete)); return (IsComplete) ? Visibility.Visible : Visibility.Collapsed; } }
 
         public FeatureDataModel(Keyword keyword)
         {

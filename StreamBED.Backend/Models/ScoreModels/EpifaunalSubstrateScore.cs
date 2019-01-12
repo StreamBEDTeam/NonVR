@@ -20,7 +20,16 @@ namespace StreamBED.Backend.Models.ScoreModels
         {
             if (score <= 20 || score >= 0)
             {
-                Score = score;
+                if (Score < 0)
+                {
+                    Score = score;
+                }
+                else
+                {
+                    Score = Score + score;
+                }
+
+                Count++;
             }
         }
     }

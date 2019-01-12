@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
@@ -30,24 +31,56 @@ namespace StreamBED.Frontend.UWP.Views
 
         private int Index = 0;
 
-        private List<int> visit = new List<int>() { 20, 15, 20, 5, 0 };
+        private List<int> visit = new List<int>() { 20, 15, 10, 5, 0 };
 
         public EpifaunalAssessmentPage()
         {
             this.InitializeComponent();
 
-            CurrentImage = FeatureSelectionPage.SelectedFeature.ImageList[Index++];
-            progressBar.Maximum = FeatureSelectionPage.SelectedFeature.ImageList.Count;
+            Index = FeatureEvalPage.SelectedFeature.CountComplete;
+            CurrentImage = FeatureEvalPage.SelectedFeature.ImageList[Index++];
+            progressBar.Maximum = FeatureEvalPage.SelectedFeature.ImageList.Count;
+            progressBar.Value = FeatureEvalPage.SelectedFeature.CountComplete;
         }
 
         public int NextImage()
         {
-            if (Index < FeatureSelectionPage.SelectedFeature.ImageList.Count)
+            if (Index < FeatureEvalPage.SelectedFeature.ImageList.Count)
             {
-                CurrentImage = FeatureSelectionPage.SelectedFeature.ImageList[Index++];
+                CurrentImage = FeatureEvalPage.SelectedFeature.ImageList[Index++];
+
+                foreach (UIElement elem in radioStack.Children)
+                {
+                    RadioButton button = elem as RadioButton;
+
+                    if (button.IsChecked.Value)
+                    {
+                        button.IsChecked = false;
+                    }
+
+                    if (button.Style.Equals((Style)App.Current.Resources["AssessmentRadioButtonSmall"]))
+                    {
+                        button.Opacity = 0;
+                        button.IsHitTestVisible = true;
+                    }
+                }
+
+                detailButton1.Opacity = 1;
+                detailButton1.IsHitTestVisible = true;
+
+                detailButton2.Opacity = 1;
+                detailButton2.IsHitTestVisible = true;
+
+                detailButton3.Opacity = 1;
+                detailButton3.IsHitTestVisible = true;
+
+                detailButton4.Opacity = 1;
+                detailButton4.IsHitTestVisible = true;
 
                 return 0;
             }
+
+            FeatureEvalPage.SelectedFeature.IsComplete = true;
 
             return -1;
         }
@@ -57,6 +90,8 @@ namespace StreamBED.Frontend.UWP.Views
             CurrentImage.Image.ChangeEpifaunalSubstrateScore(CurrentScore);
             CurrentImage.isComplete = true;
 
+            ++FeatureEvalPage.SelectedFeature.CountComplete;
+
             ++progressBar.Value;
 
             NextImage();
@@ -64,37 +99,112 @@ namespace StreamBED.Frontend.UWP.Views
 
         private void ReferenceImage_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            referenceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/ProtocolAssets/0_BW_2.png"));
+            Storyboard animation = new Storyboard();
+
+            DoubleAnimation reveal = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = new Duration(TimeSpan.FromSeconds(0.25))
+            };
+
+            DoubleAnimation hide = new DoubleAnimation
+            {
+                From = 1,
+                To = 0,
+                Duration = new Duration(TimeSpan.FromSeconds(0.25))
+            };
+
+            Storyboard.SetTarget(reveal, refImage);
+            Storyboard.SetTargetProperty(reveal, "UIElement.Opacity");
+
+            Storyboard.SetTarget(hide, refImageDetail);
+            Storyboard.SetTargetProperty(hide, "UIElement.Opacity");
+
+            animation.Children.Add(hide);
+            animation.Children.Add(reveal);
+
+            animation.Begin();
         }
 
         private void ReferenceImage_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            referenceImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/ProtocolAssets/0_C.png"));
+            Storyboard animation = new Storyboard();
+
+            DoubleAnimation reveal = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = new Duration(TimeSpan.FromSeconds(0.25))
+            };
+
+            DoubleAnimation hide = new DoubleAnimation
+            {
+                From = 1,
+                To = 0,
+                Duration = new Duration(TimeSpan.FromSeconds(0.25))
+            };
+
+            Storyboard.SetTarget(hide, refImage);
+            Storyboard.SetTargetProperty(hide, "UIElement.Opacity");
+
+            Storyboard.SetTarget(reveal, refImageDetail);
+            Storyboard.SetTargetProperty(reveal, "UIElement.Opacity");
+
+            animation.Children.Add(hide);
+            animation.Children.Add(reveal);
+
+            animation.Begin();
         }
 
         private void DetailButton_Click(object sender, RoutedEventArgs e)
         {
             string name = (sender as Button).Name;
 
+            int u = 0, l = 0;
+
             if (name.Equals("detailButton1"))
             {
-                detail1.Visibility = Visibility.Visible;
-                detailButton1.Visibility = Visibility.Collapsed;
+                u = 20;
+                l = 15;
+
+                detailButton1.Opacity = 0;
+                detailButton1.IsHitTestVisible = false;
             }
             else if (name.Equals("detailButton2"))
             {
-                detail2.Visibility = Visibility.Visible;
-                detailButton2.Visibility = Visibility.Collapsed;
+                u = 15;
+                l = 10;
+
+                detailButton2.Opacity = 0;
+                detailButton2.IsHitTestVisible = false;
             }
             else if (name.Equals("detailButton3"))
             {
-                detail3.Visibility = Visibility.Visible;
-                detailButton3.Visibility = Visibility.Collapsed;
+                u = 10;
+                l = 5;
+
+                detailButton3.Opacity = 0;
+                detailButton3.IsHitTestVisible = false;
             }
             else if (name.Equals("detailButton4"))
             {
-                detail4.Visibility = Visibility.Visible;
-                detailButton4.Visibility = Visibility.Collapsed;
+                u = 5;
+                l = 0;
+
+                detailButton4.Opacity = 0;
+                detailButton4.IsHitTestVisible = false;
+            }
+
+            foreach (UIElement elem in radioStack.Children)
+            {
+                RadioButton button = elem as RadioButton;
+
+                if (Convert.ToInt32(button.Content) > l && Convert.ToInt32(button.Content) < u)
+                {
+                    button.Opacity = 1;
+                    button.IsHitTestVisible = true;
+                }
             }
         }
 
@@ -116,6 +226,16 @@ namespace StreamBED.Frontend.UWP.Views
 
                 submitButton.IsEnabled = true;
             }
+        }
+
+        private void GlanceCloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            glanceProtocol.Visibility = Visibility.Collapsed;
+        }
+
+        private void GlanceOpenButton_Click(object sender, RoutedEventArgs e)
+        {
+            glanceProtocol.Visibility = Visibility.Visible;
         }
     }
 }

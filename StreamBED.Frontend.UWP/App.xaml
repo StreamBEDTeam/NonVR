@@ -135,10 +135,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
                         <Grid x:Name="RootGrid" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{TemplateBinding CornerRadius}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal"/>
@@ -169,7 +169,19 @@
                                     <VisualState x:Name="Indeterminate"/>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Grid VerticalAlignment="Top">
+                            
+                            <TextBlock Foreground="Black"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Margin="0, 0, 0, 5"
+                                       Text=""/>
+                            
+                            <Grid VerticalAlignment="Top"
+                                  Grid.Row="1">
                                 <Ellipse x:Name="OuterEllipse" Height="30" UseLayoutRounding="False" Width="30" Fill="LightGray"/>
                                 <Ellipse Height="15" UseLayoutRounding="False" Width="15" Fill="#4e4e4e"/>
                             </Grid>
@@ -198,10 +210,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
                         <Grid x:Name="RootGrid" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{TemplateBinding CornerRadius}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal"/>
@@ -232,7 +244,19 @@
                                     <VisualState x:Name="Indeterminate"/>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Grid VerticalAlignment="Top">
+
+                            <TextBlock Foreground="Black"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Margin="0, 0, 0, 5"
+                                       Text="{TemplateBinding Content}"/>
+
+                            <Grid VerticalAlignment="Top"
+                                  Grid.Row="1">
                                 <Ellipse x:Name="OuterEllipse" Height="40" UseLayoutRounding="False" Width="40" Fill="LightGray"/>
                                 <Ellipse Height="20" UseLayoutRounding="False" Width="20" Fill="#4e4e4e"/>
                             </Grid>

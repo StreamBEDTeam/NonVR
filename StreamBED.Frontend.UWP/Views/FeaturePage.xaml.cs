@@ -226,7 +226,7 @@ namespace StreamBED.Frontend.UWP.Views
                         SelectedItems.Add(image);
                     }
 
-                    this.Frame.Navigate(typeof(FeatureSelectionPage));
+                    this.Frame.Navigate(typeof(FeatureEvalPage));
                 }
                 else
                 {

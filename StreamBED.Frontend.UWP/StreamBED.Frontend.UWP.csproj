@@ -138,8 +138,8 @@
     <Compile Include="Views\FeaturePage.xaml.cs">
       <DependentUpon>FeaturePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FeatureSelectionPage.xaml.cs">
-      <DependentUpon>FeatureSelectionPage.xaml</DependentUpon>
+    <Compile Include="Views\FeatureEvalPage.xaml.cs">
+      <DependentUpon>FeatureEvalPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LandingPage.xaml.cs">
       <DependentUpon>LandingPage.xaml</DependentUpon>
@@ -198,7 +198,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FeatureSelectionPage.xaml">
+    <Page Include="Views\FeatureEvalPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
