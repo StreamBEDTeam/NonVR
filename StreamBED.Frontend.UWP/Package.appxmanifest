@@ -3,8 +3,8 @@
   <Identity Name="44904f0a-6785-4f36-84bc-03a69c8f4054" Publisher="CN=prana" Version="0.1.0.0" />
   <mp:PhoneIdentity PhoneProductId="44904f0a-6785-4f36-84bc-03a69c8f4054" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>StreamBED.Frontend.UWP</DisplayName>
-    <PublisherDisplayName>prana</PublisherDisplayName>
+    <DisplayName>StreamBED</DisplayName>
+    <PublisherDisplayName>Pranav Kulkarni</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>

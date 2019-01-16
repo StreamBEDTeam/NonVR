@@ -30,6 +30,8 @@ namespace StreamBED.Backend.Models
 
         public bool IsCompleted = false;
 
+        public bool IsFinalCompleted = false;
+
         /// <summary>
         /// Returns <see cref="ProtocolModel.Category"/> based on <see cref="ProtocolModel.Score"/>
         /// </summary>

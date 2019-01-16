@@ -28,7 +28,7 @@ namespace StreamBED.Frontend.UWP.Views
     /// </summary>
     public sealed partial class AreaPage : Page
     {
-        public static List<AreaDataModel> AreaList = new List<AreaDataModel>();
+        internal static List<AreaDataModel> AreaList = new List<AreaDataModel>();
 
         private bool AllAreasCompleted = false;
 
@@ -50,13 +50,13 @@ namespace StreamBED.Frontend.UWP.Views
 
                 List<ImageWithMetadata> imageList = new List<ImageWithMetadata>();
 
-                for (int i = 0; i < 20; i++)
+                for (int i = 0; i < 15; i++)
                 {
                     var image = new ImageWithMetadata(buffer);
 
                     for (int j = 0; j < r.Next(0, 4); j++)
                     {
-                        var k = EpifaunalSubstrateModel.GetKeywords()[r.Next(0, 3)];
+                        var k = EpifaunalSubstrateModel.GetKeywords()[r.Next(0, 4)];
 
                         if (!image.Keywords.Contains(k))
                         {
@@ -64,9 +64,9 @@ namespace StreamBED.Frontend.UWP.Views
                         }
                     }
 
-                    for (int j = 0; j < r.Next(0, 7); j++)
+                    for (int j = 0; j < r.Next(0, 2); j++)
                     {
-                        var k = BankStabilityModel.GetKeywords()[r.Next(0, 6)];
+                        var k = BankStabilityModel.GetKeywords()[r.Next(0, 7)];
 
                         if (!image.Keywords.Contains(k))
                         {

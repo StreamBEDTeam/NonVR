@@ -99,7 +99,7 @@ namespace StreamBED.Frontend.UWP.Views
                 }
             }
 
-            if (!flag.Value)
+            if (flag != null && !flag.Value)
             {
                 nextProtocolButton.Visibility = Visibility.Collapsed;
             }
@@ -135,7 +135,7 @@ namespace StreamBED.Frontend.UWP.Views
                 }
             }
 
-            if (!flag.Value)
+            if (flag != null && !flag.Value)
             {
                 nextProtocolButton.Visibility = Visibility.Collapsed;
             }
