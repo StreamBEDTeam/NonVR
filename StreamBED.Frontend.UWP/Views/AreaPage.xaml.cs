@@ -66,7 +66,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                     for (int j = 0; j < r.Next(0, 2); j++)
                     {
-                        var k = BankStabilityModel.GetKeywords()[r.Next(0, 7)];
+                        var k = BankStabilityModel.GetKeywords()[r.Next(0, 5)];
 
                         if (!image.Keywords.Contains(k))
                         {

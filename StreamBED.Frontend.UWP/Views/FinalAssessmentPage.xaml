@@ -575,7 +575,7 @@
                         </StackPanel>
                     </Grid>
 
-                    <Button Style="{StaticResource RoundedButton}" 
+                    <Button Style="{StaticResource KindaRoundedButton}" 
                             x:Name="epifaunalSubmitButton" 
                             Background="#EDEDED"
                             Foreground="Black"
@@ -585,6 +585,7 @@
                             Height="64"
                             Width="250"
                             Margin="0, 0, 0, 48"
+                            IsEnabled="False"
                             Click="SubmitButton_Click">
                         Submit
                     </Button>
@@ -600,7 +601,8 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Margin="270, 0">
-                        In the next and final section, you will rate the stream based on the ratings you gave to each feature. *NEED A SENTENCE HERE*
+                        <Bold>Epifaunal Substrate Protocol</Bold><LineBreak/><LineBreak/>
+                        Your score for this stream was <Run Text="{x:Bind }"/>
                     </TextBlock>
 
                     <Button Style="{StaticResource RoundedButton}" 
@@ -666,7 +668,7 @@
 						 Background="Gray"
                          Minimum="0"
                          Maximum="2"
-						 Height="5"
+						 Height="10"
 						 VerticalAlignment="Bottom"
                          Margin="15,0"/>
         </Grid>

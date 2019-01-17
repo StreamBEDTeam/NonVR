@@ -16,13 +16,11 @@ namespace StreamBED.Backend.Models.ProtocolModels
         /// </summary>
         public static class Keywords
         {
-            public static readonly Keyword SteepBank = new Keyword("Steep Bank");
-            public static readonly Keyword GentlySlopingBank = new Keyword("Gently Sloping Bank");
+            public static readonly Keyword BankSlope = new Keyword("Bank Slope");
             public static readonly Keyword BankFailure = new Keyword("Bank Failure");
-            public static readonly Keyword CrumblingBank = new Keyword("Crumbling Bank");
-            public static readonly Keyword ErosionalScars = new Keyword("Erosional Scars");
-            public static readonly Keyword ExposedSoil = new Keyword("Exposed Soil");
-            public static readonly Keyword ExposedTreeRoot = new Keyword("Exposed Tree Root");
+            public static readonly Keyword BankVegetation = new Keyword("Bank Vegetation");
+            public static readonly Keyword ErodedAreas = new Keyword("Eroded Areas");
+            public static readonly Keyword ExposedTreeRoots = new Keyword("Exposed Tree Roots");
         }
 
         /// <summary>

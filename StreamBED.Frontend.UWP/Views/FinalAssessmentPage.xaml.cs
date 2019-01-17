@@ -73,23 +73,23 @@ namespace StreamBED.Frontend.UWP.Views
 
                     if (image.Image.BankStabilityScore % 2 == 0)
                     {
-                        foreach (StackPanel stack in bankStackTop.Children)
+                        /*foreach (StackPanel stack in bankStackTop.Children)
                         {
                             if (stack.Tag.Equals(image.Image.BankStabilityScore.ToString()))
                             {
                                 stack.Children.Add(border);
                             }
-                        }
+                        }*/
                     }
                     else
                     {
-                        foreach (StackPanel stack in bankStackBottom.Children)
+                        /*foreach (StackPanel stack in bankStackBottom.Children)
                         {
                             if (stack.Tag.Equals(image.Image.BankStabilityScore.ToString()))
                             {
                                 stack.Children.Add(border);
                             }
-                        }
+                        }*/
                     }
                 }
             }
@@ -224,6 +224,15 @@ namespace StreamBED.Frontend.UWP.Views
 
         private void EpifaunalSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
+            if (e.NewValue == 0)
+            {
+                epifaunalSubmitButton.IsEnabled = false;
+            }
+            else
+            {
+                epifaunalSubmitButton.IsEnabled = true;
+            }
+
             foreach (TextBlock block in epifaunalValueStack.Children)
             {
                 if (block.Text.Equals(epifaunalSlider.Value.ToString()))
