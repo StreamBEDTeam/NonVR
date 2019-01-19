@@ -254,7 +254,7 @@ namespace StreamBED.Frontend.UWP.Views
 
         private void NextProtocolButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
 }

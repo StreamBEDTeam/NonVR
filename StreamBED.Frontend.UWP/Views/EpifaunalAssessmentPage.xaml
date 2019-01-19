@@ -9,15 +9,21 @@
 	Background="White">
 
 	<Grid>
-		<StackPanel Background="White"
+		<Grid Background="White"
 					Padding="15, 0">
-			<ProgressBar x:Name="progressBar"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ProgressBar x:Name="progressBar"
 						 Foreground="LimeGreen"
 						 Background="Gray"
 						 Height="5"
 						 VerticalAlignment="Top"/>
 
-			<Grid Margin="0, 15, 0, 0">
+			<Grid Margin="0, 15, 0, 0"
+                  Grid.Row="0">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="4*"/>
 					<ColumnDefinition Width="4*"/>
@@ -25,40 +31,37 @@
 
 				<Grid Grid.Column="0"
 					  Margin="0, 0, 7.5, 0"
-                      Width="936"
-                      Height="702">
+>
                     <Image x:Name="selectedImage"
                            Stretch="UniformToFill"/>
 				</Grid>
 
 				<Grid Grid.Column="1"
-					  Margin="7.5, 0, 0, 0"
-                      Width="936"
-                      Height="702">
-					<Image x:Name="refImageDetail" 
-						   Source="/Assets/ProtocolAssets/0_C.png"/>
+					  Margin="7.5, 0, 0, 0">
+					<Image x:Name="refImageDetail"/>
 
-					<Image x:Name="refImage" 
-						   Source="/Assets/ProtocolAssets/0_BW_2.png"
+					<Image x:Name="refImage"
 						   PointerEntered="ReferenceImage_PointerEntered"
 						   PointerExited="ReferenceImage_PointerExited"/>
 				</Grid>
 			</Grid>
 
-			<StackPanel Background="#EBEBEB"
-								Margin="0, 15">
-				<Grid Margin="0, 15, 0, 15">
-					<StackPanel x:Name="radioStack"
+			<Grid Background="#EBEBEB"
+								Margin="0, 15"
+                        Grid.Row="1">
+                <Grid Margin="0, 15, 0, 15"
+                      VerticalAlignment="Top">
+                    <StackPanel x:Name="radioStack"
 								Orientation="Horizontal"
 								HorizontalAlignment="Center">
 
-						<RadioButton Style="{StaticResource AssessmentRadioButton}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButton}"
 									 HorizontalAlignment="Center"
 									 Content="20"
 									 Click="RadioButton_Click"
 									 Margin="20, 0"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="19"
 									 Click="RadioButton_Click"
@@ -66,7 +69,7 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="18"
 									 Click="RadioButton_Click"
@@ -74,7 +77,7 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="17"
 									 Click="RadioButton_Click"
@@ -82,7 +85,7 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="16"
 									 Click="RadioButton_Click"
@@ -90,13 +93,13 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButton}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButton}"
 									 HorizontalAlignment="Center"
 									 Content="15"
 									 Click="RadioButton_Click"
 									 Margin="20, 0"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="14"
 									 Click="RadioButton_Click"
@@ -104,7 +107,7 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="13"
 									 Click="RadioButton_Click"
@@ -112,7 +115,7 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="12"
 									 Click="RadioButton_Click"
@@ -120,7 +123,7 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="11"
 									 Click="RadioButton_Click"
@@ -128,13 +131,13 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButton}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButton}"
 									 HorizontalAlignment="Center"
 									 Content="10"
 									 Click="RadioButton_Click"
 									 Margin="20, 0"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="9"
 									 Click="RadioButton_Click"
@@ -142,7 +145,7 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="8"
 									 Click="RadioButton_Click"
@@ -150,7 +153,7 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="7"
 									 Click="RadioButton_Click"
@@ -158,7 +161,7 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="6"
 									 Click="RadioButton_Click"
@@ -166,13 +169,13 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButton}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButton}"
 									 HorizontalAlignment="Center"
 									 Content="5"
 									 Click="RadioButton_Click"
 									 Margin="20, 0"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="4"
 									 Click="RadioButton_Click"
@@ -180,7 +183,7 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="3"
 									 Click="RadioButton_Click"
@@ -188,7 +191,7 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="2"
 									 Click="RadioButton_Click"
@@ -196,7 +199,7 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButtonSmall}"
 									 HorizontalAlignment="Center"
 									 Content="1"
 									 Click="RadioButton_Click"
@@ -204,25 +207,25 @@
 									 Opacity="0"
 									 IsHitTestVisible="False"/>
 
-						<RadioButton Style="{StaticResource AssessmentRadioButton}"
+                        <RadioButton Style="{StaticResource AssessmentRadioButton}"
 									 HorizontalAlignment="Center"
 									 Content="0"
 									 Click="RadioButton_Click"
 									 Margin="20, 0"/>
 
-					</StackPanel>
+                    </StackPanel>
 
-					<Grid x:Name="epifaunalDetail">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="1.25*"/>
-							<ColumnDefinition Width="2*"/>
-							<ColumnDefinition Width="2*"/>
-							<ColumnDefinition Width="2*"/>
-							<ColumnDefinition Width="2*"/>
-							<ColumnDefinition Width="1.25*"/>
-						</Grid.ColumnDefinitions>
+                    <Grid x:Name="epifaunalDetail">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.25*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1.25*"/>
+                        </Grid.ColumnDefinitions>
 
-						<Button x:Name="detailButton1"
+                        <Button x:Name="detailButton1"
 								Style="{StaticResource RoundedButton}" 
 								FontFamily="Segoe MDL2 Assets"
 								Background="Black"
@@ -236,10 +239,10 @@
 								Click="DetailButton_Click"
 								IsHitTestVisible="False"
 								Grid.Column="1">
-							&#xE710;
-						</Button>
+                            &#xE710;
+                        </Button>
 
-						<Button x:Name="detailButton2"
+                        <Button x:Name="detailButton2"
 								Style="{StaticResource RoundedButton}" 
 								FontFamily="Segoe MDL2 Assets"
 								Background="Black"
@@ -253,10 +256,10 @@
 								Click="DetailButton_Click"
 								IsHitTestVisible="False"
 								Grid.Column="2">
-							&#xE710;
-						</Button>
+                            &#xE710;
+                        </Button>
 
-						<Button x:Name="detailButton3"
+                        <Button x:Name="detailButton3"
 								Style="{StaticResource RoundedButton}" 
 								FontFamily="Segoe MDL2 Assets"
 								Background="Black"
@@ -270,10 +273,10 @@
 								Click="DetailButton_Click"
 								IsHitTestVisible="False"
 								Grid.Column="3">
-							&#xE710;
-						</Button>
+                            &#xE710;
+                        </Button>
 
-						<Button x:Name="detailButton4"
+                        <Button x:Name="detailButton4"
 								Style="{StaticResource RoundedButton}" 
 								FontFamily="Segoe MDL2 Assets"
 								Background="Black"
@@ -287,13 +290,13 @@
 								Click="DetailButton_Click"
 								IsHitTestVisible="False"
 								Grid.Column="4">
-							&#xE710;
-						</Button>
-					</Grid>
-				</Grid>
+                            &#xE710;
+                        </Button>
+                    </Grid>
+                </Grid>
 
-				<Grid>
-					<Button Style="{StaticResource KindaRoundedButton}" 
+                <Grid VerticalAlignment="Bottom">
+                    <Button Style="{StaticResource KindaRoundedButton}" 
 							x:Name="submitButton" 
 							Background="#D9D9D9"
 							Foreground="Black"
@@ -305,10 +308,40 @@
 							Margin="15"
 							Click="SubmitButton_Click"
 							IsEnabled="False">
-						Submit
-					</Button>
+                        Submit
+                    </Button>
 
-					<Button x:Name="glanceOpenButton"
+                    <Button x:Name="rightChevron"
+							Style="{StaticResource RoundedButton}" 
+							FontFamily="Segoe MDL2 Assets"
+							Background="#D9D9D9"
+							Foreground="Black"
+							FontSize="24"
+							VerticalAlignment="Center" 
+							HorizontalAlignment="Center"
+							Margin="450, 0, 0, 0"
+							Height="64"
+							Width="64"
+							Click="Chevron_Click">
+                        &#xE76C;
+                    </Button>
+
+                    <Button x:Name="leftChevron"
+							Style="{StaticResource RoundedButton}" 
+							FontFamily="Segoe MDL2 Assets"
+							Background="#D9D9D9"
+							Foreground="Black"
+							FontSize="24"
+							VerticalAlignment="Center" 
+							HorizontalAlignment="Center"
+							Margin="0, 0, 450, 0"
+							Height="64"
+							Width="64"
+							Click="Chevron_Click">
+                        &#xE76B;
+                    </Button>
+
+                    <Button x:Name="glanceOpenButton"
 							Style="{StaticResource RoundedButton}" 
 							FontFamily="Segoe MDL2 Assets"
 							Background="#D9D9D9"
@@ -323,8 +356,8 @@
 						&#xF000;
 					</Button>
 				</Grid>
-			</StackPanel>
-		</StackPanel>
+			</Grid>
+		</Grid>
 
 		<Grid x:Name="glanceProtocol"
 			  Visibility="Collapsed">

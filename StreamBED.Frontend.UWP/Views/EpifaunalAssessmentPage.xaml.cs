@@ -28,7 +28,7 @@ namespace StreamBED.Frontend.UWP.Views
     {
         private ImageDataModel CurrentImage;
 
-        private int CurrentScore = 0;
+        private int CurrentScore = 20;
 
         private int Index = 0;
 
@@ -42,7 +42,6 @@ namespace StreamBED.Frontend.UWP.Views
 
             if (Index < FeatureEvalPage.SelectedFeature.ImageList.Count)
             {
-                CurrentImage = FeatureEvalPage.SelectedFeature.ImageList[Index++];
                 progressBar.Maximum = FeatureEvalPage.SelectedFeature.ImageList.Count;
                 progressBar.Value = FeatureEvalPage.SelectedFeature.CountComplete;
             }
@@ -52,7 +51,7 @@ namespace StreamBED.Frontend.UWP.Views
         {
             base.OnNavigatedTo(e);
 
-            selectedImage.Source = CurrentImage.ImageSource;
+            NextImage();
         }
 
         public int NextImage()
@@ -61,6 +60,8 @@ namespace StreamBED.Frontend.UWP.Views
             {
                 CurrentImage = FeatureEvalPage.SelectedFeature.ImageList[Index++];
 
+                selectedImage.Source = CurrentImage.ImageSource;
+
                 foreach (UIElement elem in radioStack.Children)
                 {
                     RadioButton button = elem as RadioButton;
@@ -68,6 +69,11 @@ namespace StreamBED.Frontend.UWP.Views
                     if (button.IsChecked.Value)
                     {
                         button.IsChecked = false;
+                    }
+
+                    if (button.Content.Equals("20"))
+                    {
+                        button.IsChecked = true;
                     }
 
                     if (button.Style.Equals((Style)App.Current.Resources["AssessmentRadioButtonSmall"]))
@@ -88,6 +94,9 @@ namespace StreamBED.Frontend.UWP.Views
 
                 detailButton4.Opacity = 1;
                 detailButton4.IsHitTestVisible = true;
+
+                refImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/EpifaunalSubstrate/" + FeatureEvalPage.SelectedFeature.Keyword.FriendlyName + "/20_C.png"));
+                refImageDetail.Source = new BitmapImage(new Uri("ms-appx:///Assets/EpifaunalSubstrate/" + FeatureEvalPage.SelectedFeature.Keyword.FriendlyName + "/20_BW.png"));
 
                 return 0;
             }
@@ -158,20 +167,9 @@ namespace StreamBED.Frontend.UWP.Views
                 Duration = new Duration(TimeSpan.FromSeconds(0.25))
             };
 
-            DoubleAnimation hide = new DoubleAnimation
-            {
-                From = 1,
-                To = 0,
-                Duration = new Duration(TimeSpan.FromSeconds(0.25))
-            };
-
             Storyboard.SetTarget(reveal, refImage);
             Storyboard.SetTargetProperty(reveal, "UIElement.Opacity");
 
-            Storyboard.SetTarget(hide, refImageDetail);
-            Storyboard.SetTargetProperty(hide, "UIElement.Opacity");
-
-            animation.Children.Add(hide);
             animation.Children.Add(reveal);
 
             animation.Begin();
@@ -181,12 +179,6 @@ namespace StreamBED.Frontend.UWP.Views
         {
             Storyboard animation = new Storyboard();
 
-            DoubleAnimation reveal = new DoubleAnimation
-            {
-                From = 0,
-                To = 1,
-                Duration = new Duration(TimeSpan.FromSeconds(0.25))
-            };
 
             DoubleAnimation hide = new DoubleAnimation
             {
@@ -198,11 +190,7 @@ namespace StreamBED.Frontend.UWP.Views
             Storyboard.SetTarget(hide, refImage);
             Storyboard.SetTargetProperty(hide, "UIElement.Opacity");
 
-            Storyboard.SetTarget(reveal, refImageDetail);
-            Storyboard.SetTargetProperty(reveal, "UIElement.Opacity");
-
             animation.Children.Add(hide);
-            animation.Children.Add(reveal);
 
             animation.Begin();
         }
@@ -260,7 +248,45 @@ namespace StreamBED.Frontend.UWP.Views
 
         private void RadioButton_Click(object sender, RoutedEventArgs e)
         {
-            CurrentScore = Convert.ToInt32((sender as RadioButton).Content);
+            ChangeRadioButtonSelection(Convert.ToInt32((sender as RadioButton).Content), false);
+        }
+
+        private void ChangeRadioButtonSelection(int score, bool flag)
+        {
+            CurrentScore = score;
+
+            if (flag)
+            {
+                SelectRadioButton(score);
+            }
+
+            string root = "ms-appx:///Assets/EpifaunalSubstrate/" + FeatureEvalPage.SelectedFeature.Keyword.FriendlyName;
+
+            if (CurrentScore == 20)
+            {
+                refImage.Source = new BitmapImage(new Uri(root + "/20_C.png"));
+                refImageDetail.Source = new BitmapImage(new Uri(root + "/20_BW.png"));
+            }
+            else if (CurrentScore >= 15 && CurrentScore < 20)
+            {
+                refImage.Source = new BitmapImage(new Uri(root + "/15_C.png"));
+                refImageDetail.Source = new BitmapImage(new Uri(root + "/15_BW.png"));
+            }
+            else if (CurrentScore >= 10 && CurrentScore < 15)
+            {
+                refImage.Source = new BitmapImage(new Uri(root + "/10_C.png"));
+                refImageDetail.Source = new BitmapImage(new Uri(root + "/10_BW.png"));
+            }
+            else if (CurrentScore >= 5 && CurrentScore < 10)
+            {
+                refImage.Source = new BitmapImage(new Uri(root + "/5_C.png"));
+                refImageDetail.Source = new BitmapImage(new Uri(root + "/5_BW.png"));
+            }
+            else if (CurrentScore >= 0 && CurrentScore < 5)
+            {
+                refImage.Source = new BitmapImage(new Uri(root + "/0_C.png"));
+                refImageDetail.Source = new BitmapImage(new Uri(root + "/0_BW.png"));
+            }
 
             if (visit.Contains(CurrentScore))
             {
@@ -275,6 +301,24 @@ namespace StreamBED.Frontend.UWP.Views
                 detailButton4.IsHitTestVisible = true;
 
                 submitButton.IsEnabled = true;
+            }
+        }
+
+        private void SelectRadioButton(int value)
+        {
+            foreach (UIElement elem in radioStack.Children)
+            {
+                RadioButton button = elem as RadioButton;
+
+                if (button.IsChecked.Value)
+                {
+                    button.IsChecked = false;
+                }
+
+                if (button.Content.Equals(value.ToString()))
+                {
+                    button.IsChecked = true;
+                }
             }
         }
 
@@ -301,6 +345,92 @@ namespace StreamBED.Frontend.UWP.Views
                 FeatureEvalPage.Current.ChangeTitle(FeatureEvalPage.SelectedFeature.Keyword.Content.ToUpper());
                 
                 (this.Parent as Frame).Navigate(typeof(EpifaunalAssessmentPage));
+            }
+        }
+
+        private void Chevron_Click(object sender, RoutedEventArgs e)
+        {
+            bool flag = (sender as Button).Name.Equals("rightChevron");
+
+            if (CurrentScore > 15)
+            {
+                if (flag)
+                {
+                    ChangeRadioButtonSelection(15, true);
+                }
+            }
+            else if (CurrentScore < 15 && CurrentScore > 10)
+            {
+                if (flag)
+                {
+                    ChangeRadioButtonSelection(10, true);
+                }
+                else
+                {
+                    ChangeRadioButtonSelection(15, true);
+                }
+            }
+            else if (CurrentScore < 10 && CurrentScore > 5)
+            {
+                if (flag)
+                {
+                    ChangeRadioButtonSelection(5, true);
+                }
+                else
+                {
+                    ChangeRadioButtonSelection(10, true);
+                }
+            }
+            else if (CurrentScore < 5 && CurrentScore > 0)
+            {
+                if (flag)
+                {
+                    ChangeRadioButtonSelection(0, true);
+                }
+                else
+                {
+                    ChangeRadioButtonSelection(5, true);
+                }
+            }
+            else if (CurrentScore == 15)
+            {
+                if (flag)
+                {
+                    ChangeRadioButtonSelection(10, true);
+                }
+                else
+                {
+                    ChangeRadioButtonSelection(20, true);
+                }
+            }
+            else if (CurrentScore == 10)
+            {
+                if (flag)
+                {
+                    ChangeRadioButtonSelection(5, true);
+                }
+                else
+                {
+                    ChangeRadioButtonSelection(15, true);
+                }
+            }
+            else if (CurrentScore == 5)
+            {
+                if (flag)
+                {
+                    ChangeRadioButtonSelection(0, true);
+                }
+                else
+                {
+                    ChangeRadioButtonSelection(10, true);
+                }
+            }
+            else if (CurrentScore == 0)
+            {
+                if (!flag)
+                {
+                    ChangeRadioButtonSelection(5, true);
+                }
             }
         }
     }

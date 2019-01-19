@@ -15,10 +15,13 @@ namespace StreamBED.Backend.Helper
         /// </summary>
         public string Content { get; }
 
+        public string FriendlyName { get; }
+
         // Internal constructor
-        internal Keyword(string Content)
+        internal Keyword(string Content, string FriendlyName)
         {
             this.Content = Content;
+            this.FriendlyName = FriendlyName;
         }
     }
 }
