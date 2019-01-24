@@ -7,8 +7,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Xml.Linq;
+using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
@@ -43,6 +46,14 @@ namespace StreamBED.Frontend.UWP.Views
 
         internal static FeatureEvalPage Current = null;
 
+        internal static List<XElement> EpifaunalReference;
+
+        internal static List<XElement> BankReference;
+
+        internal static List<XElement> SelectedFeatureReference;
+
+        private XDocument referenceImages;
+
         public FeatureEvalPage()
         {
             this.InitializeComponent();
@@ -58,7 +69,7 @@ namespace StreamBED.Frontend.UWP.Views
             }
         }
 
-        private void NextButton_Click(object sender, RoutedEventArgs e)
+        private async void NextButton_Click(object sender, RoutedEventArgs e)
         {
             if (pivotRoot.SelectedIndex < 1)
             {
@@ -70,6 +81,15 @@ namespace StreamBED.Frontend.UWP.Views
 
                 InitializeProtocol(BankStabilityModel.GetKeywords(), BankStabilityModel);
                 InitializeProtocol(EpifaunalSubstrateModel.GetKeywords(), EpifaunalSubstrateModel);
+
+                using (Stream stream = await (await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/ReferenceImages.xml"))).OpenStreamForReadAsync())
+                {
+                    referenceImages = XDocument.Load(stream);
+                }
+
+                EpifaunalReference = referenceImages.Root.Elements().ElementAt(0).Elements().ToList();
+
+                BankReference = referenceImages.Root.Elements().ElementAt(1).Elements().ToList();
             }
         }
 
@@ -259,10 +279,14 @@ namespace StreamBED.Frontend.UWP.Views
 
                 if (SelectedModel is EpifaunalSubstrateModel)
                 {
+                    SelectedFeatureReference = EpifaunalReference.Where(i => i.Attribute("name").Value.Equals(SelectedFeature.Keyword.FriendlyName)).First().Elements().ToList();
+
                     assessmentFrame.Navigate(typeof(EpifaunalAssessmentPage));
                 }
                 else if (SelectedModel is BankStabilityModel)
                 {
+                    SelectedFeatureReference = BankReference.Where(i => i.Attribute("name").Value.Equals(SelectedFeature.Keyword.FriendlyName)).First().Elements().ToList();
+
                     assessmentFrame.Navigate(typeof(BankAssessmentPage));
                 }
 

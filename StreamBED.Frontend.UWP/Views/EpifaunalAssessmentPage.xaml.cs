@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -95,8 +96,11 @@ namespace StreamBED.Frontend.UWP.Views
                 detailButton4.Opacity = 1;
                 detailButton4.IsHitTestVisible = true;
 
-                refImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/EpifaunalSubstrate/" + FeatureEvalPage.SelectedFeature.Keyword.FriendlyName + "/20_C.png"));
-                refImageDetail.Source = new BitmapImage(new Uri("ms-appx:///Assets/EpifaunalSubstrate/" + FeatureEvalPage.SelectedFeature.Keyword.FriendlyName + "/20_BW.png"));
+                XElement selected = FeatureEvalPage.SelectedFeatureReference.Where(i => i.Attribute("score").Value.Equals("20")).First();
+
+                refImage.Source = new BitmapImage(new Uri(selected.Attribute("ref").Value));
+                refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
+                refDetailText.Text = selected.Value.Trim();
 
                 return 0;
             }
@@ -260,32 +264,50 @@ namespace StreamBED.Frontend.UWP.Views
                 SelectRadioButton(score);
             }
 
-            string root = "ms-appx:///Assets/EpifaunalSubstrate/" + FeatureEvalPage.SelectedFeature.Keyword.FriendlyName;
-
             if (CurrentScore == 20)
             {
-                refImage.Source = new BitmapImage(new Uri(root + "/20_C.png"));
-                refImageDetail.Source = new BitmapImage(new Uri(root + "/20_BW.png"));
+                XElement selected = FeatureEvalPage.SelectedFeatureReference.Where(i => i.Attribute("score").Value.Equals("20")).First();
+
+                refImage.Source = new BitmapImage(new Uri(selected.Attribute("ref").Value));
+                refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
+                refDetailText.Text = selected.Value.Trim();
+                refDetailText.Visibility = Visibility.Collapsed;
             }
             else if (CurrentScore >= 15 && CurrentScore < 20)
             {
-                refImage.Source = new BitmapImage(new Uri(root + "/15_C.png"));
-                refImageDetail.Source = new BitmapImage(new Uri(root + "/15_BW.png"));
+                XElement selected = FeatureEvalPage.SelectedFeatureReference.Where(i => i.Attribute("score").Value.Equals("15")).First();
+
+                refImage.Source = new BitmapImage(new Uri(selected.Attribute("ref").Value));
+                refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
+                refDetailText.Text = selected.Value.Trim();
+                refDetailText.Visibility = Visibility.Collapsed;
             }
             else if (CurrentScore >= 10 && CurrentScore < 15)
             {
-                refImage.Source = new BitmapImage(new Uri(root + "/10_C.png"));
-                refImageDetail.Source = new BitmapImage(new Uri(root + "/10_BW.png"));
+                XElement selected = FeatureEvalPage.SelectedFeatureReference.Where(i => i.Attribute("score").Value.Equals("10")).First();
+
+                refImage.Source = new BitmapImage(new Uri(selected.Attribute("ref").Value));
+                refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
+                refDetailText.Text = selected.Value.Trim();
+                refDetailText.Visibility = Visibility.Collapsed;
             }
             else if (CurrentScore >= 5 && CurrentScore < 10)
             {
-                refImage.Source = new BitmapImage(new Uri(root + "/5_C.png"));
-                refImageDetail.Source = new BitmapImage(new Uri(root + "/5_BW.png"));
+                XElement selected = FeatureEvalPage.SelectedFeatureReference.Where(i => i.Attribute("score").Value.Equals("5")).First();
+
+                refImage.Source = new BitmapImage(new Uri(selected.Attribute("ref").Value));
+                refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
+                refDetailText.Text = selected.Value.Trim();
+                refDetailText.Visibility = Visibility.Collapsed;
             }
             else if (CurrentScore >= 0 && CurrentScore < 5)
             {
-                refImage.Source = new BitmapImage(new Uri(root + "/0_C.png"));
-                refImageDetail.Source = new BitmapImage(new Uri(root + "/0_BW.png"));
+                XElement selected = FeatureEvalPage.SelectedFeatureReference.Where(i => i.Attribute("score").Value.Equals("0")).First();
+
+                refImage.Source = new BitmapImage(new Uri(selected.Attribute("ref").Value));
+                refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
+                refDetailText.Text = selected.Value.Trim();
+                refDetailText.Visibility = Visibility.Collapsed;
             }
 
             if (visit.Contains(CurrentScore))
@@ -352,11 +374,15 @@ namespace StreamBED.Frontend.UWP.Views
         {
             bool flag = (sender as Button).Name.Equals("rightChevron");
 
-            if (CurrentScore > 15)
+            if (CurrentScore < 20 && CurrentScore > 15)
             {
                 if (flag)
                 {
                     ChangeRadioButtonSelection(15, true);
+                }
+                else
+                {
+                    ChangeRadioButtonSelection(20, true);
                 }
             }
             else if (CurrentScore < 15 && CurrentScore > 10)
@@ -390,6 +416,13 @@ namespace StreamBED.Frontend.UWP.Views
                 else
                 {
                     ChangeRadioButtonSelection(5, true);
+                }
+            }
+            else if (CurrentScore == 20)
+            {
+                if (flag)
+                {
+                    ChangeRadioButtonSelection(15, true);
                 }
             }
             else if (CurrentScore == 15)
@@ -432,6 +465,11 @@ namespace StreamBED.Frontend.UWP.Views
                     ChangeRadioButtonSelection(5, true);
                 }
             }
+        }
+
+        private void RefImage_ImageOpened(object sender, RoutedEventArgs e)
+        {
+            refDetailText.Visibility = Visibility.Visible;
         }
     }
 }
