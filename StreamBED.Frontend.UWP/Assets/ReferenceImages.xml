@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <protocol name="EpifaunalSubstrateModel">
+    <feature name="Cobble">
+      <image score="0" ref="ms-appx:///Assets/EpifaunalSubstrate/Cobble/0_C.png" detail="ms-appx:///Assets/EpifaunalSubstrate/Cobble/0_BW.png">
+        
+      </image>
+      <image score="5" ref="ms-appx:///Assets/EpifaunalSubstrate/Cobble/5_C.png" detail="ms-appx:///Assets/EpifaunalSubstrate/Cobble/5_BW.png"/>
+      <image score="10" ref="ms-appx:///Assets/EpifaunalSubstrate/Cobble/10_C.png" detail="ms-appx:///Assets/EpifaunalSubstrate/Cobble/10_BW.png"/>
+      <image score="15" ref="ms-appx:///Assets/EpifaunalSubstrate/Cobble/15_C.png" detail="ms-appx:///Assets/EpifaunalSubstrate/Cobble/15_BW.png"/>
+      <image score="20" ref="ms-appx:///Assets/EpifaunalSubstrate/Cobble/20_C.png" detail="ms-appx:///Assets/EpifaunalSubstrate/Cobble/20_BW.png"/>
+    </feature>
+    <feature name="SnagsLogs">
+      
+    </feature>
+    <feature name="UndercutBanks">
+
+    </feature>
+    <feature name="UnderwaterVegetation">
+
+    </feature>
+  </protocol>
+  <protocol name="BankStabilityModel">
+    <feature name="BankFailure">
+
+    </feature>
+    <feature name="BankSlope">
+
+    </feature>
+    <feature name="BankVegetation">
+
+    </feature>
+    <feature name="ErodedAreas">
+
+    </feature>
+    <feature name="ExposedTreeRoots">
+
+    </feature>
+  </protocol>
+</root>

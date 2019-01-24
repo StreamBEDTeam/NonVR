@@ -195,14 +195,14 @@
     <Content Include="Assets\BankStability\ErodedAreas\4_BW.png" />
     <Content Include="Assets\BankStability\ErodedAreas\6_BW.png" />
     <Content Include="Assets\BankStability\ErodedAreas\6_C.png" />
-    <Content Include="Assets\BankStability\ExposedTreeRootsFinal\0_BW.png" />
-    <Content Include="Assets\BankStability\ExposedTreeRootsFinal\0_C.png" />
-    <Content Include="Assets\BankStability\ExposedTreeRootsFinal\10_BW.png" />
-    <Content Include="Assets\BankStability\ExposedTreeRootsFinal\10_C.png" />
-    <Content Include="Assets\BankStability\ExposedTreeRootsFinal\4_BW.png" />
-    <Content Include="Assets\BankStability\ExposedTreeRootsFinal\4_C.png" />
-    <Content Include="Assets\BankStability\ExposedTreeRootsFinal\6_BW_1.png" />
-    <Content Include="Assets\BankStability\ExposedTreeRootsFinal\6_C_1.png" />
+    <Content Include="Assets\BankStability\ExposedTreeRoots\0_BW.png" />
+    <Content Include="Assets\BankStability\ExposedTreeRoots\0_C.png" />
+    <Content Include="Assets\BankStability\ExposedTreeRoots\10_BW.png" />
+    <Content Include="Assets\BankStability\ExposedTreeRoots\10_C.png" />
+    <Content Include="Assets\BankStability\ExposedTreeRoots\4_BW.png" />
+    <Content Include="Assets\BankStability\ExposedTreeRoots\4_C.png" />
+    <Content Include="Assets\BankStability\ExposedTreeRoots\6_BW_1.png" />
+    <Content Include="Assets\BankStability\ExposedTreeRoots\6_C_1.png" />
     <Content Include="Assets\EpifaunalSubstrate\Cobble\0_BW.png" />
     <Content Include="Assets\EpifaunalSubstrate\Cobble\0_C.png" />
     <Content Include="Assets\EpifaunalSubstrate\Cobble\10_BW.png" />
@@ -215,7 +215,6 @@
     <Content Include="Assets\EpifaunalSubstrate\Cobble\5_C.png" />
     <Content Include="Assets\EpifaunalSubstrate\SnagsLogs\0_C.png" />
     <Content Include="Assets\EpifaunalSubstrate\SnagsLogs\0_BW.png" />
-    <Content Include="Assets\EpifaunalSubstrate\SnagsLogs\10_BW.png" />
     <Content Include="Assets\EpifaunalSubstrate\SnagsLogs\10_C.png" />
     <Content Include="Assets\EpifaunalSubstrate\SnagsLogs\15_BW.png" />
     <Content Include="Assets\EpifaunalSubstrate\SnagsLogs\15_C.png" />
@@ -223,6 +222,7 @@
     <Content Include="Assets\EpifaunalSubstrate\SnagsLogs\20_C.png" />
     <Content Include="Assets\EpifaunalSubstrate\SnagsLogs\5_BW.png" />
     <Content Include="Assets\EpifaunalSubstrate\SnagsLogs\5_C.png" />
+    <Content Include="Assets\EpifaunalSubstrate\SnagsLogs\10_BW.png" />
     <Content Include="Assets\EpifaunalSubstrate\UndercutBanks\0_BW.png" />
     <Content Include="Assets\EpifaunalSubstrate\UndercutBanks\0_C.png" />
     <Content Include="Assets\EpifaunalSubstrate\UndercutBanks\10_BW.png" />
@@ -249,6 +249,7 @@
     <Content Include="Assets\ProtocolAssets\Epifaunal.png" />
     <Content Include="Assets\ProtocolAssets\tree.png" />
     <Content Include="Assets\ProtocolAssets\rock.png" />
+    <Content Include="Assets\ReferenceImages.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
