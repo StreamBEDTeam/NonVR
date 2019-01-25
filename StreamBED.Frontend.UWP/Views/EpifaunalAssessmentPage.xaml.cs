@@ -33,7 +33,7 @@ namespace StreamBED.Frontend.UWP.Views
 
         private int Index = 0;
 
-        private List<int> visit = new List<int>() { 20, 15, 10, 5, 0 };
+        private List<int> visit = new List<int>() { 15, 10, 5, 0 };
 
         public EpifaunalAssessmentPage()
         {
@@ -100,7 +100,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                 refImage.Source = new BitmapImage(new Uri(selected.Attribute("ref").Value));
                 refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
-                refDetailText.Text = selected.Value.Trim();
+                refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
 
                 return 0;
             }
@@ -122,6 +122,7 @@ namespace StreamBED.Frontend.UWP.Views
             {
                 (completionGrid.Children[0] as TextBlock).Text = "Great job rating the " + FeatureEvalPage.SelectedFeature.Keyword.Content + " feature.\n\nNext you will rate the " + next.Keyword.Content + " feature.";
                 FeatureEvalPage.SelectedFeature = next;
+                FeatureEvalPage.SelectedFeatureReference = FeatureEvalPage.EpifaunalReference.Where(i => i.Attribute("name").Value.Equals(FeatureEvalPage.SelectedFeature.Keyword.FriendlyName)).First().Elements().ToList();
 
                 completionGrid.Visibility = Visibility.Visible;
             }
@@ -137,6 +138,7 @@ namespace StreamBED.Frontend.UWP.Views
                 {
                     (completionGrid.Children[0] as TextBlock).Text = "Great job rating the Epifunal Substrate protocol.\n\nNext you will rate the Bank Stability protocol.";
                     FeatureEvalPage.SelectedFeature = null;
+                    FeatureEvalPage.SelectedFeatureReference = null;
 
                     FeatureEvalPage.Current.ChangeToEpifaunalSubstrate();
                     completionGrid.Visibility = Visibility.Visible;
@@ -270,7 +272,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                 refImage.Source = new BitmapImage(new Uri(selected.Attribute("ref").Value));
                 refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
-                refDetailText.Text = selected.Value.Trim();
+                refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
                 refDetailText.Visibility = Visibility.Collapsed;
             }
             else if (CurrentScore >= 15 && CurrentScore < 20)
@@ -279,7 +281,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                 refImage.Source = new BitmapImage(new Uri(selected.Attribute("ref").Value));
                 refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
-                refDetailText.Text = selected.Value.Trim();
+                refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
                 refDetailText.Visibility = Visibility.Collapsed;
             }
             else if (CurrentScore >= 10 && CurrentScore < 15)
@@ -288,7 +290,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                 refImage.Source = new BitmapImage(new Uri(selected.Attribute("ref").Value));
                 refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
-                refDetailText.Text = selected.Value.Trim();
+                refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
                 refDetailText.Visibility = Visibility.Collapsed;
             }
             else if (CurrentScore >= 5 && CurrentScore < 10)
@@ -297,7 +299,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                 refImage.Source = new BitmapImage(new Uri(selected.Attribute("ref").Value));
                 refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
-                refDetailText.Text = selected.Value.Trim();
+                refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
                 refDetailText.Visibility = Visibility.Collapsed;
             }
             else if (CurrentScore >= 0 && CurrentScore < 5)
@@ -306,7 +308,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                 refImage.Source = new BitmapImage(new Uri(selected.Attribute("ref").Value));
                 refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
-                refDetailText.Text = selected.Value.Trim();
+                refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
                 refDetailText.Visibility = Visibility.Collapsed;
             }
 

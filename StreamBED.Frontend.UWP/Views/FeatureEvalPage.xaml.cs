@@ -52,7 +52,7 @@ namespace StreamBED.Frontend.UWP.Views
 
         internal static List<XElement> SelectedFeatureReference;
 
-        private XDocument referenceImages;
+        internal static XDocument referenceImages;
 
         public FeatureEvalPage()
         {
@@ -81,6 +81,18 @@ namespace StreamBED.Frontend.UWP.Views
 
                 InitializeProtocol(BankStabilityModel.GetKeywords(), BankStabilityModel);
                 InitializeProtocol(EpifaunalSubstrateModel.GetKeywords(), EpifaunalSubstrateModel);
+
+                if (epifaunalSubstrateFeatures.Count == 0)
+                {
+                    epifaunalStack.Visibility = Visibility.Collapsed;
+                    EpifaunalSubstrateModel.IsCompleted = true;
+                }
+
+                if (bankStabilityFeatures.Count == 0)
+                {
+                    bankStack.Visibility = Visibility.Collapsed;
+                    BankStabilityModel.IsCompleted = true;
+                }
 
                 using (Stream stream = await (await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/ReferenceImages.xml"))).OpenStreamForReadAsync())
                 {
@@ -111,7 +123,10 @@ namespace StreamBED.Frontend.UWP.Views
 
             foreach (FeatureDataModel feature in bankStabilityFeatures.Values)
             {
-                listViewRoot.Items.Add(feature);
+                if(!feature.IsHidden)
+                {
+                    listViewRoot.Items.Add(feature);
+                }
 
                 if (flag == null || !feature.IsComplete)
                 {
@@ -147,7 +162,10 @@ namespace StreamBED.Frontend.UWP.Views
 
             foreach (FeatureDataModel feature in epifaunalSubstrateFeatures.Values)
             {
-                listViewRoot.Items.Add(feature);
+                if (!feature.IsHidden)
+                {
+                    listViewRoot.Items.Add(feature);
+                }
 
                 if (flag == null || !feature.IsComplete)
                 {

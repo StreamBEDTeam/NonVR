@@ -18,6 +18,8 @@ namespace StreamBED.Frontend.UWP.Models
 
         public bool IsComplete = false;
 
+        public bool IsHidden = false;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         internal void NotifyPropertyChanged(string propertyName) =>

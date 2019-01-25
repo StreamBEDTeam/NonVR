@@ -42,6 +42,16 @@ namespace StreamBED.Frontend.UWP.Views
             protocolTitle.Text = "BANK STABILITY";
             SelectedModel = FeatureEvalPage.BankStabilityModel;
 
+            foreach (StackPanel stack in bankStackTop.Children)
+            {
+                stack.Children.Clear();
+            }
+
+            foreach (StackPanel stack in bankStackBottom.Children)
+            {
+                stack.Children.Clear();
+            }
+
             foreach (KeyValuePair<Keyword, FeatureDataModel> elem in FeatureEvalPage.bankStabilityFeatures)
             {
                 foreach (ImageDataModel image in elem.Value.ImageList)
@@ -73,34 +83,44 @@ namespace StreamBED.Frontend.UWP.Views
 
                     if (image.Image.BankStabilityScore % 2 == 0)
                     {
-                        /*foreach (StackPanel stack in bankStackTop.Children)
+                        foreach (StackPanel stack in bankStackTop.Children)
                         {
                             if (stack.Tag.Equals(image.Image.BankStabilityScore.ToString()))
                             {
                                 stack.Children.Add(border);
                             }
-                        }*/
+                        }
                     }
                     else
                     {
-                        /*foreach (StackPanel stack in bankStackBottom.Children)
+                        foreach (StackPanel stack in bankStackBottom.Children)
                         {
                             if (stack.Tag.Equals(image.Image.BankStabilityScore.ToString()))
                             {
                                 stack.Children.Add(border);
                             }
-                        }*/
+                        }
                     }
                 }
             }
 
-            ++layoutPivot.SelectedIndex;
+            layoutPivot.SelectedIndex = 4;
         }
 
         private void EpifaunalSubstrate_Tapped(object sender, TappedRoutedEventArgs e)
         {
             protocolTitle.Text = "EPIFAUNAL SUBSTRATE";
             SelectedModel = FeatureEvalPage.EpifaunalSubstrateModel;
+
+            foreach (StackPanel stack in epifaunalStackTop.Children)
+            {
+                stack.Children.Clear();
+            }
+
+            foreach (StackPanel stack in epifaunalStackBottom.Children)
+            {
+                stack.Children.Clear();
+            }
 
             foreach (KeyValuePair<Keyword, FeatureDataModel> elem in FeatureEvalPage.epifaunalSubstrateFeatures)
             {
@@ -154,7 +174,7 @@ namespace StreamBED.Frontend.UWP.Views
                 }
             }
 
-            ++layoutPivot.SelectedIndex;
+            layoutPivot.SelectedIndex = 2;
         }
 
         private void LayoutPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -200,14 +220,7 @@ namespace StreamBED.Frontend.UWP.Views
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedModel is BankStabilityModel)
-            {
-                layoutPivot.SelectedIndex = 4;
-            }
-            else if (SelectedModel is EpifaunalSubstrateModel)
-            {
-                layoutPivot.SelectedIndex = 2;
-            }
+            ++layoutPivot.SelectedIndex;
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
@@ -255,6 +268,36 @@ namespace StreamBED.Frontend.UWP.Views
         private void NextProtocolButton_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void BankSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            if (e.NewValue == 0)
+            {
+                epifaunalSubmitButton.IsEnabled = false;
+            }
+            else
+            {
+                epifaunalSubmitButton.IsEnabled = true;
+            }
+
+            foreach (TextBlock block in epifaunalValueStack.Children)
+            {
+                if (block.Text.Equals(epifaunalSlider.Value.ToString()))
+                {
+                    block.Opacity = 1;
+                }
+                else
+                {
+                    if (!block.Text.Equals("10") && !block.Text.Equals("6") && !block.Text.Equals("4") && !block.Text.Equals("0"))
+                    {
+                        if (block.Opacity == 1)
+                        {
+                            block.Opacity = 0;
+                        }
+                    }
+                }
+            }
         }
     }
 }

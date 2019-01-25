@@ -77,6 +77,8 @@ namespace StreamBED.Frontend.UWP.Views
                     NumberOfKeywords++;
                 }
             }
+
+            
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)

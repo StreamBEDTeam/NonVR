@@ -54,7 +54,7 @@
                                    TextAlignment="Left"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
-                                   Margin="15"
+                                   Margin="30"
                                    Visibility="Visible"/>
                     </Grid>
 

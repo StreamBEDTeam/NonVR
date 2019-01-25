@@ -65,7 +65,8 @@
                     <StackPanel HorizontalAlignment="Stretch"
                                 Width="1200">
 
-                        <StackPanel Background="White"
+                        <StackPanel x:Name="epifaunalStack"
+                                    Background="White"
                                     Margin="0, 25, 0, 0"
                                     CornerRadius="8"
                                     Tapped="EpifaunalSubstrate_Tapped">
@@ -91,7 +92,8 @@
                             <Image Source="/Assets/ProtocolAssets/Epifaunal.png"/>
                         </StackPanel>
 
-                        <StackPanel Background="White"
+                        <StackPanel x:Name="bankStack"
+                                    Background="White"
                                     Margin="0, 25, 0, 25"
                                     CornerRadius="8"
                                     Tapped="BankStability_Tapped">
