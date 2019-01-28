@@ -243,6 +243,16 @@
     <Content Include="Assets\EpifaunalSubstrate\UnderwaterVegetation\20_C.png" />
     <Content Include="Assets\EpifaunalSubstrate\UnderwaterVegetation\5_BW.png" />
     <Content Include="Assets\EpifaunalSubstrate\UnderwaterVegetation\5_C.png" />
+    <Content Include="Assets\FeatureIcons.xml" />
+    <Content Include="Assets\Icons\BankFailure.png" />
+    <Content Include="Assets\Icons\BankSlope.png" />
+    <Content Include="Assets\Icons\BankVegetation.png" />
+    <Content Include="Assets\Icons\Cobble.png" />
+    <Content Include="Assets\Icons\ErodedAreas.png" />
+    <Content Include="Assets\Icons\ExposedTreeRoots.png" />
+    <Content Include="Assets\Icons\SnagsLogs.png" />
+    <Content Include="Assets\Icons\UndercutBank.png" />
+    <Content Include="Assets\Icons\UnderwaterVegetation.png" />
     <Content Include="Assets\Logo\image.png" />
     <Content Include="Assets\Logo\StreamBEDLogo.png" />
     <Content Include="Assets\ProtocolAssets\Bank.png" />
@@ -306,6 +316,7 @@
       <HintPath>..\StreamBED.Backend\bin\Debug\StreamBED.Backend.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

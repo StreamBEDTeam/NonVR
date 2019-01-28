@@ -60,9 +60,26 @@ namespace StreamBED.Frontend.UWP.Views
 
                 if (model != null)
                 {
-                    listViewRoot.Items.Add(FeatureDataModel.GetFeatureDataModel(keyword, Area.ImageList));
+                    listViewRoot.Items.Add(model);
 
                     NumberOfKeywords++;
+                }
+                else
+                {
+                    ImageDataModel image = new ImageDataModel(new ImageWithMetadata(null));
+                    image.Image.ChangeEpifaunalSubstrateScore(0);
+                    image.Image.AddKeyword(keyword);
+                    image.IsHidden = true;
+                    image.isComplete = true;
+                    image.Image.Location = Area.Name;
+
+                    FeatureDataModel feature = new FeatureDataModel(keyword);
+
+                    if (keyword.Equals(EpifaunalSubstrateModel.Keywords.SnagsLogs) || keyword.Equals(EpifaunalSubstrateModel.Keywords.UnderwaterVegetation) || keyword.Equals(EpifaunalSubstrateModel.Keywords.UndercutBanks))
+                    {
+                        imageDict.Add(feature, image);
+                        NumberOfKeywords++;
+                    }
                 }
             }
 
@@ -72,13 +89,27 @@ namespace StreamBED.Frontend.UWP.Views
 
                 if (model != null)
                 {
-                    listViewRoot.Items.Add(FeatureDataModel.GetFeatureDataModel(keyword, Area.ImageList));
+                    listViewRoot.Items.Add(model);
 
                     NumberOfKeywords++;
                 }
-            }
+                else
+                {
+                    ImageDataModel image = new ImageDataModel(new ImageWithMetadata(null));
+                    image.Image.ChangeBankStabilityScore(20);
+                    image.Image.AddKeyword(keyword);
+                    image.IsHidden = true;
+                    image.isComplete = true;
 
-            
+                    FeatureDataModel feature = new FeatureDataModel(keyword);
+
+                    if (keyword.Equals(BankStabilityModel.Keywords.ExposedTreeRoots) || keyword.Equals(BankStabilityModel.Keywords.ErodedAreas) || keyword.Equals(BankStabilityModel.Keywords.BankFailure))
+                    {
+                        imageDict.Add(feature, image);
+                        NumberOfKeywords++;
+                    }
+                }
+            }
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)

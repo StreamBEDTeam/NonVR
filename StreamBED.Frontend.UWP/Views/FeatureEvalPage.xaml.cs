@@ -82,13 +82,13 @@ namespace StreamBED.Frontend.UWP.Views
                 InitializeProtocol(BankStabilityModel.GetKeywords(), BankStabilityModel);
                 InitializeProtocol(EpifaunalSubstrateModel.GetKeywords(), EpifaunalSubstrateModel);
 
-                if (epifaunalSubstrateFeatures.Count == 0)
+                if (epifaunalSubstrateFeatures.Values.Where(i => !i.IsHidden).Count() == 0)
                 {
                     epifaunalStack.Visibility = Visibility.Collapsed;
                     EpifaunalSubstrateModel.IsCompleted = true;
                 }
 
-                if (bankStabilityFeatures.Count == 0)
+                if (bankStabilityFeatures.Values.Where(i => !i.IsHidden).Count() == 0)
                 {
                     bankStack.Visibility = Visibility.Collapsed;
                     BankStabilityModel.IsCompleted = true;
@@ -200,7 +200,15 @@ namespace StreamBED.Frontend.UWP.Views
 
                             if (!epifaunalSubstrateFeatures.GetValueOrDefault(keyword).ImageList.Where(i => i.Image.Equals(image.Image)).Any())
                             {
-                                epifaunalSubstrateFeatures.GetValueOrDefault(keyword).ImageList.Add(new ImageDataModel(image.Image));
+                                ImageDataModel i = new ImageDataModel(image.Image);
+
+                                if (image.Image.Data == null && image.IsHidden)
+                                {
+                                    i.isComplete = true;
+                                    i.IsHidden = true;
+                                }
+
+                                epifaunalSubstrateFeatures.GetValueOrDefault(keyword).ImageList.Add(i);
                             }
                         }
                         else if (model is BankStabilityModel)
@@ -212,7 +220,15 @@ namespace StreamBED.Frontend.UWP.Views
 
                             if (!bankStabilityFeatures.GetValueOrDefault(keyword).ImageList.Select(i => i.Image.Equals(image.Image)).Any())
                             {
-                                bankStabilityFeatures.GetValueOrDefault(keyword).ImageList.Add(new ImageDataModel(image.Image));
+                                ImageDataModel i = new ImageDataModel(image.Image);
+
+                                if (image.Image.Data == null && image.IsHidden)
+                                {
+                                    i.isComplete = true;
+                                    i.IsHidden = true;
+                                }
+
+                                bankStabilityFeatures.GetValueOrDefault(keyword).ImageList.Add(i);
                             }
                         }
                     }

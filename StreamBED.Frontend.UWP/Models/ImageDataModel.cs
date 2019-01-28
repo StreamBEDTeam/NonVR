@@ -20,6 +20,8 @@ namespace StreamBED.Frontend.UWP.Models
 
         public bool isComplete { get; set; }
 
+        public bool IsHidden = false;
+
         public ImageDataModel(ImageWithMetadata Image)
         {
             this.Image = Image;
@@ -29,16 +31,21 @@ namespace StreamBED.Frontend.UWP.Models
 
         public async Task<BitmapImage> GetImageSource()
         {
-            BitmapImage bitmapImage = new BitmapImage();
-
-            using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
+            if (Image.Data != null)
             {
-                await stream.WriteAsync(Image.Data.AsBuffer());
-                stream.Seek(0);
-                bitmapImage.SetSource(stream);
+                BitmapImage bitmapImage = new BitmapImage();
+
+                using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
+                {
+                    await stream.WriteAsync(Image.Data.AsBuffer());
+                    stream.Seek(0);
+                    bitmapImage.SetSource(stream);
+                }
+
+                return bitmapImage;
             }
 
-            return bitmapImage;
+            return null;
         }
     }
 }

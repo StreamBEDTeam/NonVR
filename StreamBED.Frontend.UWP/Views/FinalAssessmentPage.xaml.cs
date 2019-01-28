@@ -8,8 +8,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
@@ -31,6 +33,8 @@ namespace StreamBED.Frontend.UWP.Views
     public sealed partial class FinalAssessmentPage : Page
     {
         private ProtocolModel SelectedModel;
+
+        private XElement icons;
 
         public FinalAssessmentPage()
         {
@@ -60,26 +64,23 @@ namespace StreamBED.Frontend.UWP.Views
 
                     Border border = new Border()
                     {
-                        Width = 63,
-                        Height = 63,
+                        Width = 50,
+                        Height = 50,
                         BorderBrush = brush,
                         BorderThickness = new Thickness(4),
                         Margin = new Thickness(0, 2.5, 0, 2.5)
                     };
 
-                    Regex initial = new Regex(@"(\b[a-zA-Z])[a-zA-Z]* ?");
-
-                    TextBlock t = new TextBlock()
+                    Image icon = new Image()
                     {
-                        Text = initial.Replace(elem.Key.Content, "$1"),
+                        Height = 45,
+                        Width = 45,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
-                        Foreground = new SolidColorBrush(Colors.Black),
-                        FontSize = 20,
-                        FontWeight = FontWeights.Bold,
+                        Source = GetFeatureIcon(elem.Key)
                     };
 
-                    border.Child = t;
+                    border.Child = icon;
 
                     if (image.Image.BankStabilityScore % 2 == 0)
                     {
@@ -130,26 +131,23 @@ namespace StreamBED.Frontend.UWP.Views
 
                     Border border = new Border()
                     {
-                        Width = 63,
-                        Height = 63,
+                        Width = 50,
+                        Height = 50,
                         BorderBrush = brush,
                         BorderThickness = new Thickness(4),
                         Margin = new Thickness(0, 2.5, 0, 2.5)
                     };
 
-                    Regex initial = new Regex(@"(\b[a-zA-Z])[a-zA-Z]* ?");
-
-                    TextBlock t = new TextBlock()
+                    Image icon = new Image()
                     {
-                        Text = initial.Replace(elem.Key.Content, "$1"),
+                        Height = 45,
+                        Width = 45,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
-                        Foreground = new SolidColorBrush(Colors.Black),
-                        FontSize = 20,
-                        FontWeight = FontWeights.Bold,
+                        Source = GetFeatureIcon(elem.Key)
                     };
 
-                    border.Child = t;
+                    border.Child = icon;
 
                     if (image.Image.EpifaunalSubstrateScore % 2 == 0)
                     {
@@ -218,8 +216,13 @@ namespace StreamBED.Frontend.UWP.Views
             }
         }
 
-        private void NextButton_Click(object sender, RoutedEventArgs e)
+        private async void NextButton_Click(object sender, RoutedEventArgs e)
         {
+            using (Stream stream = await(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/FeatureIcons.xml"))).OpenStreamForReadAsync())
+            {
+                icons = XDocument.Load(stream).Root;
+            }
+
             ++layoutPivot.SelectedIndex;
         }
 
@@ -267,7 +270,7 @@ namespace StreamBED.Frontend.UWP.Views
 
         private void NextProtocolButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void BankSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
@@ -298,6 +301,11 @@ namespace StreamBED.Frontend.UWP.Views
                     }
                 }
             }
+        }
+
+        private BitmapImage GetFeatureIcon(Keyword keyword)
+        {
+            return new BitmapImage(new Uri(icons.Elements().Where(i => i.Attribute("name").Value.Equals(keyword.FriendlyName)).First().Attribute("src").Value));
         }
     }
 }
