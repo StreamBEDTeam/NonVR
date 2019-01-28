@@ -16,58 +16,7 @@ namespace StreamBED.Frontend.UWP.Models
 
         public ObservableCollection<ImageDataModel> ImageList { get; }
 
-        private bool isComplete = false;
-
-        public bool IsComplete
-        {
-            get
-            {
-                if (IsHidden)
-                {
-                    return true;
-                }
-                else
-                {
-                    return isComplete;
-                }
-            }
-
-            set { isComplete = IsComplete; }
-        }
-
-        public bool IsHidden
-        {
-            get
-            {
-                foreach (ImageDataModel image in ImageList)
-                {
-                    if (!image.IsHidden)
-                    {
-                        return false;
-                    }
-                }
-
-                return true;
-            }
-        }
-
-        public int NonHiddenCount
-        {
-            get
-            {
-                int count = 0;
-
-                foreach (ImageDataModel image in ImageList)
-                {
-                    if (!image.IsHidden)
-                    {
-                        count++;
-                    }
-                }
-
-                return count;
-            }
-        }
+        public bool IsComplete = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

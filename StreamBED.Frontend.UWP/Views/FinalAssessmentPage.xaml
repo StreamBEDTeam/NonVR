@@ -733,114 +733,6 @@
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        Margin="0, 105, 0, 0"
-                                       Text="20"/>
-
-                                    <TextBlock Foreground="Black"
-                                       FontSize="20"
-                                       FontWeight="Bold"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Margin="21, -105, 0, 0"
-                                       Opacity="0"
-                                       Text="19"/>
-
-                                    <TextBlock Foreground="Black"
-                                       FontSize="20"
-                                       FontWeight="Bold"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Margin="22, -105, 0, 0"
-                                       Opacity="0"
-                                       Text="18"/>
-
-                                    <TextBlock Foreground="Black"
-                                       FontSize="20"
-                                       FontWeight="Bold"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Margin="21, -105, 0, 0"
-                                       Opacity="0"
-                                       Text="17"/>
-
-                                    <TextBlock Foreground="Black"
-                                       FontSize="20"
-                                       FontWeight="Bold"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Margin="21, -105, 0, 0"
-                                       Opacity="0"
-                                       Text="16"/>
-
-                                    <TextBlock Foreground="Black"
-                                       FontSize="20"
-                                       FontWeight="Bold"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Margin="22, 105, 0, 0"
-                                       Text="15"/>
-
-                                    <TextBlock Foreground="Black"
-                                       FontSize="20"
-                                       FontWeight="Bold"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Margin="21, -105, 0, 0"
-                                       Opacity="0"
-                                       Text="14"/>
-
-                                    <TextBlock Foreground="Black"
-                                       FontSize="20"
-                                       FontWeight="Bold"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Margin="22, -105, 0, 0"
-                                       Opacity="0"
-                                       Text="13"/>
-
-                                    <TextBlock Foreground="Black"
-                                       FontSize="20"
-                                       FontWeight="Bold"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Margin="21, -105, 0, 0"
-                                       Opacity="0"
-                                       Text="12"/>
-
-                                    <TextBlock Foreground="Black"
-                                       FontSize="20"
-                                       FontWeight="Bold"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Margin="22, -105, 0, 0"
-                                       Opacity="0"
-                                       Text="11"/>
-
-                                    <TextBlock Foreground="Black"
-                                       FontSize="20"
-                                       FontWeight="Bold"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Margin="22, 105, 0, 0"
                                        Text="10"/>
 
                                     <TextBlock Foreground="Black"
@@ -850,7 +742,7 @@
                                        TextAlignment="Center"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Margin="27, -105, 0, 0"
+                                       Margin="73, -105, 0, 0"
                                        Opacity="0"
                                        Text="9"/>
 
@@ -861,7 +753,7 @@
                                        TextAlignment="Center"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Margin="34, -105, 0, 0"
+                                       Margin="79, -105, 0, 0"
                                        Opacity="0"
                                        Text="8"/>
 
@@ -872,7 +764,7 @@
                                        TextAlignment="Center"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Margin="33, -105, 0, 0"
+                                       Margin="79, -105, 0, 0"
                                        Opacity="0"
                                        Text="7"/>
 
@@ -883,8 +775,7 @@
                                        TextAlignment="Center"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Margin="34, -105, 0, 0"
-                                       Opacity="0"
+                                       Margin="79, 105, 0, 0"
                                        Text="6"/>
 
                                     <TextBlock Foreground="Black"
@@ -894,7 +785,8 @@
                                        TextAlignment="Center"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Margin="34, 105, 0, 0"
+                                       Margin="79, -105, 0, 0"
+                                       Opacity="0"
                                        Text="5"/>
 
                                     <TextBlock Foreground="Black"
@@ -904,8 +796,7 @@
                                        TextAlignment="Center"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Margin="33, -105, 0, 0"
-                                       Opacity="0"
+                                       Margin="79, 105, 0, 0"
                                        Text="4"/>
 
                                     <TextBlock Foreground="Black"
@@ -915,7 +806,7 @@
                                        TextAlignment="Center"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Margin="34, -105, 0, 0"
+                                       Margin="79, -105, 0, 0"
                                        Opacity="0"
                                        Text="3"/>
 
@@ -926,7 +817,7 @@
                                        TextAlignment="Center"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Margin="33, -105, 0, 0"
+                                       Margin="79, -105, 0, 0"
                                        Opacity="0"
                                        Text="2"/>
 
@@ -937,7 +828,7 @@
                                        TextAlignment="Center"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Margin="34, -105, 0, 0"
+                                       Margin="79, -105, 0, 0"
                                        Opacity="0"
                                        Text="1"/>
 
@@ -948,7 +839,7 @@
                                        TextAlignment="Center"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Margin="34, 105, 0, 0"
+                                       Margin="79, 105, 0, 0"
                                        Text="0"/>
                                 </StackPanel>
 

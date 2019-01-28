@@ -38,6 +38,8 @@ namespace StreamBED.Frontend.UWP.Views
 
         internal static List<ImageDataModel> SelectedItems = new List<ImageDataModel>();
 
+        internal static Dictionary<Keyword, List<ImageDataModel>> biasDict = new Dictionary<Keyword, List<ImageDataModel>>();
+
         public FeaturePage()
         {
             this.InitializeComponent();
@@ -69,16 +71,17 @@ namespace StreamBED.Frontend.UWP.Views
                     ImageDataModel image = new ImageDataModel(new ImageWithMetadata(null));
                     image.Image.ChangeEpifaunalSubstrateScore(0);
                     image.Image.AddKeyword(keyword);
-                    image.IsHidden = true;
                     image.isComplete = true;
                     image.Image.Location = Area.Name;
 
-                    FeatureDataModel feature = new FeatureDataModel(keyword);
-
                     if (keyword.Equals(EpifaunalSubstrateModel.Keywords.SnagsLogs) || keyword.Equals(EpifaunalSubstrateModel.Keywords.UnderwaterVegetation) || keyword.Equals(EpifaunalSubstrateModel.Keywords.UndercutBanks))
                     {
-                        imageDict.Add(feature, image);
-                        NumberOfKeywords++;
+                        if (!biasDict.ContainsKey(keyword))
+                        {
+                            biasDict.Add(keyword, new List<ImageDataModel>());
+                        }
+
+                        biasDict.GetValueOrDefault(keyword).Add(image);
                     }
                 }
             }
@@ -96,17 +99,19 @@ namespace StreamBED.Frontend.UWP.Views
                 else
                 {
                     ImageDataModel image = new ImageDataModel(new ImageWithMetadata(null));
-                    image.Image.ChangeBankStabilityScore(20);
+                    image.Image.ChangeBankStabilityScore(10);
                     image.Image.AddKeyword(keyword);
-                    image.IsHidden = true;
                     image.isComplete = true;
-
-                    FeatureDataModel feature = new FeatureDataModel(keyword);
+                    image.Image.Location = Area.Name;
 
                     if (keyword.Equals(BankStabilityModel.Keywords.ExposedTreeRoots) || keyword.Equals(BankStabilityModel.Keywords.ErodedAreas) || keyword.Equals(BankStabilityModel.Keywords.BankFailure))
                     {
-                        imageDict.Add(feature, image);
-                        NumberOfKeywords++;
+                        if (!biasDict.ContainsKey(keyword))
+                        {
+                            biasDict.Add(keyword, new List<ImageDataModel>());
+                        }
+
+                        biasDict.GetValueOrDefault(keyword).Add(image);
                     }
                 }
             }

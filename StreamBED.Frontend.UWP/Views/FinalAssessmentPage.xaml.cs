@@ -36,6 +36,8 @@ namespace StreamBED.Frontend.UWP.Views
 
         private XElement icons;
 
+        private bool epifaunalLoaded = false, bankLoaded = false;
+
         public FinalAssessmentPage()
         {
             this.InitializeComponent();
@@ -46,63 +48,110 @@ namespace StreamBED.Frontend.UWP.Views
             protocolTitle.Text = "BANK STABILITY";
             SelectedModel = FeatureEvalPage.BankStabilityModel;
 
-            foreach (StackPanel stack in bankStackTop.Children)
+            if (!bankLoaded)
             {
-                stack.Children.Clear();
-            }
-
-            foreach (StackPanel stack in bankStackBottom.Children)
-            {
-                stack.Children.Clear();
-            }
-
-            foreach (KeyValuePair<Keyword, FeatureDataModel> elem in FeatureEvalPage.bankStabilityFeatures)
-            {
-                foreach (ImageDataModel image in elem.Value.ImageList)
+                foreach (KeyValuePair<Keyword, FeatureDataModel> elem in FeatureEvalPage.bankStabilityFeatures)
                 {
-                    SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(image.Image.Location)).First().ItemColorBrush;
-
-                    Border border = new Border()
+                    foreach (ImageDataModel image in elem.Value.ImageList)
                     {
-                        Width = 50,
-                        Height = 50,
-                        BorderBrush = brush,
-                        BorderThickness = new Thickness(4),
-                        Margin = new Thickness(0, 2.5, 0, 2.5)
-                    };
+                        SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(image.Image.Location)).First().ItemColorBrush;
 
-                    Image icon = new Image()
-                    {
-                        Height = 45,
-                        Width = 45,
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        Source = GetFeatureIcon(elem.Key)
-                    };
-
-                    border.Child = icon;
-
-                    if (image.Image.BankStabilityScore % 2 == 0)
-                    {
-                        foreach (StackPanel stack in bankStackTop.Children)
+                        Border border = new Border()
                         {
-                            if (stack.Tag.Equals(image.Image.BankStabilityScore.ToString()))
+                            Width = 50,
+                            Height = 50,
+                            BorderBrush = brush,
+                            BorderThickness = new Thickness(4),
+                            Margin = new Thickness(0, 2.5, 0, 2.5)
+                        };
+
+                        Image icon = new Image()
+                        {
+                            Height = 45,
+                            Width = 45,
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            Source = GetFeatureIcon(elem.Key)
+                        };
+
+                        border.Child = icon;
+
+                        if (image.Image.BankStabilityScore % 2 == 0)
+                        {
+                            foreach (StackPanel stack in bankStackTop.Children)
                             {
-                                stack.Children.Add(border);
+                                if (stack.Tag.Equals(image.Image.BankStabilityScore.ToString()))
+                                {
+                                    stack.Children.Add(border);
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        foreach (StackPanel stack in bankStackBottom.Children)
+                        else
                         {
-                            if (stack.Tag.Equals(image.Image.BankStabilityScore.ToString()))
+                            foreach (StackPanel stack in bankStackBottom.Children)
                             {
-                                stack.Children.Add(border);
+                                if (stack.Tag.Equals(image.Image.BankStabilityScore.ToString()))
+                                {
+                                    stack.Children.Add(border);
+                                }
                             }
                         }
                     }
                 }
+
+                foreach (KeyValuePair<Keyword, List<ImageDataModel>> elem in FeaturePage.biasDict)
+                {
+                    if (BankStabilityModel.GetKeywords().Contains(elem.Key))
+                    {
+                        foreach (ImageDataModel image in elem.Value)
+                        {
+                            SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(image.Image.Location)).First().ItemColorBrush;
+
+                            Border border = new Border()
+                            {
+                                Width = 50,
+                                Height = 50,
+                                BorderBrush = brush,
+                                BorderThickness = new Thickness(4),
+                                Margin = new Thickness(0, 2.5, 0, 2.5)
+                            };
+
+                            Image icon = new Image()
+                            {
+                                Height = 45,
+                                Width = 45,
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                VerticalAlignment = VerticalAlignment.Center,
+                                Source = GetFeatureIcon(elem.Key)
+                            };
+
+                            border.Child = icon;
+
+                            if (image.Image.BankStabilityScore % 2 == 0)
+                            {
+                                foreach (StackPanel stack in bankStackTop.Children)
+                                {
+                                    if (stack.Tag.Equals(image.Image.BankStabilityScore.ToString()))
+                                    {
+                                        stack.Children.Add(border);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                foreach (StackPanel stack in bankStackBottom.Children)
+                                {
+                                    if (stack.Tag.Equals(image.Image.BankStabilityScore.ToString()))
+                                    {
+                                        stack.Children.Add(border);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                bankLoaded = true;
             }
 
             layoutPivot.SelectedIndex = 4;
@@ -113,63 +162,110 @@ namespace StreamBED.Frontend.UWP.Views
             protocolTitle.Text = "EPIFAUNAL SUBSTRATE";
             SelectedModel = FeatureEvalPage.EpifaunalSubstrateModel;
 
-            foreach (StackPanel stack in epifaunalStackTop.Children)
+            if (!epifaunalLoaded)
             {
-                stack.Children.Clear();
-            }
-
-            foreach (StackPanel stack in epifaunalStackBottom.Children)
-            {
-                stack.Children.Clear();
-            }
-
-            foreach (KeyValuePair<Keyword, FeatureDataModel> elem in FeatureEvalPage.epifaunalSubstrateFeatures)
-            {
-                foreach (ImageDataModel image in elem.Value.ImageList)
+                foreach (KeyValuePair<Keyword, FeatureDataModel> elem in FeatureEvalPage.epifaunalSubstrateFeatures)
                 {
-                    SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(image.Image.Location)).First().ItemColorBrush;
-
-                    Border border = new Border()
+                    foreach (ImageDataModel image in elem.Value.ImageList)
                     {
-                        Width = 50,
-                        Height = 50,
-                        BorderBrush = brush,
-                        BorderThickness = new Thickness(4),
-                        Margin = new Thickness(0, 2.5, 0, 2.5)
-                    };
+                        SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(image.Image.Location)).First().ItemColorBrush;
 
-                    Image icon = new Image()
-                    {
-                        Height = 45,
-                        Width = 45,
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        Source = GetFeatureIcon(elem.Key)
-                    };
-
-                    border.Child = icon;
-
-                    if (image.Image.EpifaunalSubstrateScore % 2 == 0)
-                    {
-                        foreach (StackPanel stack in epifaunalStackTop.Children)
+                        Border border = new Border()
                         {
-                            if (stack.Tag.Equals(image.Image.EpifaunalSubstrateScore.ToString()))
+                            Width = 50,
+                            Height = 50,
+                            BorderBrush = brush,
+                            BorderThickness = new Thickness(4),
+                            Margin = new Thickness(0, 2.5, 0, 2.5)
+                        };
+
+                        Image icon = new Image()
+                        {
+                            Height = 45,
+                            Width = 45,
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            Source = GetFeatureIcon(elem.Key)
+                        };
+
+                        border.Child = icon;
+
+                        if (image.Image.EpifaunalSubstrateScore % 2 == 0)
+                        {
+                            foreach (StackPanel stack in epifaunalStackTop.Children)
                             {
-                                stack.Children.Add(border);
+                                if (stack.Tag.Equals(image.Image.EpifaunalSubstrateScore.ToString()))
+                                {
+                                    stack.Children.Add(border);
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        foreach (StackPanel stack in epifaunalStackBottom.Children)
+                        else
                         {
-                            if (stack.Tag.Equals(image.Image.EpifaunalSubstrateScore.ToString()))
+                            foreach (StackPanel stack in epifaunalStackBottom.Children)
                             {
-                                stack.Children.Add(border);
+                                if (stack.Tag.Equals(image.Image.EpifaunalSubstrateScore.ToString()))
+                                {
+                                    stack.Children.Add(border);
+                                }
                             }
                         }
                     }
                 }
+
+                foreach (KeyValuePair<Keyword, List<ImageDataModel>> elem in FeaturePage.biasDict)
+                {
+                    if (EpifaunalSubstrateModel.GetKeywords().Contains(elem.Key))
+                    {
+                        foreach (ImageDataModel image in elem.Value)
+                        {
+                            SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(image.Image.Location)).First().ItemColorBrush;
+
+                            Border border = new Border()
+                            {
+                                Width = 50,
+                                Height = 50,
+                                BorderBrush = brush,
+                                BorderThickness = new Thickness(4),
+                                Margin = new Thickness(0, 2.5, 0, 2.5)
+                            };
+
+                            Image icon = new Image()
+                            {
+                                Height = 45,
+                                Width = 45,
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                VerticalAlignment = VerticalAlignment.Center,
+                                Source = GetFeatureIcon(elem.Key)
+                            };
+
+                            border.Child = icon;
+
+                            if (image.Image.EpifaunalSubstrateScore % 2 == 0)
+                            {
+                                foreach (StackPanel stack in epifaunalStackTop.Children)
+                                {
+                                    if (stack.Tag.Equals(image.Image.EpifaunalSubstrateScore.ToString()))
+                                    {
+                                        stack.Children.Add(border);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                foreach (StackPanel stack in epifaunalStackBottom.Children)
+                                {
+                                    if (stack.Tag.Equals(image.Image.EpifaunalSubstrateScore.ToString()))
+                                    {
+                                        stack.Children.Add(border);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                epifaunalLoaded = true;
             }
 
             layoutPivot.SelectedIndex = 2;
@@ -208,11 +304,11 @@ namespace StreamBED.Frontend.UWP.Views
         {
             if (SelectedModel is BankStabilityModel && layoutPivot.SelectedIndex > 4)
             {
-                layoutPivot.SelectedIndex = 4;
+                layoutPivot.SelectedIndex = 5;
             }
             else if (SelectedModel is EpifaunalSubstrateModel && layoutPivot.SelectedIndex > 2)
             {
-                layoutPivot.SelectedIndex = 2;
+                layoutPivot.SelectedIndex = 3;
             }
         }
 

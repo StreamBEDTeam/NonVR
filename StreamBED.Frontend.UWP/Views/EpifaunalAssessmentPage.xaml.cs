@@ -41,9 +41,9 @@ namespace StreamBED.Frontend.UWP.Views
 
             Index = FeatureEvalPage.SelectedFeature.CountComplete;
 
-            if (Index < FeatureEvalPage.SelectedFeature.NonHiddenCount)
+            if (Index < FeatureEvalPage.SelectedFeature.ImageList.Count)
             {
-                progressBar.Maximum = FeatureEvalPage.SelectedFeature.NonHiddenCount;
+                progressBar.Maximum = FeatureEvalPage.SelectedFeature.ImageList.Count;
                 progressBar.Value = FeatureEvalPage.SelectedFeature.CountComplete;
             }
         }
@@ -57,59 +57,50 @@ namespace StreamBED.Frontend.UWP.Views
 
         public int NextImage()
         {
-            if (Index < FeatureEvalPage.SelectedFeature.NonHiddenCount)
+            if (Index < FeatureEvalPage.SelectedFeature.ImageList.Count)
             {
-                ImageDataModel image = FeatureEvalPage.SelectedFeature.ImageList[Index++];
+                CurrentImage = FeatureEvalPage.SelectedFeature.ImageList[Index++];
 
-                if (!image.IsHidden)
+                selectedImage.Source = CurrentImage.ImageSource;
+
+                foreach (UIElement elem in radioStack.Children)
                 {
-                    CurrentImage = image;
+                    RadioButton button = elem as RadioButton;
 
-                    selectedImage.Source = CurrentImage.ImageSource;
-
-                    foreach (UIElement elem in radioStack.Children)
+                    if (button.IsChecked.Value)
                     {
-                        RadioButton button = elem as RadioButton;
-
-                        if (button.IsChecked.Value)
-                        {
-                            button.IsChecked = false;
-                        }
-
-                        if (button.Content.Equals("20"))
-                        {
-                            button.IsChecked = true;
-                        }
-
-                        if (button.Style.Equals((Style)App.Current.Resources["AssessmentRadioButtonSmall"]))
-                        {
-                            button.Opacity = 0;
-                            button.IsHitTestVisible = true;
-                        }
+                        button.IsChecked = false;
                     }
 
-                    detailButton1.Opacity = 1;
-                    detailButton1.IsHitTestVisible = true;
+                    if (button.Content.Equals("20"))
+                    {
+                        button.IsChecked = true;
+                    }
 
-                    detailButton2.Opacity = 1;
-                    detailButton2.IsHitTestVisible = true;
-
-                    detailButton3.Opacity = 1;
-                    detailButton3.IsHitTestVisible = true;
-
-                    detailButton4.Opacity = 1;
-                    detailButton4.IsHitTestVisible = true;
-
-                    XElement selected = FeatureEvalPage.SelectedFeatureReference.Where(i => i.Attribute("score").Value.Equals("20")).First();
-
-                    refImage.Source = new BitmapImage(new Uri(selected.Attribute("ref").Value));
-                    refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
-                    refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
+                    if (button.Style.Equals((Style)App.Current.Resources["AssessmentRadioButtonSmall"]))
+                    {
+                        button.Opacity = 0;
+                        button.IsHitTestVisible = true;
+                    }
                 }
-                else
-                {
-                    NextImage();
-                }
+
+                detailButton1.Opacity = 1;
+                detailButton1.IsHitTestVisible = true;
+
+                detailButton2.Opacity = 1;
+                detailButton2.IsHitTestVisible = true;
+
+                detailButton3.Opacity = 1;
+                detailButton3.IsHitTestVisible = true;
+
+                detailButton4.Opacity = 1;
+                detailButton4.IsHitTestVisible = true;
+
+                XElement selected = FeatureEvalPage.SelectedFeatureReference.Where(i => i.Attribute("score").Value.Equals("20")).First();
+
+                refImage.Source = new BitmapImage(new Uri(selected.Attribute("ref").Value));
+                refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
+                refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
 
                 return 0;
             }

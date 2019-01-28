@@ -14,7 +14,7 @@
   
   <icon name="SnagsLogs" src="ms-appx:///Assets/Icons/SnagsLogs.png"/>
   
-  <icon name="UndercutBank" src="ms-appx:///Assets/Icons/UndercutBank.png"/>
+  <icon name="UndercutBanks" src="ms-appx:///Assets/Icons/UndercutBank.png"/>
   
   <icon name="UnderwaterVegetation" src="ms-appx:///Assets/Icons/UnderwaterVegetation.png"/>
 </root>

@@ -20,8 +20,6 @@ namespace StreamBED.Frontend.UWP.Models
 
         public bool isComplete { get; set; }
 
-        public bool IsHidden = false;
-
         public ImageDataModel(ImageWithMetadata Image)
         {
             this.Image = Image;
