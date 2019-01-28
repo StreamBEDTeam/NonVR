@@ -201,8 +201,8 @@
     <Content Include="Assets\BankStability\ExposedTreeRoots\10_C.png" />
     <Content Include="Assets\BankStability\ExposedTreeRoots\4_BW.png" />
     <Content Include="Assets\BankStability\ExposedTreeRoots\4_C.png" />
-    <Content Include="Assets\BankStability\ExposedTreeRoots\6_BW_1.png" />
-    <Content Include="Assets\BankStability\ExposedTreeRoots\6_C_1.png" />
+    <Content Include="Assets\BankStability\ExposedTreeRoots\6_BW.png" />
+    <Content Include="Assets\BankStability\ExposedTreeRoots\6_C.png" />
     <Content Include="Assets\EpifaunalSubstrate\Cobble\0_BW.png" />
     <Content Include="Assets\EpifaunalSubstrate\Cobble\0_C.png" />
     <Content Include="Assets\EpifaunalSubstrate\Cobble\10_BW.png" />

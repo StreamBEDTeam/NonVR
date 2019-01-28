@@ -322,7 +322,6 @@ namespace StreamBED.Frontend.UWP.Views
             {
                 icons = XDocument.Load(stream).Root;
             }
-
             ++layoutPivot.SelectedIndex;
         }
 

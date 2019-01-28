@@ -909,7 +909,7 @@
 
             <PivotItem Margin="0, 59, 0, 0">
                 <Grid Background="White">
-                    <TextBlock Foreground="Black"
+                    <TextBlock x:Name="text" Foreground="Black"
                        FontSize="36"
                        TextWrapping="Wrap"
                        TextAlignment="Center"
