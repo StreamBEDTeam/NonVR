@@ -8,21 +8,15 @@
 	mc:Ignorable="d"
 	Background="White">
 
-	<Grid>
-		<Grid Background="White"
+    <Grid>
+        <Grid Background="White"
 					Padding="15, 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <ProgressBar x:Name="progressBar"
-						 Foreground="LimeGreen"
-						 Background="Gray"
-						 Height="5"
-						 VerticalAlignment="Top"/>
-
-			<Grid Margin="0, 15, 0, 0"
+            <Grid Margin="0, 25, 0, 0"
                   Grid.Row="0">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="4*"/>
@@ -379,7 +373,13 @@
 			</Grid>
 		</Grid>
 
-		<Grid x:Name="glanceProtocol"
+        <ProgressBar x:Name="progressBar"
+						 Foreground="LimeGreen"
+						 Background="Gray"
+						 Height="10"
+						 VerticalAlignment="Top"/>
+
+        <Grid x:Name="glanceProtocol"
 			  Visibility="Collapsed">
 			<Grid.Background>
 				<SolidColorBrush Color="Black" Opacity="0.5"/>

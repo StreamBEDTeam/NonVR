@@ -38,6 +38,10 @@ namespace StreamBED.Frontend.UWP.Views
 
         private bool epifaunalLoaded = false, bankLoaded = false;
 
+        private EpifaunalSubstrateModel EpifaunalSubstrateModel = new EpifaunalSubstrateModel();
+
+        private BankStabilityModel BankStabilityModel = new BankStabilityModel();
+
         public FinalAssessmentPage()
         {
             this.InitializeComponent();
@@ -304,11 +308,11 @@ namespace StreamBED.Frontend.UWP.Views
         {
             if (SelectedModel is BankStabilityModel && layoutPivot.SelectedIndex > 4)
             {
-                layoutPivot.SelectedIndex = 5;
+                layoutPivot.SelectedIndex = 4;
             }
             else if (SelectedModel is EpifaunalSubstrateModel && layoutPivot.SelectedIndex > 2)
             {
-                layoutPivot.SelectedIndex = 3;
+                layoutPivot.SelectedIndex = 2;
             }
         }
 
@@ -326,11 +330,17 @@ namespace StreamBED.Frontend.UWP.Views
         {
             if (SelectedModel is BankStabilityModel)
             {
-                layoutPivot.SelectedIndex = 4;
+                layoutPivot.SelectedIndex = 5;
+
+                BankStabilityModel.Score = bankSlider.Value;
+                progressBar.Value++;
             }
             else if (SelectedModel is EpifaunalSubstrateModel)
             {
-                layoutPivot.SelectedIndex = 2;
+                layoutPivot.SelectedIndex = 3;
+
+                EpifaunalSubstrateModel.Score = epifaunalSlider.Value;
+                progressBar.Value++;
             }
         }
 
@@ -373,16 +383,16 @@ namespace StreamBED.Frontend.UWP.Views
         {
             if (e.NewValue == 0)
             {
-                epifaunalSubmitButton.IsEnabled = false;
+                bankSubmitButton.IsEnabled = false;
             }
             else
             {
-                epifaunalSubmitButton.IsEnabled = true;
+                bankSubmitButton.IsEnabled = true;
             }
 
-            foreach (TextBlock block in epifaunalValueStack.Children)
+            foreach (TextBlock block in bankValueStack.Children)
             {
-                if (block.Text.Equals(epifaunalSlider.Value.ToString()))
+                if (block.Text.Equals(bankSlider.Value.ToString()))
                 {
                     block.Opacity = 1;
                 }

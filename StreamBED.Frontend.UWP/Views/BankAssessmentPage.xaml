@@ -9,15 +9,15 @@
 	Background="White">
 
     <Grid>
-        <StackPanel Background="White"
+        <Grid Background="White"
 					Padding="15, 0">
-            <ProgressBar x:Name="progressBar"
-						 Foreground="LimeGreen"
-						 Background="Gray"
-						 Height="5"
-						 VerticalAlignment="Top"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <Grid Margin="0, 15, 0, 0">
+            <Grid Margin="0, 25, 0, 0"
+                  Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="4*"/>
@@ -25,29 +25,46 @@
 
                 <Grid Grid.Column="0"
 					  Margin="0, 0, 7.5, 0"
-                      Width="936"
-                      Height="702">
+>
                     <Image x:Name="selectedImage"
                            Stretch="UniformToFill"/>
                 </Grid>
 
                 <Grid Grid.Column="1"
-					  Margin="7.5, 0, 0, 0"
-                      Width="936"
-                      Height="702">
-                    <Image x:Name="refImageDetail" 
-						   Source="/Assets/ProtocolAssets/0_C.png"/>
+					  Margin="7.5, 0, 0, 0">
+                    <Image x:Name="refImageDetail"
+                           Stretch="UniformToFill"/>
 
-                    <Image x:Name="refImage" 
-						   Source="/Assets/ProtocolAssets/0_BW_2.png"
+                    <Grid VerticalAlignment="Top">
+                        <Grid.Background>
+                            <SolidColorBrush Color="Black" Opacity="0.5"/>
+                        </Grid.Background>
+
+                        <TextBlock x:Name="refDetailText"
+                                   Foreground="White"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="30"
+                                   Visibility="Visible"/>
+                    </Grid>
+
+                    <Image x:Name="refImage"
 						   PointerEntered="ReferenceImage_PointerEntered"
-						   PointerExited="ReferenceImage_PointerExited"/>
+						   PointerExited="ReferenceImage_PointerExited"
+                           ImageOpened="RefImage_ImageOpened"
+                           Stretch="UniformToFill"/>
                 </Grid>
             </Grid>
 
-            <StackPanel Background="#EBEBEB"
-								Margin="0, 15">
-                <Grid Margin="0, 15, 0, 15">
+            <Grid Background="#EBEBEB"
+								Margin="0, 15"
+                        Grid.Row="1">
+                <Grid Margin="0, 15, 0, 15"
+                      VerticalAlignment="Top">
                     <StackPanel x:Name="radioStack"
 								Orientation="Horizontal"
 								HorizontalAlignment="Center">
@@ -132,10 +149,10 @@
 									 Click="RadioButton_Click"
 									 Margin="20, 0"/>
 
-                        
+
                     </StackPanel>
 
-                    <Grid x:Name="epifaunalDetail">
+                    <Grid x:Name="bankDetail">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4.5*"/>
                             <ColumnDefinition Width="1*"/>
@@ -197,7 +214,7 @@
                     </Grid>
                 </Grid>
 
-                <Grid>
+                <Grid VerticalAlignment="Bottom">
                     <Button Style="{StaticResource KindaRoundedButton}" 
 							x:Name="submitButton" 
 							Background="#D9D9D9"
@@ -211,6 +228,36 @@
 							Click="SubmitButton_Click"
 							IsEnabled="False">
                         Submit
+                    </Button>
+
+                    <Button x:Name="rightChevron"
+							Style="{StaticResource RoundedButton}" 
+							FontFamily="Segoe MDL2 Assets"
+							Background="#D9D9D9"
+							Foreground="Black"
+							FontSize="24"
+							VerticalAlignment="Center" 
+							HorizontalAlignment="Center"
+							Margin="450, 0, 0, 0"
+							Height="64"
+							Width="64"
+							Click="Chevron_Click">
+                        &#xE76C;
+                    </Button>
+
+                    <Button x:Name="leftChevron"
+							Style="{StaticResource RoundedButton}" 
+							FontFamily="Segoe MDL2 Assets"
+							Background="#D9D9D9"
+							Foreground="Black"
+							FontSize="24"
+							VerticalAlignment="Center" 
+							HorizontalAlignment="Center"
+							Margin="0, 0, 450, 0"
+							Height="64"
+							Width="64"
+							Click="Chevron_Click">
+                        &#xE76B;
                     </Button>
 
                     <Button x:Name="glanceOpenButton"
@@ -228,8 +275,14 @@
                         &#xF000;
                     </Button>
                 </Grid>
-            </StackPanel>
-        </StackPanel>
+            </Grid>
+        </Grid>
+
+        <ProgressBar x:Name="progressBar"
+						 Foreground="LimeGreen"
+						 Background="Gray"
+						 Height="10"
+						 VerticalAlignment="Top"/>
 
         <Grid x:Name="glanceProtocol"
 			  Visibility="Collapsed">
@@ -239,7 +292,7 @@
 
             <Image x:Name="image"
 				   Width="1200"
-				   Source="/Assets/ProtocolAssets/Epifaunal.png"/>
+				   Source="/Assets/ProtocolAssets/Bank.png"/>
 
             <Button Style="{StaticResource RoundedButton}" 
 					x:Name="glanceCloseButton"
