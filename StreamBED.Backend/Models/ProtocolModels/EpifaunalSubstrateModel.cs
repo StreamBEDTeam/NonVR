@@ -9,6 +9,7 @@ namespace StreamBED.Backend.Models.ProtocolModels
     /// <summary>
     /// Defines the Epifaunal Substrate Model.
     /// </summary>
+    [Serializable]
     public class EpifaunalSubstrateModel : ProtocolModel
     {
         /// <summary>

@@ -10,6 +10,7 @@ namespace StreamBED.Backend.Models.ScoreModels
     /// <summary>
     /// Defines score associated with <see cref="EpifaunalSubstrateModel"/>
     /// </summary>
+    [Serializable]
     internal class EpifaunalSubstrateScore : ScoreModel
     {
         /// <summary>

@@ -8,6 +8,7 @@ namespace StreamBED.Backend.Helper
     /// <summary>
     /// Defines a keyword.
     /// </summary>
+    [Serializable]
     public class Keyword : Attribute
     {
         /// <summary>

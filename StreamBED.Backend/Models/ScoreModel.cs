@@ -8,6 +8,7 @@ namespace StreamBED.Backend.Models
     /// <summary>
     /// Defines an abstract class to represent score associated with a protocol.
     /// </summary>
+    [Serializable]
     public abstract class ScoreModel
     {
         /// <summary>

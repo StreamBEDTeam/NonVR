@@ -10,6 +10,7 @@ namespace StreamBED.Backend.Models.ScoreModels
     /// <summary>
     /// Defines score associated with <see cref="BankStabilityModel"/>
     /// </summary>
+    [Serializable]
     internal class BankStabilityScore : ScoreModel
     {
         /// <summary>

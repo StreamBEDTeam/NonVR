@@ -9,6 +9,7 @@ namespace StreamBED.Backend.Models
     /// <summary>
     /// Defines an abstract class to represent a protocol.
     /// </summary>
+    [Serializable]
     public abstract class ProtocolModel
     {
         /// <summary>

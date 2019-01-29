@@ -9,6 +9,7 @@ namespace StreamBED.Backend.Models.ProtocolModels
     /// <summary>
     /// Defines the Bank Stability Model.
     /// </summary>
+    [Serializable]
     public class BankStabilityModel : ProtocolModel
     {
         /// <summary>
