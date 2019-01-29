@@ -12,6 +12,7 @@ namespace StreamBED.Backend.Helper
     /// Defines an image with meta data like <see cref="Keywords"/>,
     /// <see cref="Location"/>, etc.
     /// </summary>
+    [Serializable]
     public class ImageWithMetadata
     {
         #region Private Variables

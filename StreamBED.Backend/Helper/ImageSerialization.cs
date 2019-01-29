@@ -11,6 +11,7 @@ namespace StreamBED.Backend.Helper
     /// <summary>
     /// Defines methods to serialize and deserialize a list of <see cref="ImageWithMetadata"/>.
     /// </summary>
+    [Serializable]
     public class ImageSerialization
     {
         // Stores all the images that are going to be serialized or deserialized.

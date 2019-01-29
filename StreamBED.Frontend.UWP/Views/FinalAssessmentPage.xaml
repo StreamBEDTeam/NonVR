@@ -909,7 +909,7 @@
 
             <PivotItem Margin="0, 59, 0, 0">
                 <Grid Background="White">
-                    <TextBlock x:Name="text" Foreground="Black"
+                    <TextBlock Foreground="Black"
                        FontSize="36"
                        TextWrapping="Wrap"
                        TextAlignment="Center"
@@ -917,7 +917,8 @@
                        HorizontalAlignment="Center"
                        Margin="270, 0">
                         <Bold>Bank Stability Protocol</Bold><LineBreak/><LineBreak/>
-                        Your score for this stream was <Run Text="{x:Bind BankStabilityModel.Score}"/>
+                        Your score for this stream was <Run Text="{x:Bind BankStabilityModel.Score}"/><LineBreak/>
+                        
                     </TextBlock>
 
                     <Button Style="{StaticResource RoundedButton}" 
