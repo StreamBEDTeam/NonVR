@@ -30,6 +30,104 @@
                IsHitTestVisible="False"
                SelectionChanged="PivotRoot_SelectionChanged">
             <PivotItem>
+                <StackPanel>
+                    <TextBlock Foreground="Black"
+                           FontSize="36"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Center"
+                           Margin="270, 0">
+                    For internal use only. Use this page to set up assessment.
+                    </TextBlock>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="30">
+                        <TextBlock Foreground="Black"
+                                       FontSize="24"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center">
+                                Participant Number:
+                        </TextBlock>
+
+                        <TextBox x:Name="idBox"
+                                Foreground="Black"
+                                 FontSize="24"
+                                 TextWrapping="Wrap"
+                                 TextAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Center"
+                                 Width="150"
+                                 Margin="15, 0"/>
+                    </StackPanel>
+
+                    <Grid Height="450"
+                          Width="900"
+                          HorizontalAlignment="Center"
+                          Margin="15"
+                          BorderBrush="Gray"
+                          BorderThickness="4"
+                          CornerRadius="8"
+                          CanDrag="True"
+                          Drop="Grid_Drop">
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Margin="30">
+                            <TextBlock Foreground="Black"
+                                       FontSize="24"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center">
+                                Drag and drop image file here, or
+                            </TextBlock>
+
+                            <Button Style="{StaticResource RoundedButton}" 
+                                    x:Name="selectButton" 
+                                    Background="#EDEDED"
+                                    Foreground="Black"
+                                    FontSize="24"
+                                    VerticalAlignment="Bottom" 
+                                    HorizontalAlignment="Center"
+                                    Height="64"
+                                    Width="310"
+                                    Margin="0, 30, 0, 0"
+                                    Click="SelectButton_Click">
+                                Select file
+                            </Button>
+                            <Button Style="{StaticResource RoundedButton}" 
+                                    x:Name="generateButton" 
+                                    Background="#EDEDED"
+                                    Foreground="Black"
+                                    FontSize="24"
+                                    VerticalAlignment="Bottom" 
+                                    HorizontalAlignment="Center"
+                                    Height="64"
+                                    Width="310"
+                                    Margin="0, 30, 0, 0"
+                                    Click="GenerateButton_Click">
+                                Randomly generate
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock x:Name="imageStatus"
+                               Foreground="Black"
+                               FontSize="24"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Margin="15">
+                        Images loaded: 0
+                    </TextBlock>
+                </StackPanel>
+            </PivotItem>
+            
+            <PivotItem>
                 <Image Source="/Assets/Logo/StreamBEDLogo.png" Height="350"/>
             </PivotItem>
 
@@ -84,6 +182,7 @@
                 Height="64"
                 Width="310"
                 Margin="0, 0, 0, 48"
+                Visibility="Collapsed"
                 Click="NextButton_Click">
             Start Assessment
         </Button>

@@ -48,6 +48,11 @@ namespace StreamBED.Backend.Helper
             imageList.Remove(Image);
         }
 
+        public void ClearImages()
+        {
+            imageList.Clear();
+        }
+
         /// <summary>
         /// Serializes ImageList and is saved to ImageData.dat.
         /// </summary>
@@ -56,7 +61,7 @@ namespace StreamBED.Backend.Helper
             Stream stream = File.Open("ImageData.dat", FileMode.Create);
             BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-            binaryFormatter.Serialize(stream, ImageList);
+            binaryFormatter.Serialize(stream, imageList);
 
             stream.Close();
         }
@@ -66,10 +71,27 @@ namespace StreamBED.Backend.Helper
         /// </summary>
         public void DeserializeImage()
         {
-            Stream stream = File.Open("ImageData.dat", FileMode.Open);
+            Stream stream = File.Open(@"ImageData.dat", FileMode.Open, FileAccess.Read, FileShare.Read);
+            DeserializeImage(stream);
+        }
+
+        public void DeserializeImage(Stream stream)
+        {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-            imageList = (List<ImageWithMetadata>)binaryFormatter.Deserialize(stream);
+            var images = (List<ImageWithMetadata>)binaryFormatter.Deserialize(stream);
+
+            if (images is List<ImageWithMetadata>)
+            {
+                imageList = images;
+            }
+            else if (images is IList<ImageWithMetadata>)
+            {
+                foreach (ImageWithMetadata i in images)
+                {
+                    imageList.Add(i);
+                }
+            }
 
             stream.Close();
         }

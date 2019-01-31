@@ -41,7 +41,7 @@ namespace StreamBED.Frontend.UWP.Views
         {
             if (AreaList.Count == 0)
             {
-                var buffer = await Convert(new BitmapImage(
+                /*var buffer = await Convert(new BitmapImage(
                                         new Uri("ms-appx:///Assets/Logo/image.png")
                                     ));
 
@@ -93,6 +93,37 @@ namespace StreamBED.Frontend.UWP.Views
                     foreach (ImageDataModel image in imageModelList)
                     {
                         if (image.Image.Location.Equals(area.Name))
+                        {
+                            area.ImageList.Add(image);
+                        }
+                    }
+
+                    if (area.ImageList.Count != 0)
+                    {
+                        listViewRoot.Items.Add(area);
+                        AreaList.Add(area);
+                    }
+                }*/
+                ImageSerialization a = new ImageSerialization();
+                a.DeserializeImage();
+                var c = a.ImageList;
+
+                ColorScheme scheme = new ColorScheme();
+
+                List<ImageDataModel> imageModelList = new List<ImageDataModel>();
+
+                foreach (ImageWithMetadata image in c)
+                {
+                    imageModelList.Add(new ImageDataModel(image));
+                }
+
+                for (int i = 1; i <= 7; i++)
+                {
+                    var area = new AreaDataModel("Area " + i, scheme.GetColor());
+
+                    foreach (ImageDataModel image in imageModelList)
+                    {
+                        if (image.Image.Location.Replace("area-", "Area ").Equals(area.Name))
                         {
                             area.ImageList.Add(image);
                         }
