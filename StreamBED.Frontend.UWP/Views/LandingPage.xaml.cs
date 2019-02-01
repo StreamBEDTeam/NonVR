@@ -30,7 +30,9 @@ namespace StreamBED.Frontend.UWP.Views
     /// </summary>
     public sealed partial class LandingPage : Page
     {
-        ImageSerialization imageSerialization = new ImageSerialization();
+        internal static ImageSerialization imageSerialization = new ImageSerialization();
+
+        internal static string ParticipantNumber = "";
 
         public LandingPage()
         {
@@ -60,6 +62,11 @@ namespace StreamBED.Frontend.UWP.Views
         {
             if (pivotRoot.SelectedIndex < 4)
             {
+                if (pivotRoot.SelectedIndex == 0)
+                {
+                    ParticipantNumber = idBox.Text;
+                }
+
                 pivotRoot.SelectedIndex = ++pivotRoot.SelectedIndex;
             }
             else
@@ -79,6 +86,8 @@ namespace StreamBED.Frontend.UWP.Views
             imageSerialization.DeserializeImage(await file.OpenStreamForReadAsync());
 
             imageStatus.Text = "Images loaded: " + imageSerialization.ImageList.Count;
+
+            nextButton.Visibility = Visibility.Visible;
         }
 
         private async void GenerateButton_Click(object sender, RoutedEventArgs e)
@@ -121,6 +130,8 @@ namespace StreamBED.Frontend.UWP.Views
             }
 
             imageStatus.Text = "Images loaded: " + imageSerialization.ImageList.Count;
+
+            nextButton.Visibility = Visibility.Visible;
         }
 
         private async Task<byte[]> Convert(BitmapImage image)
@@ -142,13 +153,20 @@ namespace StreamBED.Frontend.UWP.Views
             {
                 var storageItems = await e.DataView.GetStorageItemsAsync();
 
-                foreach (StorageFile storageItem in storageItems)
+                foreach (StorageFile file in storageItems)
                 {
-                    var bitmapImage = new BitmapImage();
-                    await bitmapImage.SetSourceAsync(await storageItem.OpenReadAsync());
+                    imageSerialization.DeserializeImage(await file.OpenStreamForReadAsync());
 
+                    imageStatus.Text = "Images loaded: " + imageSerialization.ImageList.Count;
                 }
             }
+
+            nextButton.Visibility = Visibility.Visible;
+        }
+
+        private void Grid_DragOver(object sender, DragEventArgs e)
+        {
+            e.AcceptedOperation = DataPackageOperation.Copy;
         }
     }
 }

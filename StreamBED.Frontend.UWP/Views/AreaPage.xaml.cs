@@ -41,47 +41,11 @@ namespace StreamBED.Frontend.UWP.Views
         {
             if (AreaList.Count == 0)
             {
-                /*var buffer = await Convert(new BitmapImage(
-                                        new Uri("ms-appx:///Assets/Logo/image.png")
-                                    ));
-
                 ColorScheme scheme = new ColorScheme();
-                Random r = new Random();
-
-                List<ImageWithMetadata> imageList = new List<ImageWithMetadata>();
-
-                for (int i = 0; i < 2; i++)
-                {
-                    var image = new ImageWithMetadata(buffer);
-
-                    for (int j = 0; j < r.Next(0, 4); j++)
-                    {
-                        var k = EpifaunalSubstrateModel.GetKeywords()[r.Next(0, 4)];
-
-                        if (!image.Keywords.Contains(k))
-                        {
-                            image.AddKeyword(k);
-                        }
-                    }
-
-                    for (int j = 0; j < r.Next(0, 2); j++)
-                    {
-                        var k = BankStabilityModel.GetKeywords()[r.Next(0, 5)];
-
-                        if (!image.Keywords.Contains(k))
-                        {
-                            image.AddKeyword(k);
-                        }
-                    }
-
-                    image.Location = "Area " + r.Next(1, 7);
-
-                    imageList.Add(image);
-                }
 
                 List<ImageDataModel> imageModelList = new List<ImageDataModel>();
 
-                foreach (ImageWithMetadata image in imageList)
+                foreach (ImageWithMetadata image in LandingPage.imageSerialization.ImageList)
                 {
                     imageModelList.Add(new ImageDataModel(image));
                 }
@@ -92,38 +56,12 @@ namespace StreamBED.Frontend.UWP.Views
 
                     foreach (ImageDataModel image in imageModelList)
                     {
+                        if (image.Image.Location.StartsWith("area-"))
+                        {
+                            image.Image.Location = image.Image.Location.Replace("area-", "Area ");
+                        }
+
                         if (image.Image.Location.Equals(area.Name))
-                        {
-                            area.ImageList.Add(image);
-                        }
-                    }
-
-                    if (area.ImageList.Count != 0)
-                    {
-                        listViewRoot.Items.Add(area);
-                        AreaList.Add(area);
-                    }
-                }*/
-                ImageSerialization a = new ImageSerialization();
-                a.DeserializeImage();
-                var c = a.ImageList;
-
-                ColorScheme scheme = new ColorScheme();
-
-                List<ImageDataModel> imageModelList = new List<ImageDataModel>();
-
-                foreach (ImageWithMetadata image in c)
-                {
-                    imageModelList.Add(new ImageDataModel(image));
-                }
-
-                for (int i = 1; i <= 7; i++)
-                {
-                    var area = new AreaDataModel("Area " + i, scheme.GetColor());
-
-                    foreach (ImageDataModel image in imageModelList)
-                    {
-                        if (image.Image.Location.Replace("area-", "Area ").Equals(area.Name))
                         {
                             area.ImageList.Add(image);
                         }

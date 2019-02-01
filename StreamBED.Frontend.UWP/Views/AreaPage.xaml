@@ -91,7 +91,8 @@
                                         <Image x:Name="image" 
                                                    Height="300"
                                                    Width="300"
-                                                   Source="{x:Bind ImageSource}"/>
+                                                   Source="{x:Bind ImageSource}"
+                                               Stretch="UniformToFill"/>
                                         <!--</Button>-->
                                     </DataTemplate>
                                 </GridView.ItemTemplate>

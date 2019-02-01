@@ -66,12 +66,14 @@
 
                     <Grid Height="450"
                           Width="900"
+                          Background="White"
                           HorizontalAlignment="Center"
                           Margin="15"
                           BorderBrush="Gray"
                           BorderThickness="4"
                           CornerRadius="8"
-                          CanDrag="True"
+                          AllowDrop="True"
+                          DragOver="Grid_DragOver"
                           Drop="Grid_Drop">
                         <StackPanel HorizontalAlignment="Center"
                                     VerticalAlignment="Center"

@@ -79,15 +79,15 @@ namespace StreamBED.Backend.Helper
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-            var images = (List<ImageWithMetadata>)binaryFormatter.Deserialize(stream);
+            var images = binaryFormatter.Deserialize(stream);
 
             if (images is List<ImageWithMetadata>)
             {
-                imageList = images;
+                imageList = (List<ImageWithMetadata>)images;
             }
             else if (images is IList<ImageWithMetadata>)
             {
-                foreach (ImageWithMetadata i in images)
+                foreach (ImageWithMetadata i in (IList<ImageWithMetadata>)images)
                 {
                     imageList.Add(i);
                 }
