@@ -172,7 +172,7 @@ namespace StreamBED.Frontend.UWP.Views
                 {
                     foreach (ImageDataModel image in elem.Value.ImageList)
                     {
-                        SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(image.Image.Location)).First().ItemColorBrush;
+                        SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(AreaPage.AreaNames.GetValueOrDefault(image.Image.Location))).First().ItemColorBrush;
 
                         Border border = new Border()
                         {
@@ -223,7 +223,7 @@ namespace StreamBED.Frontend.UWP.Views
                     {
                         foreach (ImageDataModel image in elem.Value)
                         {
-                            SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(image.Image.Location)).First().ItemColorBrush;
+                            SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(AreaPage.AreaNames.GetValueOrDefault(image.Image.Location))).First().ItemColorBrush;
 
                             Border border = new Border()
                             {

@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -243,6 +243,9 @@
     <Content Include="Assets\EpifaunalSubstrate\UnderwaterVegetation\20_C.png" />
     <Content Include="Assets\EpifaunalSubstrate\UnderwaterVegetation\5_BW.png" />
     <Content Include="Assets\EpifaunalSubstrate\UnderwaterVegetation\5_C.png" />
+    <Content Include="Assets\Results.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Assets\FeatureIcons.xml" />
     <Content Include="Assets\Icons\BankFailure.png" />
     <Content Include="Assets\Icons\BankSlope.png" />

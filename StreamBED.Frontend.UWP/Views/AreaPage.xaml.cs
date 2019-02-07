@@ -30,6 +30,8 @@ namespace StreamBED.Frontend.UWP.Views
     {
         internal static List<AreaDataModel> AreaList = new List<AreaDataModel>();
 
+        internal static Dictionary<string, string> AreaNames = new Dictionary<string, string>();
+
         private bool AllAreasCompleted = false;
 
         public AreaPage()
@@ -50,7 +52,36 @@ namespace StreamBED.Frontend.UWP.Views
                     imageModelList.Add(new ImageDataModel(image));
                 }
 
-                for (int i = 1; i <= 7; i++)
+                int count = 1;
+
+                foreach (ImageDataModel image in imageModelList)
+                {
+                    if (!AreaNames.ContainsKey(image.Image.Location))
+                    {
+                        AreaNames.Add(image.Image.Location, "Area " + count++);
+                    }
+                }
+
+                foreach (string key in AreaNames.Keys)
+                {
+                    AreaDataModel area = new AreaDataModel(AreaNames.GetValueOrDefault(key), scheme.GetColor());
+
+                    foreach (ImageDataModel image in imageModelList)
+                    { 
+                        if (AreaNames.GetValueOrDefault(image.Image.Location).Equals(area.Name))
+                        {
+                            area.ImageList.Add(image);
+                        }
+                    }
+
+                    if (area.ImageList.Count != 0)
+                    {
+                        listViewRoot.Items.Add(area);
+                        AreaList.Add(area);
+                    }
+                }
+
+                /*for (int i = 1; i <= 7; i++)
                 {
                     var area = new AreaDataModel("Area " + i, scheme.GetColor());
 
@@ -72,7 +103,7 @@ namespace StreamBED.Frontend.UWP.Views
                         listViewRoot.Items.Add(area);
                         AreaList.Add(area);
                     }
-                }
+                }*/
             }
             else
             {

@@ -77,23 +77,26 @@ namespace StreamBED.Backend.Helper
 
         public void DeserializeImage(Stream stream)
         {
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-
-            var images = binaryFormatter.Deserialize(stream);
-
-            if (images is List<ImageWithMetadata>)
+            if (stream != null)
             {
-                imageList = (List<ImageWithMetadata>)images;
-            }
-            else if (images is IList<ImageWithMetadata>)
-            {
-                foreach (ImageWithMetadata i in (IList<ImageWithMetadata>)images)
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+
+                var images = binaryFormatter.Deserialize(stream);
+
+                if (images is List<ImageWithMetadata>)
                 {
-                    imageList.Add(i);
+                    imageList = (List<ImageWithMetadata>)images;
                 }
-            }
+                else if (images is IList<ImageWithMetadata>)
+                {
+                    foreach (ImageWithMetadata i in (IList<ImageWithMetadata>)images)
+                    {
+                        imageList.Add(i);
+                    }
+                }
 
-            stream.Close();
+                stream.Close();
+            }
         }
     }
 }

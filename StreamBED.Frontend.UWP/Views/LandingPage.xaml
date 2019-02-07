@@ -126,6 +126,20 @@
                                Margin="15">
                         Images loaded: 0
                     </TextBlock>
+
+                    <Button Style="{StaticResource RoundedButton}" 
+                            x:Name="extractButton" 
+                            Background="#EDEDED"
+                            Foreground="Black"
+                            FontSize="24"
+                            VerticalAlignment="Bottom" 
+                            HorizontalAlignment="Center"
+                            Height="64"
+                            Width="310"
+                            Margin="0, 30, 0, 0"
+                            Click="ExtractButton_Click">
+                        Extract results
+                    </Button>
                 </StackPanel>
             </PivotItem>
             

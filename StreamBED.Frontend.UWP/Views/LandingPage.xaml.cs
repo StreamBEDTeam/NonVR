@@ -22,6 +22,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.Storage.Streams;
 using StreamBED.Backend.Models.ProtocolModels;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.UI.Popups;
 
 namespace StreamBED.Frontend.UWP.Views
 {
@@ -58,16 +59,26 @@ namespace StreamBED.Frontend.UWP.Views
             }
         }
 
-        private void NextButton_Click(object sender, RoutedEventArgs e)
+        private async void NextButton_Click(object sender, RoutedEventArgs e)
         {
             if (pivotRoot.SelectedIndex < 4)
             {
                 if (pivotRoot.SelectedIndex == 0)
                 {
-                    ParticipantNumber = idBox.Text;
+                    if (!idBox.Text.Equals(""))
+                    {
+                        ParticipantNumber = idBox.Text;
+                        pivotRoot.SelectedIndex = ++pivotRoot.SelectedIndex;
+                    }
+                    else
+                    {
+                        await new MessageDialog("Please enter Participation Number.").ShowAsync();
+                    }
                 }
-
-                pivotRoot.SelectedIndex = ++pivotRoot.SelectedIndex;
+                else
+                {
+                    pivotRoot.SelectedIndex = ++pivotRoot.SelectedIndex;
+                }
             }
             else
             {
@@ -167,6 +178,11 @@ namespace StreamBED.Frontend.UWP.Views
         private void Grid_DragOver(object sender, DragEventArgs e)
         {
             e.AcceptedOperation = DataPackageOperation.Copy;
+        }
+
+        private void ExtractButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
