@@ -180,9 +180,23 @@ namespace StreamBED.Frontend.UWP.Views
             e.AcceptedOperation = DataPackageOperation.Copy;
         }
 
-        private void ExtractButton_Click(object sender, RoutedEventArgs e)
+        private async void ExtractButton_Click(object sender, RoutedEventArgs e)
         {
+            FileSavePicker p = new FileSavePicker();
+            p.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+            p.FileTypeChoices.Add("XML", new List<string>() { ".xml" });
+            p.SuggestedFileName = "Results";
 
+            StorageFile file = await p.PickSaveFileAsync();
+
+            if (file != null)
+            {
+                CachedFileManager.DeferUpdates(file);
+
+                StorageFile data = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(@"Assets\Results.xml");
+
+                await FileIO.WriteTextAsync(file, await FileIO.ReadTextAsync(data));
+            }
         }
     }
 }
