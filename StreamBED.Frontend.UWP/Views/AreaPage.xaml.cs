@@ -39,7 +39,7 @@ namespace StreamBED.Frontend.UWP.Views
             this.InitializeComponent();
         }
 
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             if (AreaList.Count == 0)
             {

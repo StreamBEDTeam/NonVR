@@ -72,7 +72,7 @@ namespace StreamBED.Frontend.UWP.Views
                     image.Image.ChangeEpifaunalSubstrateScore(0);
                     image.Image.AddKeyword(keyword);
                     image.isComplete = true;
-                    image.Image.Location = Area.Name;
+                    image.Image.Location = AreaPage.AreaNames.Where(i => i.Value.Equals(Area.Name)).First().Key;
 
                     if (keyword.Equals(EpifaunalSubstrateModel.Keywords.SnagsLogs) || keyword.Equals(EpifaunalSubstrateModel.Keywords.UnderwaterVegetation) || keyword.Equals(EpifaunalSubstrateModel.Keywords.UndercutBanks))
                     {
@@ -102,7 +102,7 @@ namespace StreamBED.Frontend.UWP.Views
                     image.Image.ChangeBankStabilityScore(10);
                     image.Image.AddKeyword(keyword);
                     image.isComplete = true;
-                    image.Image.Location = Area.Name;
+                    image.Image.Location = AreaPage.AreaNames.Where(i => i.Value.Equals(Area.Name)).First().Key;
 
                     if (keyword.Equals(BankStabilityModel.Keywords.ExposedTreeRoots) || keyword.Equals(BankStabilityModel.Keywords.ErodedAreas) || keyword.Equals(BankStabilityModel.Keywords.BankFailure))
                     {

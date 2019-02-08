@@ -4,6 +4,7 @@ using StreamBED.Backend.Models.ProtocolModels;
 using StreamBED.Frontend.UWP.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -58,7 +59,7 @@ namespace StreamBED.Frontend.UWP.Views
                 {
                     foreach (ImageDataModel image in elem.Value.ImageList)
                     {
-                        SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(image.Image.Location)).First().ItemColorBrush;
+                        SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(AreaPage.AreaNames.GetValueOrDefault(image.Image.Location))).First().ItemColorBrush;
 
                         Border border = new Border()
                         {
@@ -86,7 +87,7 @@ namespace StreamBED.Frontend.UWP.Views
                             {
                                 if (stack.Tag.Equals(image.Image.BankStabilityScore.ToString()))
                                 {
-                                    stack.Children.Add(border);
+                                    AddElement(stack, border);
                                 }
                             }
                         }
@@ -96,7 +97,7 @@ namespace StreamBED.Frontend.UWP.Views
                             {
                                 if (stack.Tag.Equals(image.Image.BankStabilityScore.ToString()))
                                 {
-                                    stack.Children.Add(border);
+                                    AddElement(stack, border);
                                 }
                             }
                         }
@@ -109,7 +110,7 @@ namespace StreamBED.Frontend.UWP.Views
                     {
                         foreach (ImageDataModel image in elem.Value)
                         {
-                            SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(image.Image.Location)).First().ItemColorBrush;
+                            SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(AreaPage.AreaNames.GetValueOrDefault(image.Image.Location))).First().ItemColorBrush;
 
                             Border border = new Border()
                             {
@@ -137,7 +138,7 @@ namespace StreamBED.Frontend.UWP.Views
                                 {
                                     if (stack.Tag.Equals(image.Image.BankStabilityScore.ToString()))
                                     {
-                                        stack.Children.Add(border);
+                                        AddElement(stack, border);
                                     }
                                 }
                             }
@@ -147,7 +148,7 @@ namespace StreamBED.Frontend.UWP.Views
                                 {
                                     if (stack.Tag.Equals(image.Image.BankStabilityScore.ToString()))
                                     {
-                                        stack.Children.Add(border);
+                                        AddElement(stack, border);
                                     }
                                 }
                             }
@@ -200,7 +201,7 @@ namespace StreamBED.Frontend.UWP.Views
                             {
                                 if (stack.Tag.Equals(image.Image.EpifaunalSubstrateScore.ToString()))
                                 {
-                                    stack.Children.Add(border);
+                                    AddElement(stack, border);
                                 }
                             }
                         }
@@ -210,7 +211,7 @@ namespace StreamBED.Frontend.UWP.Views
                             {
                                 if (stack.Tag.Equals(image.Image.EpifaunalSubstrateScore.ToString()))
                                 {
-                                    stack.Children.Add(border);
+                                    AddElement(stack, border);
                                 }
                             }
                         }
@@ -251,7 +252,7 @@ namespace StreamBED.Frontend.UWP.Views
                                 {
                                     if (stack.Tag.Equals(image.Image.EpifaunalSubstrateScore.ToString()))
                                     {
-                                        stack.Children.Add(border);
+                                        AddElement(stack, border);
                                     }
                                 }
                             }
@@ -261,7 +262,7 @@ namespace StreamBED.Frontend.UWP.Views
                                 {
                                     if (stack.Tag.Equals(image.Image.EpifaunalSubstrateScore.ToString()))
                                     {
-                                        stack.Children.Add(border);
+                                        AddElement(stack, border);
                                     }
                                 }
                             }
@@ -273,6 +274,43 @@ namespace StreamBED.Frontend.UWP.Views
             }
 
             layoutPivot.SelectedIndex = 2;
+        }
+
+        private void AddElement(StackPanel stack, Border border)
+        {
+            if (stack.Children.Count < 5)
+            {
+                stack.Children.Add(border);
+            }
+            else
+            {
+                if (stack.Children.Count != 6)
+                {
+                    TextBlock text = new TextBlock()
+                    {
+                        Foreground = new SolidColorBrush(Colors.Black),
+                        FontSize = 20,
+                        FontWeight = FontWeights.Bold,
+                        TextAlignment = TextAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center
+                    };
+
+                    border.Child = text;
+                    stack.Children.Add(border);
+                }
+
+                TextBlock textBlock = ((stack.Children[5] as Border).Child as TextBlock);
+
+                if (textBlock.Text.Equals(""))
+                {
+                    textBlock.Text = "+1";
+                }
+                else
+                {
+                    textBlock.Text = "+" + (Convert.ToInt32(textBlock.Text.Substring(1)) + 1);
+                }
+            }
         }
 
         private void LayoutPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)

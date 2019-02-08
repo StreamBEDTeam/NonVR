@@ -185,7 +185,6 @@ namespace StreamBED.Frontend.UWP.Views
         {
             Storyboard animation = new Storyboard();
 
-
             DoubleAnimation hide = new DoubleAnimation
             {
                 From = 1,
@@ -274,8 +273,10 @@ namespace StreamBED.Frontend.UWP.Views
                 refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
                 refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
                 refDetailText.Visibility = Visibility.Collapsed;
+                noImageBox.Visibility = Visibility.Collapsed;
+                refImage.IsHitTestVisible = true;
             }
-            else if (CurrentScore >= 15 && CurrentScore < 20)
+            else if (CurrentScore == 15)
             {
                 XElement selected = FeatureEvalPage.SelectedFeatureReference.Where(i => i.Attribute("score").Value.Equals("15")).First();
 
@@ -283,8 +284,10 @@ namespace StreamBED.Frontend.UWP.Views
                 refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
                 refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
                 refDetailText.Visibility = Visibility.Collapsed;
+                noImageBox.Visibility = Visibility.Collapsed;
+                refImage.IsHitTestVisible = true;
             }
-            else if (CurrentScore >= 10 && CurrentScore < 15)
+            else if (CurrentScore == 10)
             {
                 XElement selected = FeatureEvalPage.SelectedFeatureReference.Where(i => i.Attribute("score").Value.Equals("10")).First();
 
@@ -292,8 +295,10 @@ namespace StreamBED.Frontend.UWP.Views
                 refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
                 refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
                 refDetailText.Visibility = Visibility.Collapsed;
+                noImageBox.Visibility = Visibility.Collapsed;
+                refImage.IsHitTestVisible = true;
             }
-            else if (CurrentScore >= 5 && CurrentScore < 10)
+            else if (CurrentScore == 5)
             {
                 XElement selected = FeatureEvalPage.SelectedFeatureReference.Where(i => i.Attribute("score").Value.Equals("5")).First();
 
@@ -301,8 +306,10 @@ namespace StreamBED.Frontend.UWP.Views
                 refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
                 refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
                 refDetailText.Visibility = Visibility.Collapsed;
+                noImageBox.Visibility = Visibility.Collapsed;
+                refImage.IsHitTestVisible = true;
             }
-            else if (CurrentScore >= 0 && CurrentScore < 5)
+            else if (CurrentScore == 0)
             {
                 XElement selected = FeatureEvalPage.SelectedFeatureReference.Where(i => i.Attribute("score").Value.Equals("0")).First();
 
@@ -310,6 +317,17 @@ namespace StreamBED.Frontend.UWP.Views
                 refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
                 refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
                 refDetailText.Visibility = Visibility.Collapsed;
+                noImageBox.Visibility = Visibility.Collapsed;
+                refImage.IsHitTestVisible = true;
+            }
+            else
+            {
+                refImage.Source = null;
+                refImageDetail.Source = null;
+                refDetailText.Text = "";
+                refDetailText.Visibility = Visibility.Collapsed;
+                noImageBox.Visibility = Visibility.Visible;
+                refImage.IsHitTestVisible = false;
             }
 
             if (visit.Contains(CurrentScore))

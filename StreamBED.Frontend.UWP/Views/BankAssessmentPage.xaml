@@ -32,6 +32,20 @@
 
                 <Grid Grid.Column="1"
 					  Margin="7.5, 0, 0, 0">
+                    <Border x:Name="noImageBox"
+                            BorderBrush="Gray"
+                            BorderThickness="4"
+                            Visibility="Collapsed">
+                        <TextBlock Foreground="Black"
+                                   FontSize="24"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center">
+                            No Reference Image
+                        </TextBlock>
+                    </Border>
+
                     <Image x:Name="refImageDetail"
                            Stretch="UniformToFill"/>
 

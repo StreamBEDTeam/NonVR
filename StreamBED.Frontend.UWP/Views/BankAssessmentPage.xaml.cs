@@ -263,8 +263,10 @@ namespace StreamBED.Frontend.UWP.Views
                 refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
                 refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
                 refDetailText.Visibility = Visibility.Collapsed;
+                noImageBox.Visibility = Visibility.Collapsed;
+                refImage.IsHitTestVisible = true;
             }
-            else if (CurrentScore >= 6 && CurrentScore < 10)
+            else if (CurrentScore == 6)
             {
                 XElement selected = FeatureEvalPage.SelectedFeatureReference.Where(i => i.Attribute("score").Value.Equals("6")).First();
 
@@ -272,8 +274,10 @@ namespace StreamBED.Frontend.UWP.Views
                 refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
                 refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
                 refDetailText.Visibility = Visibility.Collapsed;
+                noImageBox.Visibility = Visibility.Collapsed;
+                refImage.IsHitTestVisible = true;
             }
-            else if (CurrentScore >= 4 && CurrentScore < 6)
+            else if (CurrentScore == 4)
             {
                 XElement selected = FeatureEvalPage.SelectedFeatureReference.Where(i => i.Attribute("score").Value.Equals("4")).First();
 
@@ -281,8 +285,10 @@ namespace StreamBED.Frontend.UWP.Views
                 refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
                 refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
                 refDetailText.Visibility = Visibility.Collapsed;
+                noImageBox.Visibility = Visibility.Collapsed;
+                refImage.IsHitTestVisible = true;
             }
-            else if (CurrentScore >= 0 && CurrentScore < 4)
+            else if (CurrentScore == 0)
             {
                 XElement selected = FeatureEvalPage.SelectedFeatureReference.Where(i => i.Attribute("score").Value.Equals("0")).First();
 
@@ -290,6 +296,17 @@ namespace StreamBED.Frontend.UWP.Views
                 refImageDetail.Source = new BitmapImage(new Uri(selected.Attribute("detail").Value));
                 refDetailText.Text = selected.Value.Replace("\n        ", "\n").Trim();
                 refDetailText.Visibility = Visibility.Collapsed;
+                noImageBox.Visibility = Visibility.Collapsed;
+                refImage.IsHitTestVisible = true;
+            }
+            else
+            {
+                refImage.Source = null;
+                refImageDetail.Source = null;
+                refDetailText.Text = "";
+                refDetailText.Visibility = Visibility.Collapsed;
+                noImageBox.Visibility = Visibility.Visible;
+                refImage.IsHitTestVisible = false;
             }
 
             if (visit.Contains(CurrentScore))
