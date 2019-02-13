@@ -18,6 +18,8 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 using Windows.UI;
 using Windows.UI.Text;
+using Windows.UI.Popups;
+using System.Collections.ObjectModel;
 
 namespace StreamBED.Frontend.UWP.Views
 {
@@ -35,6 +37,8 @@ namespace StreamBED.Frontend.UWP.Views
         private FontIcon CompletionIcon;
 
         private Dictionary<FeatureDataModel, ImageDataModel> imageDict = new Dictionary<FeatureDataModel, ImageDataModel>();
+
+        private List<ImageDataModel> hiddenImages = new List<ImageDataModel>();
 
         internal static List<ImageDataModel> SelectedItems = new List<ImageDataModel>();
 
@@ -55,6 +59,14 @@ namespace StreamBED.Frontend.UWP.Views
             }
 
             Area = e.Parameter as AreaDataModel;
+
+            foreach (ImageDataModel image in Area.ImageList)
+            {
+                if (image.Image.Keywords.Contains(null))
+                {
+                    hiddenImages.Add(image);
+                }
+            }
 
             foreach (Keyword keyword in EpifaunalSubstrateModel.GetKeywords())
             {
@@ -115,6 +127,20 @@ namespace StreamBED.Frontend.UWP.Views
                     }
                 }
             }
+
+            if (hiddenImages.Count > 0)
+            {
+                var model = new FeatureDataModel("Images with no features", new ObservableCollection<ImageDataModel>(hiddenImages));
+
+                listViewRoot.Items.Add(model);
+
+                if (hiddenImages.Count == Area.ImageList.Count())
+                {
+                    nextButton.Visibility = Visibility.Visible;
+
+                    Area.IsCompleted = true;
+                }
+            }
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -167,7 +193,7 @@ namespace StreamBED.Frontend.UWP.Views
                 CompletionIcon = icon;
 
                 titleGrid.Children.Add(title);
-                titleGrid.Children.Add(icon);
+                titleGrid.Children.Add(icon); 
                 border.Child = titleGrid;
 
                 stack.Children.Insert(0, border);
@@ -193,7 +219,7 @@ namespace StreamBED.Frontend.UWP.Views
         {
             var gridView = sender as GridView;
 
-            if (gridView.DataContext != null)
+            if (gridView.DataContext != null && !(gridView.DataContext as FeatureDataModel).Keyword.Content.Equals("Other images"))
             {
                 if (gridView.SelectedItem as ImageDataModel != null)
                 {
@@ -276,6 +302,11 @@ namespace StreamBED.Frontend.UWP.Views
         private void PopupButton_Click(object sender, RoutedEventArgs e)
         {
             messagePopup.Visibility = Visibility.Collapsed;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

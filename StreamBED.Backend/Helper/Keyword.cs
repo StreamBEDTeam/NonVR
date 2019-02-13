@@ -19,7 +19,7 @@ namespace StreamBED.Backend.Helper
         public string FriendlyName { get; }
 
         // Internal constructor
-        internal Keyword(string Content, string FriendlyName)
+        public Keyword(string Content, string FriendlyName)
         {
             this.Content = Content;
             this.FriendlyName = FriendlyName;

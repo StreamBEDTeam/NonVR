@@ -8,7 +8,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="#d9d9d9">
+    Background="#d9d9d9"
+    Loaded="Page_Loaded">
    
     <Grid x:Name="layoutRoot">
         <ListView x:Name="listViewRoot"
@@ -65,36 +66,15 @@
 
                                     <GridView.ItemTemplate>
                                         <DataTemplate x:DataType="model:ImageDataModel">
-                                            <!--<Button x:Name="imageRoot"
-                                                    Height="300"
-                                                    Width="300"
-                                                    Margin="2.5, 5"
-                                                    Style="{StaticResource ImageButton}">-->
-                                                <Image x:Name="image" 
+                                            <Image x:Name="image" 
                                                        Height="300"
                                                        Width="300"
                                                        Source="{x:Bind ImageSource}"
                                                        Stretch="UniformToFill"/>
-                                            <!--</Button>-->
                                         </DataTemplate>
                                     </GridView.ItemTemplate>
                                 </GridView>
 
-                                <!--<Grid x:Name="buttonGrid"
-                                      Height="100"
-                                      Background="White">
-                                    <Button Style="{StaticResource KindaRoundedButton}" 
-                                            x:Name="seeAllButton" 
-                                            Background="#EDEDED"
-                                            Foreground="Black"
-                                            FontSize="24"
-                                            VerticalAlignment="Center" 
-                                            HorizontalAlignment="Center"
-                                            Height="64"
-                                            Width="200">
-                                        See All Images
-                                    </Button>
-                                </Grid>-->
                             </StackPanel>
                         </Border>
                     </StackPanel>

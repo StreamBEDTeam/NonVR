@@ -12,7 +12,7 @@ namespace StreamBED.Frontend.UWP.Models
 {
     public class FeatureDataModel : INotifyPropertyChanged
     {
-        public Keyword Keyword { get; }
+        public Keyword Keyword;
 
         public ObservableCollection<ImageDataModel> ImageList { get; }
 
@@ -31,6 +31,12 @@ namespace StreamBED.Frontend.UWP.Models
         {
             this.Keyword = keyword;
             ImageList = new ObservableCollection<ImageDataModel>();
+        }
+
+        public FeatureDataModel(string Name, ObservableCollection<ImageDataModel> ImageList)
+        {
+            this.Keyword = new Keyword(Name, Name);
+            this.ImageList = ImageList;
         }
 
         public static FeatureDataModel GetFeatureDataModel(Keyword keyword, ICollection<ImageDataModel> imageList)

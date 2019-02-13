@@ -80,30 +80,6 @@ namespace StreamBED.Frontend.UWP.Views
                         AreaList.Add(area);
                     }
                 }
-
-                /*for (int i = 1; i <= 7; i++)
-                {
-                    var area = new AreaDataModel("Area " + i, scheme.GetColor());
-
-                    foreach (ImageDataModel image in imageModelList)
-                    {
-                        if (image.Image.Location.StartsWith("area-"))
-                        {
-                            image.Image.Location = image.Image.Location.Replace("area-", "Area ");
-                        }
-
-                        if (image.Image.Location.Equals(area.Name))
-                        {
-                            area.ImageList.Add(image);
-                        }
-                    }
-
-                    if (area.ImageList.Count != 0)
-                    {
-                        listViewRoot.Items.Add(area);
-                        AreaList.Add(area);
-                    }
-                }*/
             }
             else
             {
