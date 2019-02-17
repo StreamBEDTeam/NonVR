@@ -60,6 +60,7 @@ namespace StreamBED.Frontend.UWP.Views
             if (Index < FeatureEvalPage.SelectedFeature.ImageList.Count)
             {
                 CurrentImage = FeatureEvalPage.SelectedFeature.ImageList[Index++];
+                CurrentScore = 10;
 
                 selectedImage.Source = CurrentImage.ImageSource;
 
@@ -356,7 +357,7 @@ namespace StreamBED.Frontend.UWP.Views
         {
             if (FeatureEvalPage.SelectedFeature == null)
             {
-                FeatureEvalPage.Current.ChangeToBankStability();
+                FeatureEvalPage.Current.ChangeToEpifaunalSubstrate();
 
                 (((this.Parent as Frame).Parent as PivotItem).Parent as Pivot).SelectedIndex = 2;
             }

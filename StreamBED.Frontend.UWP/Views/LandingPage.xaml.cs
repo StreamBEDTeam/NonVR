@@ -23,6 +23,7 @@ using Windows.Storage.Streams;
 using StreamBED.Backend.Models.ProtocolModels;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Popups;
+using System.Xml.Linq;
 
 namespace StreamBED.Frontend.UWP.Views
 {
@@ -35,17 +36,30 @@ namespace StreamBED.Frontend.UWP.Views
 
         internal static string ParticipantNumber = "";
 
+        internal static bool IsOfficial = false;
+
         public LandingPage()
         {
             this.InitializeComponent();
         }
 
-        private void PivotRoot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void PivotRoot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (pivotRoot.SelectedIndex == 0)
             {
                 nextButton.Content = "Next";
                 pivotRoot.IsHitTestVisible = true;
+                
+                try
+                {
+                    StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Results.xml", CreationCollisionOption.FailIfExists);
+
+                    await FileIO.WriteTextAsync(file, "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root>\n");
+                }
+                catch (Exception f)
+                {
+
+                }
             }
             else if (pivotRoot.SelectedIndex == 1)
             {
@@ -99,6 +113,8 @@ namespace StreamBED.Frontend.UWP.Views
             imageStatus.Text = "Images loaded: " + imageSerialization.ImageList.Count;
 
             nextButton.Visibility = Visibility.Visible;
+
+            IsOfficial = true;
         }
 
         private async void GenerateButton_Click(object sender, RoutedEventArgs e)
@@ -173,6 +189,8 @@ namespace StreamBED.Frontend.UWP.Views
             }
 
             nextButton.Visibility = Visibility.Visible;
+
+            IsOfficial = true;
         }
 
         private void Grid_DragOver(object sender, DragEventArgs e)
@@ -193,9 +211,21 @@ namespace StreamBED.Frontend.UWP.Views
             {
                 CachedFileManager.DeferUpdates(file);
 
-                StorageFile data = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(@"Assets\Results.xml");
+                StorageFile data = await ApplicationData.Current.LocalFolder.GetFileAsync("Results.xml");
 
-                await FileIO.WriteTextAsync(file, await FileIO.ReadTextAsync(data));
+                string xml = await FileIO.ReadTextAsync(data) + "\n</root>";
+
+                try
+                {
+                    XDocument doc = XDocument.Parse(xml);
+                    xml = doc.ToString();
+                }
+                catch (Exception f)
+                {
+
+                }
+
+                await FileIO.WriteTextAsync(file, xml);
             }
         }
     }

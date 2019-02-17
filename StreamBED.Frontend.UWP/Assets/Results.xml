@@ -1,20 +1,3 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <root>
   
-</root>
-
-<!--
-  Format for entry is:
-  
-  <participant id="1001" official="true"> // Official when images are loaded from .dat file.
-    <ratings>
-      <area name="Area 1">
-        <feature keyword="SnagsLogs" score="10" bias="false"/>
-        <feature keyword="UnderwaterVegetation" score="0" bias="true"/> // Bias is true when feature is generated.
-      </area>
-    </ratings>
-    
-    <protocol type="EpifaunalSubstrateModel" score="15"/>
-    <protocol type="BankStabilityModel" score="15"/>
-  </participant>
--->

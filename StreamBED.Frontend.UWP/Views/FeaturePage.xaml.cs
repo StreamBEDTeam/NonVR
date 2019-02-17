@@ -128,7 +128,7 @@ namespace StreamBED.Frontend.UWP.Views
                 }
             }
 
-            if (hiddenImages.Count > 0)
+            /*if (hiddenImages.Count > 0)
             {
                 var model = new FeatureDataModel("Images with no features", new ObservableCollection<ImageDataModel>(hiddenImages));
 
@@ -140,7 +140,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                     Area.IsCompleted = true;
                 }
-            }
+            }*/
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)

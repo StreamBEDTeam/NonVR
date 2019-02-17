@@ -243,6 +243,7 @@
     <Content Include="Assets\EpifaunalSubstrate\UnderwaterVegetation\20_C.png" />
     <Content Include="Assets\EpifaunalSubstrate\UnderwaterVegetation\5_BW.png" />
     <Content Include="Assets\EpifaunalSubstrate\UnderwaterVegetation\5_C.png" />
+    <Content Include="Assets\Icons\Key.png" />
     <Content Include="Assets\Results.xml">
       <SubType>Designer</SubType>
     </Content>

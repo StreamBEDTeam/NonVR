@@ -509,7 +509,7 @@
                                 </StackPanel>
                                 
                                 <Slider x:Name="epifaunalSlider"
-                                        Style="{StaticResource EpifuanalAssessmentSlider}" 
+                                        Style="{StaticResource EpifaunalAssessmentSlider}" 
                                         IsDirectionReversed="True" 
                                         Minimum="0" 
                                         Maximum="20" 
@@ -591,10 +591,39 @@
                             Click="SubmitButton_Click">
                         Submit
                     </Button>
+
+                    <Button Style="{StaticResource RoundedButton}" 
+							FontFamily="Segoe MDL2 Assets"
+							Background="#D9D9D9"
+							Foreground="Black"
+							FontSize="24"
+							VerticalAlignment="Bottom" 
+							HorizontalAlignment="Right"
+							Margin="48"
+							Height="64"
+							Width="64"
+							Click="GlanceOpenButton_Click">
+                        &#xF000;
+                    </Button>
+
+                    <Button Style="{StaticResource RoundedButton}" 
+							FontFamily="Segoe MDL2 Assets"
+							Background="#D9D9D9"
+							Foreground="Black"
+							FontSize="24"
+							VerticalAlignment="Bottom" 
+							HorizontalAlignment="Right"
+							Margin="48, 48, 160, 48"
+							Height="64"
+							Width="64"
+							Click="LegendButton_Click">
+                        <Image Source="/Assets/Icons/Key.png"
+                               Height="30"/>
+                    </Button>
                 </Grid>
             </PivotItem>
 
-            <PivotItem Margin="0, 59, 0, 0">
+            <PivotItem Margin="0, -16, 0, 0">
                 <Grid Background="White">
                     <TextBlock Foreground="Black"
                        FontSize="36"
@@ -604,7 +633,7 @@
                        HorizontalAlignment="Center"
                        Margin="270, 0">
                         <Bold>Epifaunal Substrate Protocol</Bold><LineBreak/><LineBreak/>
-                        Your score for this stream was <Run Text="{x:Bind EpifaunalSubstrateModel.Score}"/>
+                        Your score for this stream was <Run x:Name="epifaunalScoreRun"/>
                     </TextBlock>
 
                     <Button Style="{StaticResource RoundedButton}" 
@@ -904,10 +933,39 @@
                             Click="SubmitButton_Click">
                         Submit
                     </Button>
+
+                    <Button Style="{StaticResource RoundedButton}" 
+							FontFamily="Segoe MDL2 Assets"
+							Background="#D9D9D9"
+							Foreground="Black"
+							FontSize="24"
+							VerticalAlignment="Bottom" 
+							HorizontalAlignment="Right"
+							Margin="48"
+							Height="64"
+							Width="64"
+							Click="GlanceOpenButton_Click">
+                        &#xF000;
+                    </Button>
+
+                    <Button Style="{StaticResource RoundedButton}" 
+							FontFamily="Segoe MDL2 Assets"
+							Background="#D9D9D9"
+							Foreground="Black"
+							FontSize="24"
+							VerticalAlignment="Bottom" 
+							HorizontalAlignment="Right"
+							Margin="48, 48, 160, 48"
+							Height="64"
+							Width="64"
+							Click="LegendButton_Click">
+                        <Image Source="/Assets/Icons/Key.png"
+                               Height="30"/>
+                    </Button>
                 </Grid>
             </PivotItem>
 
-            <PivotItem Margin="0, 59, 0, 0">
+            <PivotItem Margin="0, -16, 0, 0">
                 <Grid Background="White">
                     <TextBlock Foreground="Black"
                        FontSize="36"
@@ -917,7 +975,7 @@
                        HorizontalAlignment="Center"
                        Margin="270, 0">
                         <Bold>Bank Stability Protocol</Bold><LineBreak/><LineBreak/>
-                        Your score for this stream was <Run Text="{x:Bind BankStabilityModel.Score}"/><LineBreak/>
+                        Your score for this stream was <Run x:Name="bankStabilityRun"/><LineBreak/>
                         
                     </TextBlock>
 
@@ -933,6 +991,52 @@
                             Click="NextProtocolButton_Click">
                         Next
                     </Button>
+                </Grid>
+            </PivotItem>
+
+            <PivotItem Margin="0, -16, 0, 0">
+                <Grid Background="White">
+                    <TextBlock Foreground="Black"
+                       FontSize="36"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Margin="270, 0">
+                        Thank you for participating in StreamBED VR's citizen science water monitoring training
+                    </TextBlock>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="48"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Center">
+                        <Button Style="{StaticResource RoundedButton}" 
+                                x:Name="extractButton" 
+                                Background="#EDEDED"
+                                Foreground="Black"
+                                FontSize="24"
+                                VerticalAlignment="Bottom" 
+                                HorizontalAlignment="Center"
+                                Height="64"
+                                Width="310"
+                                Click="ExtractButton_Click">
+                            Extract results
+                        </Button>
+
+                        <Button Style="{StaticResource RoundedButton}" 
+                                x:Name="closeButton" 
+                                Background="#EDEDED"
+                                Foreground="Black"
+                                FontSize="24"
+                                VerticalAlignment="Bottom" 
+                                HorizontalAlignment="Center"
+                                Margin="48, 0, 0, 0"
+                                Height="64"
+                                Width="310"
+                                Click="CloseButton_Click">
+                            Close Application
+                        </Button>
+                    </StackPanel>
                 </Grid>
             </PivotItem>
         </Pivot>
@@ -986,6 +1090,205 @@
                          Maximum="2"
 						 Height="10"
 						 VerticalAlignment="Bottom"/>
+        </Grid>
+
+        <Grid x:Name="glanceProtocol"
+			  Visibility="Collapsed">
+            <Grid.Background>
+                <SolidColorBrush Color="Black" Opacity="0.5"/>
+            </Grid.Background>
+
+            <Image x:Name="image"
+				   Width="1200"
+				   Source="/Assets/ProtocolAssets/Epifaunal.png"/>
+
+            <Button Style="{StaticResource RoundedButton}" 
+					x:Name="glanceCloseButton"
+					FontFamily="Segoe MDL2 Assets"
+					Background="#EDEDED"
+					Foreground="Black"
+					FontSize="24"
+					VerticalAlignment="Bottom" 
+					HorizontalAlignment="Center"
+					Margin="15, 15"
+					Height="64"
+					Width="64"
+					Click="GlanceCloseButton_Click">
+                &#xE711;
+            </Button>
+        </Grid>
+
+        <Grid x:Name="glanceLegend"
+			  Visibility="Collapsed">
+            <Grid.Background>
+                <SolidColorBrush Color="Black" Opacity="0.5"/>
+            </Grid.Background>
+
+            <Grid Background="White"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Padding="48">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Margin="0, 0, 48, 0"
+                            Grid.Column="0">
+                    <TextBlock Foreground="Black"
+                               FontSize="24"
+                               TextWrapping="Wrap"
+                               FontWeight="Bold"
+                               Margin="0, 0, 0, 15"
+                               VerticalAlignment="Center">
+                        Epifaunal Substrate Features
+                    </TextBlock>
+                    
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0, 0, 0, 15">
+                        <Image Source="/Assets/Icons/SnagsLogs.png"
+                               Height="45"/>
+                        <TextBlock Foreground="Black"
+                                   FontSize="24"
+                                   TextWrapping="Wrap"
+                                   Margin="15,0"
+                                   VerticalAlignment="Center">
+                            Snags &amp; Logs
+                        </TextBlock>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0, 0, 0, 15">
+                        <Image Source="/Assets/Icons/UnderwaterVegetation.png"
+                               Height="45"/>
+                        <TextBlock Foreground="Black"
+                                   FontSize="24"
+                                   TextWrapping="Wrap"
+                                   Margin="15,0"
+                                   VerticalAlignment="Center">
+                            Underwater Vegetation
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0, 0, 0, 15">
+                        <Image Source="/Assets/Icons/UndercutBank.png"
+                               Height="45"/>
+                        <TextBlock Foreground="Black"
+                                   FontSize="24"
+                                   TextWrapping="Wrap"
+                                   Margin="15,0"
+                                   VerticalAlignment="Center">
+                            Undercut Banks
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0, 0, 0, 15">
+                        <Image Source="/Assets/Icons/Cobble.png"
+                               Height="45"/>
+                        <TextBlock Foreground="Black"
+                                   FontSize="24"
+                                   TextWrapping="Wrap"
+                                   Margin="15,0"
+                                   VerticalAlignment="Center">
+                            Small/Medium Cobble
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Foreground="Black"
+                               FontSize="24"
+                               TextWrapping="Wrap"
+                               FontWeight="Bold"
+                               Margin="0, 0, 0, 15"
+                               VerticalAlignment="Center">
+                        Bank Stability Features
+                    </TextBlock>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0, 0, 0, 15">
+                        <Image Source="/Assets/Icons/BankSlope.png"
+                               Height="45"/>
+                        <TextBlock Foreground="Black"
+                                   FontSize="24"
+                                   TextWrapping="Wrap"
+                                   Margin="15,0"
+                                   VerticalAlignment="Center">
+                            Bank Slope
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0, 0, 0, 15">
+                        <Image Source="/Assets/Icons/BankFailure.png"
+                               Height="45"/>
+                        <TextBlock Foreground="Black"
+                                   FontSize="24"
+                                   TextWrapping="Wrap"
+                                   Margin="15,0"
+                                   VerticalAlignment="Center">
+                            Bank Failure
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0, 0, 0, 15">
+                        <Image Source="/Assets/Icons/BankVegetation.png"
+                               Height="45"/>
+                        <TextBlock Foreground="Black"
+                                   FontSize="24"
+                                   TextWrapping="Wrap"
+                                   Margin="15,0"
+                                   VerticalAlignment="Center">
+                            Bank Vegetation
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0, 0, 0, 15">
+                        <Image Source="/Assets/Icons/ErodedAreas.png"
+                               Height="45"/>
+                        <TextBlock Foreground="Black"
+                                   FontSize="24"
+                                   TextWrapping="Wrap"
+                                   Margin="15,0"
+                                   VerticalAlignment="Center">
+                            Eroded Areas
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0, 0, 0, 15">
+                        <Image Source="/Assets/Icons/ExposedTreeRoots.png"
+                               Height="45"/>
+                        <TextBlock Foreground="Black"
+                                   FontSize="24"
+                                   TextWrapping="Wrap"
+                                   Margin="15,0"
+                                   VerticalAlignment="Center">
+                            Exposed Tree Roots
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+
+            </Grid>
+            
+            <Button Style="{StaticResource RoundedButton}" 
+					x:Name="legendCloseButton"
+					FontFamily="Segoe MDL2 Assets"
+					Background="#EDEDED"
+					Foreground="Black"
+					FontSize="24"
+					VerticalAlignment="Bottom" 
+					HorizontalAlignment="Center"
+					Margin="15, 15"
+					Height="64"
+					Width="64"
+					Click="LegendCloseButton_Click">
+                &#xE711;
+            </Button>
         </Grid>
 
         <Grid x:Name="titleBar"

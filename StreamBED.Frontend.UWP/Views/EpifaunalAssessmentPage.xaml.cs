@@ -60,6 +60,7 @@ namespace StreamBED.Frontend.UWP.Views
             if (Index < FeatureEvalPage.SelectedFeature.ImageList.Count)
             {
                 CurrentImage = FeatureEvalPage.SelectedFeature.ImageList[Index++];
+                CurrentScore = 20;
 
                 selectedImage.Source = CurrentImage.ImageSource;
 
