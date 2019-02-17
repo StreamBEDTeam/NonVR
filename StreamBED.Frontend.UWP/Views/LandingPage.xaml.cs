@@ -36,6 +36,8 @@ namespace StreamBED.Frontend.UWP.Views
 
         internal static string ParticipantNumber = "";
 
+        internal static char StreamNameCode = ' ';
+
         internal static bool IsOfficial = false;
 
         public LandingPage()
@@ -52,7 +54,7 @@ namespace StreamBED.Frontend.UWP.Views
                 
                 try
                 {
-                    StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Results.xml", CreationCollisionOption.FailIfExists);
+                    StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("Results.xml", CreationCollisionOption.ReplaceExisting);
 
                     await FileIO.WriteTextAsync(file, "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root>\n");
                 }
@@ -82,6 +84,7 @@ namespace StreamBED.Frontend.UWP.Views
                     if (!idBox.Text.Equals(""))
                     {
                         ParticipantNumber = idBox.Text;
+                        StreamNameCode = nameBox.Text.ElementAt(0);
                         pivotRoot.SelectedIndex = ++pivotRoot.SelectedIndex;
                     }
                     else
@@ -196,37 +199,6 @@ namespace StreamBED.Frontend.UWP.Views
         private void Grid_DragOver(object sender, DragEventArgs e)
         {
             e.AcceptedOperation = DataPackageOperation.Copy;
-        }
-
-        private async void ExtractButton_Click(object sender, RoutedEventArgs e)
-        {
-            FileSavePicker p = new FileSavePicker();
-            p.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
-            p.FileTypeChoices.Add("XML", new List<string>() { ".xml" });
-            p.SuggestedFileName = "Results";
-
-            StorageFile file = await p.PickSaveFileAsync();
-
-            if (file != null)
-            {
-                CachedFileManager.DeferUpdates(file);
-
-                StorageFile data = await ApplicationData.Current.LocalFolder.GetFileAsync("Results.xml");
-
-                string xml = await FileIO.ReadTextAsync(data) + "\n</root>";
-
-                try
-                {
-                    XDocument doc = XDocument.Parse(xml);
-                    xml = doc.ToString();
-                }
-                catch (Exception f)
-                {
-
-                }
-
-                await FileIO.WriteTextAsync(file, xml);
-            }
         }
     }
 }

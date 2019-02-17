@@ -64,7 +64,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                 foreach (string key in AreaNames.Keys)
                 {
-                    AreaDataModel area = new AreaDataModel(AreaNames.GetValueOrDefault(key), scheme.GetColor());
+                    AreaDataModel area = new AreaDataModel(AreaNames.GetValueOrDefault(key), scheme.GetColor(key.ElementAt(1)));
 
                     foreach (ImageDataModel image in imageModelList)
                     { 

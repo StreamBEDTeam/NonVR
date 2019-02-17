@@ -38,8 +38,6 @@ namespace StreamBED.Frontend.UWP.Views
 
         private Dictionary<FeatureDataModel, ImageDataModel> imageDict = new Dictionary<FeatureDataModel, ImageDataModel>();
 
-        private List<ImageDataModel> hiddenImages = new List<ImageDataModel>();
-
         internal static List<ImageDataModel> SelectedItems = new List<ImageDataModel>();
 
         internal static Dictionary<Keyword, List<ImageDataModel>> biasDict = new Dictionary<Keyword, List<ImageDataModel>>();
@@ -59,14 +57,6 @@ namespace StreamBED.Frontend.UWP.Views
             }
 
             Area = e.Parameter as AreaDataModel;
-
-            foreach (ImageDataModel image in Area.ImageList)
-            {
-                if (image.Image.Keywords.Contains(null))
-                {
-                    hiddenImages.Add(image);
-                }
-            }
 
             foreach (Keyword keyword in EpifaunalSubstrateModel.GetKeywords())
             {
@@ -127,20 +117,6 @@ namespace StreamBED.Frontend.UWP.Views
                     }
                 }
             }
-
-            /*if (hiddenImages.Count > 0)
-            {
-                var model = new FeatureDataModel("Images with no features", new ObservableCollection<ImageDataModel>(hiddenImages));
-
-                listViewRoot.Items.Add(model);
-
-                if (hiddenImages.Count == Area.ImageList.Count())
-                {
-                    nextButton.Visibility = Visibility.Visible;
-
-                    Area.IsCompleted = true;
-                }
-            }*/
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)

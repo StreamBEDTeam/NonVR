@@ -85,7 +85,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                         border.Child = icon;
 
-                        resultEntry += "<rating areaName=\"" + image.Image.Location + "\" keyword=\"" + elem.Key + "\" score=\"" + image.Image.BankStabilityScore + "\" bias=\"false\" />\n";
+                        resultEntry += "<rating areaName=\"" + image.Image.Location + "\" keyword=\"" + elem.Key.FriendlyName + "\" score=\"" + image.Image.BankStabilityScore + "\" bias=\"false\" />\n";
 
                         if (image.Image.BankStabilityScore % 2 == 0)
                         {
@@ -203,7 +203,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                         border.Child = icon;
 
-                        resultEntry += "<rating areaName=\"" + image.Image.Location + "\" keyword=\"" + elem.Key + "\" score=\"" + image.Image.EpifaunalSubstrateScore + "\" bias=\"false\" />\n";
+                        resultEntry += "<rating areaName=\"" + image.Image.Location + "\" keyword=\"" + elem.Key.FriendlyName + "\" score=\"" + image.Image.EpifaunalSubstrateScore + "\" bias=\"false\" />\n";
 
                         if (image.Image.EpifaunalSubstrateScore % 2 == 0)
                         {
@@ -382,21 +382,88 @@ namespace StreamBED.Frontend.UWP.Views
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
+            int expertScore = 0;
             if (SelectedModel is BankStabilityModel)
             {
                 layoutPivot.SelectedIndex = 5;
 
-                bankStabilityRun.Text = Convert.ToInt32(bankSlider.Value).ToString();
+                bankRun.Text = Convert.ToInt32(bankSlider.Value).ToString();
                 BankStabilityModel.Score = bankSlider.Value;
                 progressBar.Value++;
+
+                if (LandingPage.StreamNameCode == 'P')
+                {
+                    expertScore = 9;
+                }
+                else if (LandingPage.StreamNameCode == 'M')
+                {
+                    expertScore = 5;
+                }
+
+                bankExpert.Text = expertScore.ToString();
+
+                if (expertScore > 0)
+                {
+                    double index = bankSlider.Value / expertScore;
+
+                    if (index == 1)
+                    {
+                        bankFeedback.Text = "Great job, you scored exactly like the expert!";
+                    }
+                    else if (index < 1 && index >= 0.85)
+                    {
+                        bankFeedback.Text = "Great job, you scored close to the expert!";
+                    }
+                    else if (index < 0.85 && index >= 0.75)
+                    {
+                        bankFeedback.Text = "Good job, you kind of scored close to the expert!";
+                    }
+                    else
+                    {
+                        bankFeedback.Text = "Good attempt, try again next time!";
+                    }
+                }
             }
             else if (SelectedModel is EpifaunalSubstrateModel)
             {
                 layoutPivot.SelectedIndex = 3;
 
-                epifaunalScoreRun.Text = Convert.ToInt32(epifaunalSlider.Value).ToString();
+                epifaunalRun.Text = Convert.ToInt32(epifaunalSlider.Value).ToString();
                 EpifaunalSubstrateModel.Score = epifaunalSlider.Value;
                 progressBar.Value++;
+
+                if (LandingPage.StreamNameCode == 'P')
+                {
+                    expertScore = 16;
+                }
+                else if (LandingPage.StreamNameCode == 'M')
+                {
+                    expertScore = 9;
+                }
+
+                epifaunalExpert.Text = expertScore.ToString();
+
+                if (expertScore > 0)
+                {
+                    double index = epifaunalSlider.Value / expertScore;
+
+                    if (index == 1)
+                    {
+                        epifaunalFeedback.Text = "Great job, you scored exactly like the expert!";
+                    }
+                    else if (index < 1 && index >= 0.85)
+                    {
+                        epifaunalFeedback.Text = "Great job, you scored close to the expert!";
+                    }
+                    else if (index < 0.85 && index >= 0.75)
+                    {
+                        epifaunalFeedback.Text = "Good job, you kind of scored close to the expert!";
+                    }
+                    else
+                    {
+                        epifaunalFeedback.Text = "Good attempt, try again next time!";
+                    }
+                }
             }
         }
 

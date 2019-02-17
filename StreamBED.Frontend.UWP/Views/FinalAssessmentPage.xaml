@@ -632,8 +632,10 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Margin="270, 0">
-                        <Bold>Epifaunal Substrate Protocol</Bold><LineBreak/><LineBreak/>
-                        Your score for this stream was <Run x:Name="epifaunalScoreRun"/>
+                        <Bold>Bank Stability Protocol</Bold><LineBreak/><LineBreak/>
+                        Your score for this stream was <Run x:Name="epifaunalRun"/><LineBreak/><LineBreak/>
+                        The expert assessment for this stream was <Run x:Name="epifaunalExpert"/><LineBreak/><LineBreak/>
+                        <Run x:Name="epifaunalFeedback"/>
                     </TextBlock>
 
                     <Button Style="{StaticResource RoundedButton}" 
@@ -975,8 +977,9 @@
                        HorizontalAlignment="Center"
                        Margin="270, 0">
                         <Bold>Bank Stability Protocol</Bold><LineBreak/><LineBreak/>
-                        Your score for this stream was <Run x:Name="bankStabilityRun"/><LineBreak/>
-                        
+                        Your score for this stream was <Run x:Name="bankRun"/><LineBreak/><LineBreak/>
+                        The expert assessment for this stream was <Run x:Name="bankExpert"/><LineBreak/><LineBreak/>
+                        <Run x:Name="bankFeedback"/>
                     </TextBlock>
 
                     <Button Style="{StaticResource RoundedButton}" 

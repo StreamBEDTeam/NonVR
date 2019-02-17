@@ -244,9 +244,6 @@
     <Content Include="Assets\EpifaunalSubstrate\UnderwaterVegetation\5_BW.png" />
     <Content Include="Assets\EpifaunalSubstrate\UnderwaterVegetation\5_C.png" />
     <Content Include="Assets\Icons\Key.png" />
-    <Content Include="Assets\Results.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Assets\FeatureIcons.xml" />
     <Content Include="Assets\Icons\BankFailure.png" />
     <Content Include="Assets\Icons\BankSlope.png" />
