@@ -76,14 +76,29 @@ namespace StreamBED.Frontend.UWP.Views
                     image.isComplete = true;
                     image.Image.Location = AreaPage.AreaNames.Where(i => i.Value.Equals(Area.Name)).First().Key;
 
-                    if (keyword.Equals(EpifaunalSubstrateModel.Keywords.SnagsLogs) || keyword.Equals(EpifaunalSubstrateModel.Keywords.UnderwaterVegetation) || keyword.Equals(EpifaunalSubstrateModel.Keywords.UndercutBanks))
+                    if (Area.IsBank.Value)
                     {
-                        if (!biasDict.ContainsKey(keyword))
+                        if (keyword.Equals(EpifaunalSubstrateModel.Keywords.UndercutBanks))
                         {
-                            biasDict.Add(keyword, new List<ImageDataModel>());
-                        }
+                            if (!biasDict.ContainsKey(keyword))
+                            {
+                                biasDict.Add(keyword, new List<ImageDataModel>());
+                            }
 
-                        biasDict.GetValueOrDefault(keyword).Add(image);
+                            biasDict.GetValueOrDefault(keyword).Add(image);
+                        }
+                    }
+                    else
+                    {
+                        if (keyword.Equals(EpifaunalSubstrateModel.Keywords.SnagsLogs) || keyword.Equals(EpifaunalSubstrateModel.Keywords.UnderwaterVegetation))
+                        {
+                            if (!biasDict.ContainsKey(keyword))
+                            {
+                                biasDict.Add(keyword, new List<ImageDataModel>());
+                            }
+
+                            biasDict.GetValueOrDefault(keyword).Add(image);
+                        }
                     }
                 }
             }
@@ -106,16 +121,26 @@ namespace StreamBED.Frontend.UWP.Views
                     image.isComplete = true;
                     image.Image.Location = AreaPage.AreaNames.Where(i => i.Value.Equals(Area.Name)).First().Key;
 
-                    if (keyword.Equals(BankStabilityModel.Keywords.ExposedTreeRoots) || keyword.Equals(BankStabilityModel.Keywords.ErodedAreas) || keyword.Equals(BankStabilityModel.Keywords.BankFailure))
+                    if (Area.IsBank.Value)
                     {
-                        if (!biasDict.ContainsKey(keyword))
+                        if (keyword.Equals(BankStabilityModel.Keywords.ExposedTreeRoots) || keyword.Equals(BankStabilityModel.Keywords.ErodedAreas) || keyword.Equals(BankStabilityModel.Keywords.BankFailure))
                         {
-                            biasDict.Add(keyword, new List<ImageDataModel>());
-                        }
+                            if (!biasDict.ContainsKey(keyword))
+                            {
+                                biasDict.Add(keyword, new List<ImageDataModel>());
+                            }
 
-                        biasDict.GetValueOrDefault(keyword).Add(image);
+                            biasDict.GetValueOrDefault(keyword).Add(image);
+                        }
                     }
                 }
+            }
+
+            if (listViewRoot.Items.Count == 0)
+            {
+                nextButton.Visibility = Visibility.Visible;
+
+                Area.IsCompleted = true;
             }
         }
 
@@ -137,12 +162,12 @@ namespace StreamBED.Frontend.UWP.Views
                 Grid titleGrid = new Grid()
                 {
                     Height = 75,
-                    Background = Area.ItemColorBrush
+                    Background = new SolidColorBrush(Colors.White)
                 };
 
                 TextBlock title = new TextBlock()
                 {
-                    Foreground = new SolidColorBrush(Colors.White),
+                    Foreground = new SolidColorBrush(Colors.Black),
                     FontSize = 30,
                     FontWeight = FontWeights.Bold,
                     TextWrapping = TextWrapping.Wrap,
@@ -155,7 +180,7 @@ namespace StreamBED.Frontend.UWP.Views
                 FontIcon icon = new FontIcon()
                 {
                     FontFamily = new FontFamily("Segoe MDL2 Assets"),
-                    Foreground = new SolidColorBrush(Colors.White),
+                    Foreground = new SolidColorBrush(Colors.Black),
                     FontSize = 45,
                     VerticalAlignment = VerticalAlignment.Center,
                     HorizontalAlignment = HorizontalAlignment.Right,

@@ -38,12 +38,12 @@
                             Margin="150, 12.5, 150, 12.5"
                             Width="1200">
                         <StackPanel x:Name="templateRoot"
-                                    Background="White">
+                                    Background="#EBEBEB">
                             <Grid x:Name="titleGrid"
                                   Height="75"
-                                  Background="{x:Bind ItemColorBrush}">
+                                  Background="White">
                                 <TextBlock x:Name="titleBlock"
-                                           Foreground="White"
+                                           Foreground="Black"
                                            FontSize="30"
                                            FontWeight="Bold"
                                            TextWrapping="Wrap"
@@ -53,7 +53,7 @@
                                            Text="{x:Bind Name, Converter={StaticResource UpperCaseConverter}}"/>
 
                                 <FontIcon FontFamily="Segoe MDL2 Assets"
-                                          Foreground="White"
+                                          Foreground="Black"
                                           FontSize="45"
                                           VerticalAlignment="Center" 
                                           HorizontalAlignment="Right"
@@ -83,24 +83,18 @@
 
                                 <GridView.ItemTemplate>
                                     <DataTemplate x:DataType="model:ImageDataModel">
-                                        <!--<Button x:Name="imageRoot"
-                                                Height="300"
-                                                Width="300"
-                                                Margin="5, 10"
-                                                Style="{StaticResource ImageButton}">-->
                                         <Image x:Name="image" 
                                                    Height="300"
                                                    Width="300"
                                                    Source="{x:Bind ImageSource}"
                                                Stretch="UniformToFill"/>
-                                        <!--</Button>-->
                                     </DataTemplate>
                                 </GridView.ItemTemplate>
                             </GridView>
 
                             <Grid x:Name="buttonGrid"
                                   Height="100"
-                                  Background="{x:Bind ItemColorBrush}">
+                                  Background="White">
                                 <Button Style="{StaticResource KindaRoundedButton}" 
                                         x:Name="nextButton" 
                                         Background="#EDEDED"

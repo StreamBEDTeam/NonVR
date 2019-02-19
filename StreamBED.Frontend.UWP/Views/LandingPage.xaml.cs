@@ -58,7 +58,7 @@ namespace StreamBED.Frontend.UWP.Views
 
                     await FileIO.WriteTextAsync(file, "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root>\n");
                 }
-                catch (Exception f)
+                catch (Exception)
                 {
 
                 }
@@ -84,7 +84,7 @@ namespace StreamBED.Frontend.UWP.Views
                     if (!idBox.Text.Equals(""))
                     {
                         ParticipantNumber = idBox.Text;
-                        StreamNameCode = nameBox.Text.ElementAt(0);
+                        StreamNameCode = nameBox.Text.ToUpper().ElementAt(0);
                         pivotRoot.SelectedIndex = ++pivotRoot.SelectedIndex;
                     }
                     else

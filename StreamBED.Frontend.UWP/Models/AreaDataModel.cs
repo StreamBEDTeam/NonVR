@@ -18,23 +18,17 @@ namespace StreamBED.Frontend.UWP.Models
 
         public ObservableCollection<ImageDataModel> ImageList { get; }
 
-        public Color ItemColor { get; }
-
         public bool IsCompleted = false;
 
         public bool IsEnabled { get { return !IsCompleted; } }
 
+        public bool? IsBank = false;
+
         public Visibility Visibility { get { return (IsCompleted) ? Visibility.Visible : Visibility.Collapsed; } }
 
-        public SolidColorBrush ItemColorBrush
-        {
-            get { return new SolidColorBrush(ItemColor); }
-        }
-
-        public AreaDataModel(string Name, Color ItemColor)
+        public AreaDataModel(string Name)
         {
             this.Name = Name;
-            this.ItemColor = ItemColor;
 
             ImageList = new ObservableCollection<ImageDataModel>();
         }

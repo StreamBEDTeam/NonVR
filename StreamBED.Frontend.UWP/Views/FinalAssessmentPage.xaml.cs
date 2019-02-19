@@ -62,14 +62,12 @@ namespace StreamBED.Frontend.UWP.Views
                 foreach (KeyValuePair<Keyword, FeatureDataModel> elem in FeatureEvalPage.bankStabilityFeatures)
                 {
                     foreach (ImageDataModel image in elem.Value.ImageList)
-                    {
-                        SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(AreaPage.AreaNames.GetValueOrDefault(image.Image.Location))).First().ItemColorBrush;
-
+                    {                  
                         Border border = new Border()
                         {
                             Width = 50,
                             Height = 50,
-                            BorderBrush = brush,
+                            BorderBrush = new SolidColorBrush(Colors.Black),
                             BorderThickness = new Thickness(4),
                             Margin = new Thickness(0, 2.5, 0, 2.5)
                         };
@@ -116,13 +114,11 @@ namespace StreamBED.Frontend.UWP.Views
                     {
                         foreach (ImageDataModel image in elem.Value)
                         {
-                            SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(AreaPage.AreaNames.GetValueOrDefault(image.Image.Location))).First().ItemColorBrush;
-
                             Border border = new Border()
                             {
                                 Width = 50,
                                 Height = 50,
-                                BorderBrush = brush,
+                                BorderBrush = new SolidColorBrush(Colors.Black),
                                 BorderThickness = new Thickness(4),
                                 Margin = new Thickness(0, 2.5, 0, 2.5)
                             };
@@ -181,13 +177,11 @@ namespace StreamBED.Frontend.UWP.Views
                 {
                     foreach (ImageDataModel image in elem.Value.ImageList)
                     {
-                        SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(AreaPage.AreaNames.GetValueOrDefault(image.Image.Location))).First().ItemColorBrush;
-
                         Border border = new Border()
                         {
                             Width = 50,
                             Height = 50,
-                            BorderBrush = brush,
+                            BorderBrush = new SolidColorBrush(Colors.Black),
                             BorderThickness = new Thickness(4),
                             Margin = new Thickness(0, 2.5, 0, 2.5)
                         };
@@ -234,13 +228,11 @@ namespace StreamBED.Frontend.UWP.Views
                     {
                         foreach (ImageDataModel image in elem.Value)
                         {
-                            SolidColorBrush brush = AreaPage.AreaList.Where(i => i.Name.Equals(AreaPage.AreaNames.GetValueOrDefault(image.Image.Location))).First().ItemColorBrush;
-
                             Border border = new Border()
                             {
                                 Width = 50,
                                 Height = 50,
-                                BorderBrush = brush,
+                                BorderBrush = new SolidColorBrush(Colors.Black),
                                 BorderThickness = new Thickness(4),
                                 Margin = new Thickness(0, 2.5, 0, 2.5)
                             };
@@ -620,7 +612,7 @@ namespace StreamBED.Frontend.UWP.Views
                     XDocument doc = XDocument.Parse(xml);
                     xml = doc.ToString();
                 }
-                catch (Exception f)
+                catch (Exception)
                 {
 
                 }

@@ -64,7 +64,16 @@ namespace StreamBED.Frontend.UWP.Views
 
                 foreach (string key in AreaNames.Keys)
                 {
-                    AreaDataModel area = new AreaDataModel(AreaNames.GetValueOrDefault(key), scheme.GetColor(key.ElementAt(1)));
+                    AreaDataModel area = new AreaDataModel(AreaNames.GetValueOrDefault(key));
+
+                    if (key.ElementAt(1) == 'S')
+                    {
+                        area.IsBank = false;
+                    }
+                    else if (key.ElementAt(1) == 'B')
+                    {
+                        area.IsBank = true;
+                    }
 
                     foreach (ImageDataModel image in imageModelList)
                     { 

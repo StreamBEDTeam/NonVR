@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Linq;
 using Windows.ApplicationModel;
 using Windows.Foundation;
@@ -192,9 +193,9 @@ namespace StreamBED.Frontend.UWP.Views
                                 epifaunalSubstrateFeatures.Add(keyword, new FeatureDataModel(keyword));
                             }
 
-                            if (!epifaunalSubstrateFeatures.GetValueOrDefault(keyword).ImageList.Where(i => i.Image.Equals(image.Image)).Any())
+                            if (!epifaunalSubstrateFeatures.GetValueOrDefault(keyword).ImageList.Where(i => i.Image.Data.SequenceEqual(image.Image.Data)).Any())
                             {
-                                epifaunalSubstrateFeatures.GetValueOrDefault(keyword).ImageList.Add(new ImageDataModel(image.Image));
+                                epifaunalSubstrateFeatures.GetValueOrDefault(keyword).ImageList.Add(new ImageDataModel(DeepClone(image.Image)));
                             }
                         }
                         else if (model is BankStabilityModel)
@@ -204,9 +205,9 @@ namespace StreamBED.Frontend.UWP.Views
                                 bankStabilityFeatures.Add(keyword, new FeatureDataModel(keyword));
                             }
 
-                            if (!bankStabilityFeatures.GetValueOrDefault(keyword).ImageList.Select(i => i.Image.Equals(image.Image)).Any())
+                            if (!bankStabilityFeatures.GetValueOrDefault(keyword).ImageList.Where(i => i.Image.Data.SequenceEqual(image.Image.Data)).Any())
                             {
-                                bankStabilityFeatures.GetValueOrDefault(keyword).ImageList.Add(new ImageDataModel(image.Image));
+                                bankStabilityFeatures.GetValueOrDefault(keyword).ImageList.Add(new ImageDataModel(DeepClone(image.Image)));
                             }
                         }
                     }
@@ -336,6 +337,18 @@ namespace StreamBED.Frontend.UWP.Views
         private void NextProtocolButton_Click(object sender, RoutedEventArgs e)
         {
             ++layoutPivot.SelectedIndex;
+        }
+
+        public static T DeepClone<T>(T obj)
+        {
+            using (var ms = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(ms, obj);
+                ms.Position = 0;
+
+                return (T)formatter.Deserialize(ms);
+            }
         }
     }
 }

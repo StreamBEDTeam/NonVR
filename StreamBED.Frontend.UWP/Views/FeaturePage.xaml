@@ -153,8 +153,8 @@
 
                 <Button Style="{StaticResource KindaRoundedButton}" 
                         x:Name="popupButton" 
-                        Background="{x:Bind Area.ItemColorBrush}"
-                        Foreground="White"
+                        Background="White"
+                        Foreground="Black"
                         FontSize="24"
                         VerticalAlignment="Bottom" 
                         HorizontalAlignment="Right"
